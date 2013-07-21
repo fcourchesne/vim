@@ -1,42 +1,102 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Main
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set rtp+=/usr/lib/python3.3/site-packages/powerline/bindings/vim
+set rtp+=/usr/local/lib/python2.7/dist-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim
+set rtp+=/Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim
 call pathogen#infect() 
 
 set ofu=syntaxcomplete#Complete
 "set autoread " Set to auto read when a file is changed from the outside
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=7
+
+" Turn on the WiLd menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+
+"Always show current position
+set ruler
+
+" Height of the command bar
+set cmdheight=1
+
+" A buffer becomes hidden when it is abandoned
+set hid
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases 
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+"
+"
 let g:mapleader = ","
 set backspace=indent,eol,start "Allow backspacing over everything in insert mode.
-set noerrorbells        " No beeps.
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+
 set undolevels=200      " Number of undo levels.
 set ttyfast             " We have a fast terminal connection.
 set esckeys             " Cursor keys in insert mode.
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General 
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 set background=dark         " Assume a dark background
 if !has('win32') && !has('win64')
     set term=$TERM       " Make arrow and other keys work
 endif
-filetype plugin indent on  	" Automatically detect file types.
-syntax on 					" syntax highlighting
-set mouse=a					" automatically enable mouse usage
-"set autochdir 				" always switch to the current file directory.. Messes with some plugins, best left commented out
-" not every vim is compiled with this, use the following line instead
-" If you use command-t plugin, it conflicts with this, comment it out.
- "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+filetype plugin indent on   " Automatically detect file types.
+syntax on                   " syntax highlighting
+set mouse=a                 " automatically enable mouse usage
 scriptencoding utf-8
 
 " set autowrite                  " automatically write a file when leaving a modified buffer
-set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
+set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
-set virtualedit=onemore 	   	" allow for cursor beyond last character
-set history=1000  				" Store a ton of history (default is 20)
-set spell 		 	        	" spell checking on
+set virtualedit=onemore         " allow for cursor beyond last character
+set history=1000                " Store a ton of history (default is 20)
+set spell                       " spell checking on
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fuzzy finder
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <C-f> :<C-u>FufFile **/<CR> 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Omni complete"
@@ -48,6 +108,11 @@ hi Pmenu guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
 hi PmenuSbar guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
 hi PmenuThumb guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" XML
+au FileType xml exe ":silent 1,$!xmllint --format --recover - 2>/dev/null"
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Typical Ctrl-C/V/X behavior and Select all
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -56,22 +121,25 @@ vnoremap <C-X> "+x
 " CTRL-C and CTRL-Insert are Copy
 vnoremap <C-C> "+y
 " CTRL-V and SHIFT-Insert are Paste
-map <C-V>   	"+gP
-cmap <C-V>  	<C-R>+
-cmap <S-Insert> 	<C-R>+
+map <C-V>       "+gP
+cmap <C-V>      <C-R>+
+cmap <S-Insert>     <C-R>+
 " Pasting blockwise and linewise selections is not possible in Insert and
 " Visual mode without the +virtualedit feature.  They are pasted as if they
 " were characterwise instead.
 " Uses the paste.vim autoload script.
 exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
 exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
-imap <S-Insert> 	<C-V>
-vmap <S-Insert> 	<C-V>
+imap <S-Insert>     <C-V>
+vmap <S-Insert>     <C-V>
 " Use CTRL-Q to do what CTRL-V used to do
-noremap <C-Q>   	<C-V>
+noremap <C-Q>       <C-V>
 " Select all (ctrl+a)
-:map <silent> <C-A> gg0vG$
-:imap <C-A> <ESC><C-A>
+map <silent> <C-A> gg0vG$
+imap <C-A> <ESC><C-A>
+
+"" Fix arrows entering A/B/C/D
+set nocompatible
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Auto completion
@@ -84,71 +152,70 @@ set completeopt=menu,menuone,longest " Complete options (disable preview scratch
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set so=10 " Set 7 lines to the cursor - when moving vertical..
 
-if has('cmdline_info')
-    set ruler                  	" show the ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-    set showcmd                	" show partial commands in status line and
-                                " selected characters/lines in visual mode
-endif
-set showcmd " show partial commands in status line and
-" selected characters/lines in visual mode
-endif
 set showmode            " Show current mode.
-set cmdheight=1 "The command bar height
-set hid "Change buffer - without saving
 
-set backspace=indent,eol,start	" backspace for dummys
-set linespace=0					" No extra spaces between rows
-set nu							" Line numbers on
-set showmatch					" show matching brackets/parenthesis
-set incsearch					" find as you type search
-set hlsearch					" highlight search terms
-set winminheight=0				" windows can be 0 line high 
-set ignorecase					" case insensitive search
-set smartcase					" case sensitive when uc present
-set wildmenu					" show list instead of just completing
-set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
-set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
-set scrolljump=5 				" lines to scroll when cursor leaves screen
-set scrolloff=3 				" minimum lines to keep above and below cursor
-set foldenable  				" auto fold code
-set gdefault					" the /g flag on :s substitutions by default
+set backspace=indent,eol,start  " backspace for dummys
+set linespace=0                 " No extra spaces between rows
+set nu                          " Line numbers on
+
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+
+set winminheight=0              " windows can be 0 line high 
+set wildmenu                    " show list instead of just completing
+set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
+set scrolljump=5                " lines to scroll when cursor leaves screen
+set scrolloff=3                 " minimum lines to keep above and below cursor
+set foldenable                  " auto fold code
+set gdefault                    " the /g flag on :s substitutions by default
 set list
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
 
-
-
-	" Shortcuts
-	" Change Working Directory to that of the current file
-    cmap cwd lcd %:p:h
-	cmap cd. lcd %:p:h
+" Shortcuts
+" Change Working Directory to that of the current file
+cmap cwd lcd %:p:h
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set shell=/bin/zsh
-set encoding=utf8
-set ffs=unix,dos,mac "Default file types
-"set number
 
-hi cursorline guibg=#333333 	" highlight bg color of current line
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+
+hi cursorline guibg=#333333     " highlight bg color of current line
 hi CursorColumn guibg=#333333   " highlight cursor
-set cursorline  				" highlight current line
+set cursorline                  " highlight current line
 
 if has('mouse')
   set mouse=a
 endif
 
 if has("gui_running")
-    set gfn=DejaVu\ Sans\ Mono\ Book\ 8
+    ""set gfn=DejaVu\ Sans\ Mono\ Book\ 9
+    set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
     ""set gfn=Consolas\ Regular\ 9
-    color solarized
-    set tabpagemax=15 				" only show 15 tabs
-	set showmode                   	" display the current mode
+    ""set gfn=Neep\ Medium\ Semi-Condensed\ 9
+    colorscheme molokai
+    set tabpagemax=15               " only show 15 tabs
+    set showmode                    " display the current mode
+    set guioptions-=T
+    set guioptions+=e
+    set guioptions-=L
+    ""set t_Co=256
+    set guitablabel=%M\ %t
 else
-    set t_Co=256
-    color molokai
+    set t_Co=256 "" Set 256 colors
+    colorscheme molokai
 endif
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -163,18 +230,39 @@ set noswapfile
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nowrap                     	" wrap long lines
-set autoindent                 	" indent at the same level of the previous line
-set shiftwidth=4               	" use indents of 4 spaces
-set expandtab 	  	     		" tabs are spaces, not tabs
-set tabstop=4 					" an indentation every four columns
-set softtabstop=4 				" let backspace delete indent
-"set matchpairs+=<:>            	" match, to be used with % 
-set pastetoggle=<F12>          	" pastetoggle (sane indentation on pastes)
+set nowrap                      " wrap long lines
+set autoindent                  " indent at the same level of the previous line
+
+set expandtab                   " tabs are spaces, not tabs
+set tabstop=4                   " an indentation every four columns
+set softtabstop=4               " let backspace delete indent
+"set matchpairs+=<:>                " match, to be used with % 
+set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 " Remove trailing whitespaces and ^M chars
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-" }
+" }o
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+" Linebreak on 500 characters
+set lbr
+set tw=500
+
+set ai "Auto indent
+set si "Smart indent
+set wrap "Wrap lines
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs and buffers
@@ -188,21 +276,70 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+map <space> /
+map <c-space> ?
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>
+
+" Close all the buffers
+map <leader>ba :1,1000 bd!<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Specify the behavior when switching between buffers 
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+" Remember info about open buffers on close
+set viminfo^=%
+
+
 """"""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
-if has('statusline')
-    set laststatus=2
+" Always show the status line
+set laststatus=2
 
-    " Broken down into easily includeable segments
-    set statusline=%<%f\    " Filename
-    set statusline+=%w%h%m%r " Options
-    set statusline+=%{fugitive#statusline()} "  Git Hotness
-    set statusline+=\ [%{&ff}/%Y]            " filetype
-    set statusline+=\ [%{getcwd()}]          " current dir
-    "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-endif
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+set showtabline=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -219,6 +356,8 @@ func! DeleteTrailingWS() "Delete trailing white space, useful for Python ;)
   exe "normal `z"
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufRead,BufNewFile *.go set makeprg=go\ install\ %:h
+autocmd BufRead,BufNewFile *.go set ft=go
 "Pressing ,ss will toggle and un-toggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -272,6 +411,13 @@ map <leader>f :MRU<CR>
 let g:snips_author = 'Francis Courchesne <fcourchesne@gmail.com>'
 " Shortcut for reloading snippets, useful when developing
 nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
+nnoremap ,rr <esc>:exec ReloadAllSnippets()<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UltiSnips
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsSnippetsDir = "~/.vim/bundle/UltiSnips/UltiSnips"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delimitmate {
@@ -285,7 +431,8 @@ au FileType xml,html,xhtml,py let b:delimitMate_matchpairs = "(:),[:],{:}"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " HTML autoclose tag
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au FileType xhtml,xml so ~/.vim/ftplugin/html_autoclosetag.vim
+au FileType xhtml,xml so ~/.vim/bundle/autoclosetag/ftplugin/html/autoclose.vim
+
 
 "------------------------------------------------------------------------------
 " Correct typos.
@@ -369,24 +516,14 @@ if has("autocmd")
   " Enabled file type detection and file-type specific plugins.
   filetype plugin on
 
-  " Python code.
-  augroup python
-    autocmd BufReadPre,FileReadPre      *.py set tabstop=4
-    autocmd BufReadPre,FileReadPre      *.py set expandtab
-    autocmd BufReadPre,FileReadPre      *.py 
-  augroup END
-
-  " Ruby code.
-  augroup ruby
-    autocmd BufReadPre,FileReadPre      *.rb set tabstop=2
-    autocmd BufReadPre,FileReadPre      *.rb set expandtab
-  augroup END
-
   au BufNewFile,BufRead *.jinja set syntax=htmljinja
   au BufNewFile,BufRead *.mako set ft=mako
 
 endif
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pep8
+let g:pep8_map='F12'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MISC
@@ -397,14 +534,13 @@ map <buffer> <S-e> :w<CR>:!/usr/bin/python2 %<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => "NerdTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-map <leader>e :NERDTreeFind<CR>
-nmap <leader>nt :NERDTreeFind<CR>
+map <C-o> :NERDTreeToggle<CR>
+map <S-o> :NERDTreeToggle<CR>
 let NERDTreeShowBookmarks=1
-let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.eep', '\.DSN', '\.lss', '\.lst', '\.map', '\.o', '\.sym', '\.DBK', '\.elf', '\.hex']
 let NERDTreeChDirMode=0
 let NERDTreeQuitOnOpen=1
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=0
    
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -423,28 +559,9 @@ let NERDTreeKeepTreeInNewTab=0
 " }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => "taglist
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Taglist Variables {
-    let Tlist_Auto_Highlight_Tag = 1
-    let Tlist_Auto_Update = 1
-    let Tlist_Exit_OnlyWindow = 1
-    let Tlist_File_Fold_Auto_Close = 1
-    let Tlist_Highlight_Tag_On_BufEnter = 1
-    let Tlist_Use_Right_Window = 1
-    let Tlist_Use_SingleClick = 1
-
-    let g:ctags_statusline=1
-    " Override how taglist does javascript
-    let g:tlist_javascript_settings = 'javascript;f:function;c:class;m:method;p:property;v:global'
-    map <C-t> :TlistToggle<CR>
-
-    " No scrollbar on taglist display
-    set guioptions-=L
-    set guioptions-=l
-
- " }
-
+" => tabularize
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <S-t> :TagbarToggle <CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tabularize
@@ -521,10 +638,106 @@ vnoremap <Space> zf
 
 if has("gui_running")
     " Hide icon bar and scrollbar
-    set go-=T
-    set go-=r
+    set go-=T  "no scrollbar by default
+    set go-=r  "no toolbar by default
+    set go-=m  "no menu displayed by default
     " Toggle toolbar/scrollbar/menu 
     map <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
     map <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
     map <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 endif
+"Save hotkey
+map <C-s> :w<CR>
+map <S-s> :w<CR>
+map <C-b> :bn<CR>
+map <S-b> :bn<CR>
+command -nargs=1 E execute('silent! !mkdir -p "$(dirname "<args>")"') <Bar> e <args>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! CmdLine(str)
+    exe "menu Foo.Bar :" . a:str
+    emenu Foo.Bar
+    unmenu Foo
+endfunction
+
+function! VisualSelection(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+if has("mac") || has("macunix")
+  nmap <D-j> <M-j>
+  nmap <D-k> <M-k>
+  vmap <D-j> <M-j>
+  vmap <D-k> <M-k>
+endif
+
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    en
+    return ''
+endfunction
+
+" Don't close window, when deleting a buffer
+command! Bclose call <SID>BufcloseCloseIt()
+function! <SID>BufcloseCloseIt()
+   let l:currentBufNum = bufnr("%")
+   let l:alternateBufNum = bufnr("#")
+
+   if buflisted(l:alternateBufNum)
+     buffer #
+   else
+     bnext
+   endif
+
+   if bufnr("%") == l:currentBufNum
+     new
+   endif
+
+   if buflisted(l:currentBufNum)
+     execute("bdelete! ".l:currentBufNum)
+   endif
+endfunction

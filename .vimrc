@@ -1,10 +1,15 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Main
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=/usr/lib/python3.3/site-packages/powerline/bindings/vim
-set rtp+=/usr/local/lib/python2.7/dist-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim
-set rtp+=/Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim
+" "set rtp+=/usr/lib/python3.3/site-packages/powerline/bindings/vim
+" "set rtp+=/usr/local/lib/python2.7/dist-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim
+" "set rtp+=/Library/Python/2.7/site-packages/Powerline-beta-py2.7.egg/powerline/bindings/vim
 call pathogen#infect() 
+
+" Airline
+" "let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 set ofu=syntaxcomplete#Complete
 "set autoread " Set to auto read when a file is changed from the outside
@@ -199,11 +204,8 @@ if has('mouse')
 endif
 
 if has("gui_running")
-    ""set gfn=DejaVu\ Sans\ Mono\ Book\ 9
-    set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-    ""set gfn=Consolas\ Regular\ 9
-    ""set gfn=Neep\ Medium\ Semi-Condensed\ 9
-    colorscheme molokai
+    set gfn=Source\ Code\ Pro\ for\ Powerline\ 9
+    colorscheme BusyBee
     set tabpagemax=15               " only show 15 tabs
     set showmode                    " display the current mode
     set guioptions-=T
@@ -213,7 +215,7 @@ if has("gui_running")
     set guitablabel=%M\ %t
 else
     set t_Co=256 "" Set 256 colors
-    colorscheme molokai
+    colorscheme BusyBee
 endif
 
 

@@ -23,26 +23,29 @@
     path = bundle/vim-dispatch
     url = git@github.com:tpope/vim-dispatch
 [submodule "bundle/vim-addon-mw-utils"]
-	path = bundle/vim-addon-mw-utils
-	url = git@github.com:marcweber/vim-addon-mw-utils
+    path = bundle/vim-addon-mw-utils
+    url = git@github.com:marcweber/vim-addon-mw-utils
 [submodule "bundle/fruity.vim"]
-	path = bundle/fruity.vim
-	url = git@github.com:vim-scripts/fruity.vim
+    path = bundle/fruity.vim
+    url = git@github.com:vim-scripts/fruity.vim
 [submodule "bundle/Mark"]
-	path = bundle/Mark
-	url = git@github.com:vim-scripts/Mark
+    path = bundle/Mark
+    url = git@github.com:vim-scripts/Mark
 [submodule "bundle/tagbar"]
-	path = bundle/tagbar
-	url = git@github.com:majutsushi/tagbar
+    path = bundle/tagbar
+    url = git@github.com:majutsushi/tagbar
 [submodule "bundle/vim-vinegar"]
-	path = bundle/vim-vinegar
-	url = git@github.com:tpope/vim-vinegar
+    path = bundle/vim-vinegar
+    url = git@github.com:tpope/vim-vinegar
 [submodule "bundle/nerdtree"]
-	path = bundle/nerdtree
-	url = git@github.com:scrooloose/nerdtree
+    path = bundle/nerdtree
+    url = git@github.com:scrooloose/nerdtree
 [submodule "bundle/vim-fugitive"]
-	path = bundle/vim-fugitive
-	url = git@github.com:tpope/vim-fugitive
+    path = bundle/vim-fugitive
+    url = git@github.com:tpope/vim-fugitive
 [submodule "bundle/git-nerdtree"]
-	path = bundle/git-nerdtree
-	url = git@github.com:Xuyuanp/git-nerdtree
+    path = bundle/git-nerdtree
+    url = git@github.com:Xuyuanp/git-nerdtree
+[submodule "bundle/tlib_vim"]
+    path = bundle/tlib_vim
+    url = git@github.com:tomtom/tlib_vim

@@ -1,0 +1,1 @@
+/home/fcourchesne/Data/Programming/GO//src/github.com/nsf/gocode/vim//ftplugin/go/gocomplete.vim

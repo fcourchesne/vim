@@ -7,9 +7,10 @@
 call pathogen#infect() 
 
 " Airline
-" "let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+""let g:airline#extensions#tabline#left_sep = ' '
+""let g:airline#extensions#tabline#left_alt_sep = '|'
 
 set ofu=syntaxcomplete#Complete
 "set autoread " Set to auto read when a file is changed from the outside
@@ -204,8 +205,8 @@ if has('mouse')
 endif
 
 if has("gui_running")
-    set gfn=Source\ Code\ Pro\ for\ Powerline\ 9
-    colorscheme BusyBee
+    set gfn=Source\ Code\ Pro\ for\ Powerline\ 8
+    colorscheme rdark
     set tabpagemax=15               " only show 15 tabs
     set showmode                    " display the current mode
     set guioptions-=T
@@ -215,7 +216,7 @@ if has("gui_running")
     set guitablabel=%M\ %t
 else
     set t_Co=256 "" Set 256 colors
-    colorscheme BusyBee
+    colorscheme rdark-terminal
 endif
 
 
@@ -414,12 +415,6 @@ let g:snips_author = 'Francis Courchesne <fcourchesne@gmail.com>'
 " Shortcut for reloading snippets, useful when developing
 nnoremap ,smr <esc>:exec ReloadAllSnippets()<cr>
 nnoremap ,rr <esc>:exec ReloadAllSnippets()<cr>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UltiSnips
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsUsePythonVersion = 2
-let g:UltiSnipsSnippetsDir = "~/.vim/bundle/UltiSnips/UltiSnips"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Delimitmate {

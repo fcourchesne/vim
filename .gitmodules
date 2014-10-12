@@ -49,3 +49,9 @@
 [submodule "bundle/tlib_vim"]
     path = bundle/tlib_vim
     url = git@github.com:tomtom/tlib_vim
+[submodule "bundle/vim-gitgutter"]
+    path = bundle/vim-gitgutter
+    url = git@github.com/airblade/vim-gitgutter
+[submodule "bundle/FC-Snippets"]
+    path = bundle/FC-Snippets
+    url = git@github.com/fcourchesne/FC-Snippets

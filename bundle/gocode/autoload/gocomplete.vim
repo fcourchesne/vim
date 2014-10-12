@@ -1,1 +1,1 @@
-/home/fcourchesne/Data/Programming/GO//src/github.com/nsf/gocode/vim//autoload/gocomplete.vim
+/home/fcourchesne/Data/Programming/GO/src/github.com/nsf/gocode/vim/autoload/gocomplete.vim

@@ -51,7 +51,10 @@
     url = git@github.com:tomtom/tlib_vim
 [submodule "bundle/vim-gitgutter"]
     path = bundle/vim-gitgutter
-    url = git@github.com/airblade/vim-gitgutter
+    url = git@github.com:airblade/vim-gitgutter
 [submodule "bundle/FC-Snippets"]
 	path = bundle/FC-Snippets
 	url = git@github.com:fcourchesne/FC-Snippets
+[submodule "bundle/vim-go"]
+    path = bundle/vim-go
+    url = git@github.com:fatih/vim-go

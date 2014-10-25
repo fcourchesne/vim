@@ -205,7 +205,7 @@ if has('mouse')
 endif
 
 if has("gui_running")
-    set gfn=Source\ Code\ Pro\ for\ Powerline\ 8
+    set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
     colorscheme rdark
     set tabpagemax=15               " only show 15 tabs
     set showmode                    " display the current mode

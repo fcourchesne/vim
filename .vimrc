@@ -15,6 +15,38 @@ let g:airline#extensions#tabline#enabled = 1
 set ofu=syntaxcomplete#Complete
 "set autoread " Set to auto read when a file is changed from the outside
 "
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vim-go
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+au FileType go nmap <Leader>e <Plug>(go-rename)
+
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+"Enable goimports to automatically insert import paths instead of gofmt:
+let g:go_fmt_command = "goimports"
+
+"Run gofmt on save, without screen full output
+""let g:go_fmt_autosave = 0
+""au FileType go au BufWritePre <buffer> Fmt
+
+au BufWritePost *.go silent! !ctags -R &.
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -206,7 +238,7 @@ endif
 
 if has("gui_running")
     set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
-    colorscheme rdark
+    colorscheme Tomorrow
     set tabpagemax=15               " only show 15 tabs
     set showmode                    " display the current mode
     set guioptions-=T
@@ -216,7 +248,7 @@ if has("gui_running")
     set guitablabel=%M\ %t
 else
     set t_Co=256 "" Set 256 colors
-    colorscheme rdark-terminal
+    colorscheme Tomorrow
 endif
 
 
@@ -558,7 +590,7 @@ let NERDTreeKeepTreeInNewTab=0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tabularize
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <S-t> :TagbarToggle <CR>
+map <C-t> :TagbarToggle <CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => tabularize

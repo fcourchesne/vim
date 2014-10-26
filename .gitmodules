@@ -60,4 +60,4 @@
     url = git@github.com:fatih/vim-go
 [submodule "bundle/promptline"]
     path = bundle/promptline
-    url = git@github.com/edkolev/promptline
+    url = git@github.com/edkolev/promptline.vim

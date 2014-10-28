@@ -1,0 +1,15 @@
+" Customization for W540 Laptop (High DPI)
+
+hi cursorline guibg=#D1CDE5    " highlight bg color of current line
+hi CursorColumn guibg=#D1CDE5  " highlight cursor
+
+set background=dark         " Assume a dark background
+
+if has("gui_running")
+    ""set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ 6
+    set gfn=Source\ Code\ Pro\ for\ Powerline\ 6
+    colorscheme Tomorrow
+else
+    set t_Co=256 "" Set 256 colors
+    colorscheme Tomorrow
+endif

@@ -61,3 +61,6 @@
 [submodule "bundle/promptline.vim"]
 	path = bundle/promptline
 	url = https://github.com/edkolev/promptline.vim
+[submodule "bundle/neocomplete"]
+	path = bundle/neocomplete
+	url = https://github.com/Shougo/neocomplete.vim

@@ -1,7 +1,81 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Main
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call pathogen#infect() 
+" silent !mkdir -p ~/.vim/bundle/ > /dev/null 2>&1
+" silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'fcourchesne/FC-vim-colors'
+Plugin 'fcourchesne/FC-Snippets'
+Plugin 'Xuyuanp/git-nerdtree'
+Plugin 'ervandew/supertab'
+
+Plugin 'sjl/gundo.vim'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/syntastic.git'
+Plugin 'vim-scripts/tComment'
+Plugin 'tpope/vim-surround'
+Plugin 'elzr/vim-json'
+
+" Auto completion
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'rking/ag.vim'
+
+" Building
+Plugin 'tpope/vim-dispatch'
+"Plugin 'mileszs/ack.vim'
+"Plugin 'edsono/vim-matchit'
+Plugin 'tpope/vim-fugitive'
+Plugin 'mattn/gist-vim'
+"Plugin 'henrik/vim-indexed-search'
+"Plugin 'tpope/vim-abolish'
+"Plugin 'tpope/vim-repeat'
+"Plugin 'jiangmiao/auto-pairs'
+"Plugin 'xolox/vim-session'
+"Plugin 'xolox/vim-misc'
+"Plugin 'editorconfig/editorconfig-vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'airblade/vim-gitgutter'
+"Plugin 'Lokaltog/vim-easymotion'
+"Plugin 'rhysd/clever-f.vim'
+" 'ogglable panel'
+"Plugin 'tpope/vim-vinegar'
+"Plugin 'vim-scripts/taglist.vim'
+Plugin 'majutsushi/tagbar'
+" language vundles
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'marijnh/tern_for_vim'
+Plugin 'kchmck/vim-coffee-script'
+"Plugin 'othree/javascript-libraries-syntax.vim'
+"Plugin 'vim-ruby/vim-ruby'
+"Plugin 'tpope/vim-rails'
+"Plugin 'kana/vim-textobj-user'
+"Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'fatih/vim-go'
+"Plugin 'dart-lang/dart-vim-plugin'
+" Databases
+"Plugin 'krisajenkins/dbext.vim'
+"Plugin 'vim-scripts/SQLComplete.vim'
+"Plugin 'vim-scripts/SQLUtilities'
+"Plugin 'NagatoPain/AutoSQLUpperCase.vim'
+"Plugin 'vim-scripts/dbext.vim'
+" Experimental vundle
+"Plugin 'gorodinskiy/vim-coloresque.git'
+"Plugin 'maxbrunsfeld/vim-yankstack'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 "Change Working Directory to that of the current file
 set shell=$SHELL
 set encoding=utf8
@@ -34,9 +108,19 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_powerline_fonts = 1
-""let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme = 'molokai'
+if !exists("g:airline_symbols")
+let g:airline_symbols = {}
+endif
+let g:airline_theme="powerlineish"
+let g:airline_powerline_fonts=1
+" let g:airline_section_warning = airline#section#create([ "syntastic" ])
+let g:airline#extensions#branch#empty_message = "No SCM"
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
+let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
 
 
 
@@ -74,6 +158,13 @@ au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
+nnoremap <leader>Gr :!go run %<cr>
+nnoremap <leader>GR :!go run -race %<cr>
+nnoremap <leader>Gt :!go test -v -cover<cr>
+nnoremap <leader>GT :!go test -race -v -cover<cr>
+nnoremap <leader>Gb :!go build<cr>
+nnoremap <leader>GB :!go build -race<cr>
+nnoremap <leader>Gi :!go install<cr>
 " let g:go_fmt_command = "goimports"  "Enable goimports to automatically insert import paths instead of gofmt:
 " let g:go_fmt_autosave = 0           "Run gofmt on save, without screen full output
 " au BufWritePost *.go silent! !ctags -R &.

@@ -4,9 +4,14 @@ set background=dark         " Assume a dark background
 
 if has("gui_running")
     ""set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ 6
-    set gfn=Droid\ Sans\ Mono\ for\ Powerline\ 6
-    colorscheme molokai-custom 
+    set gfn=Droid\ Sans\ Mono\ for\ Powerline\ 11
+    " Light themes
+    " colorscheme Tomorrow
+    colorscheme Tomorrow-FC
+    "colorscheme ironman
+    "colorscheme tutticolori
+    "colorscheme summerfruit
 else
     set t_Co=256 "" Set 256 colors
-    colorscheme molokai-custom
+    colorscheme Tomorrow-FC
 endif

@@ -8,7 +8,6 @@ set shell=/bin/zsh
 set encoding=utf8                   " Set utf8 as standard encoding and en_US as the standard language
 set ffs=unix,dos,mac                " Use Unix as the standard file type
 set cursorline                  " highlight current line
-" set guicursor=a:blinkon0   " turn off cursor blinking
 set guicursor=a:blinkon600-blinkoff400  " Slow down cursor blinking speed
 
 if has('mouse')
@@ -19,7 +18,6 @@ nmap :Q :q
 
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
-au FileType xhtml,xml so ~/.vim/bundle/autoclosetag/ftplugin/html/autoclose.vim
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -37,101 +35,17 @@ let g:airline_theme = 'molokai'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set complete=.,i " Complete only the current buffer and includes
 set completeopt=menu,menuone,longest " Complete options (disable preview scratch window)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Omni complete"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""au FileType python set omnifunc=pythoncomplete#Complete
-""let g:SuperTabDefaultCompletionType = "context"
-""set ofu=syntaxcomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+set ofu=syntaxcomplete#Complete
 hi Pmenu guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
 hi PmenuSbar guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
 hi PmenuThumb guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Neo snippet
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin key-mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Neocomplete
-" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-""inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-" Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-" For perlomni.vim setting.
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -149,10 +63,9 @@ au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
-let g:go_fmt_command = "goimports"  "Enable goimports to automatically insert import paths instead of gofmt:
-let g:go_fmt_autosave = 0           "Run gofmt on save, without screen full output
-au FileType go au BufWritePre <buffer> Fmt
-au BufWritePost *.go silent! !ctags -R &.
+" let g:go_fmt_command = "goimports"  "Enable goimports to automatically insert import paths instead of gofmt:
+" let g:go_fmt_autosave = 0           "Run gofmt on save, without screen full output
+" au BufWritePost *.go silent! !ctags -R &.
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -204,8 +117,7 @@ set scrolljump=5                " lines to scroll when cursor leaves screen
 set scrolloff=3                 " minimum lines to keep above and below cursor
 set foldenable                  " auto fold code
 set gdefault                    " the /g flag on :s substitutions by default
-""set list
-""set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fuzzy finder
@@ -271,12 +183,7 @@ set autoindent                  " indent at the same level of the previous line
 set expandtab                   " tabs are spaces, not tabs
 set tabstop=4                   " an indentation every four columns
 set softtabstop=4               " let backspace delete indent
-"set matchpairs+=<:>                " match, to be used with % 
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
-"set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-" Remove trailing whitespaces and ^M chars
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
-" }o
 set smarttab                    " Be smart when using tabs ;)
 set shiftwidth=4                " 1 tab == 4 spaces
 set tabstop=4
@@ -285,6 +192,9 @@ set tw=500
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
+""set list
+""set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs and buffers
@@ -440,16 +350,7 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=0
    
-map <F11> :DbgStepInto<CR>
-map <F10> :DbgStepOver<CR>
-map <S-F11> :DbgStepOut<CR>
-map <F5> :DbgRun<CR>
-map <F6> :DbgDetach<CR>
-""map <F8> :DbgToggleBreakpoint<CR>
-""map <S-F8> :DbgFlushBreakpoints<CR>
-""map <F9> :DbgRefreshWatch<CR>
-""map <S-F9> :DbgAddWatch<CR>
-map <F7> :TlistToggle<CR>
+map <F7> :TagbarToggle<CR>
 map <F8> :NERDTreeToggle<CR>
 inoremap <F9> <C-O>za
 nnoremap <F9> za

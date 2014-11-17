@@ -1,6 +1,0 @@
-[submodule "bundle/fruity.vim"]
-    path = bundle/fruity.vim
-    url = git@github.com:vim-scripts/fruity.vim
-[submodule "bundle/nerdtree"]
-    path = bundle/nerdtree
-    url = git@github.com:scrooloose/nerdtree

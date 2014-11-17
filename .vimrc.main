@@ -3,9 +3,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call pathogen#infect() 
 "Change Working Directory to that of the current file
-cmap cwd lcd %:p:h              
-set shell=/bin/zsh
-set encoding=utf8                   " Set utf8 as standard encoding and en_US as the standard language
+set shell=$SHELL
+set encoding=utf8
 set ffs=unix,dos,mac                " Use Unix as the standard file type
 set cursorline                  " highlight current line
 set guicursor=a:blinkon600-blinkoff400  " Slow down cursor blinking speed
@@ -13,12 +12,24 @@ set guicursor=a:blinkon600-blinkoff400  " Slow down cursor blinking speed
 if has('mouse')
   set mouse=a
 endif
+
 nmap :W :w
 nmap :Q :q
 
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
 
+if has("gui_running")
+    set showmode                    " display the current mode
+    set guioptions+=e
+    set guioptions-=L
+    set guioptions-=T  "no scrollbar by default
+    set guioptions-=r  "no toolbar by default
+    set guioptions-=m  "no menu displayed by default
+    ""set guitablabel=%M\ %t
+else
+    "Insert else
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Airline
@@ -120,9 +131,8 @@ set gdefault                    " the /g flag on :s substitutions by default
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Fuzzy finder
+" => CtrlP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <C-f> :<C-u>FufFile **/<CR> 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -151,28 +161,14 @@ map <silent> <C-A> gg0vG$
 imap <C-A> <ESC><C-A>
 
 
-if has("gui_running")
-    set tabpagemax=15               " only show 15 tabs
-    set showmode                    " display the current mode
-    set guioptions-=T
-    set guioptions+=e
-    set guioptions-=L
-    ""set t_Co=256
-    ""set guitablabel=%M\ %t
-    set guitablabel=%!pathshorten(expand(\"\%:p\"))
-else
-    "Insert else
-endif
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off
-set nobackup
-set nowb
-set noswapfile
-
+" set nobackup
+" set nowb
+" set noswapfile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -199,24 +195,8 @@ set wrap "Wrap lines
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map hotkey to remove search highlights
-map <silent> <leader><cr> :noh<cr>
-
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
 map j gj
 map k gk
-
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
-
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
@@ -237,15 +217,6 @@ map <leader>tm :tabmove
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Specify the behavior when switching between buffers 
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
@@ -254,16 +225,6 @@ autocmd BufReadPost *
      \ endif
 set viminfo^=%                   " Remember info about open buffers on close
 
-
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
-
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-set showtabline=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -274,8 +235,6 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-autocmd BufRead,BufNewFile *.go set makeprg=go\ install\ %:h
-autocmd BufRead,BufNewFile *.go set ft=go
 "Pressing ,ss will toggle and un-toggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -288,32 +247,19 @@ nnoremap ; :
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv 
+map <C-f> :CtrlPMixed<CR>
+map 0 ^
+map <F7> :TagbarToggle<CR>
+map <F8> :NERDTreeToggle<CR>
+map <C-s> :w<CR>
+map <S-s> :w<CR>
+map <C-b> :bn<CR>
+map <S-b> :bn<CR>
 
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-""""""""""""""""""""""""""""""
-" => JavaScript section
-"""""""""""""""""""""""""""""""
-au FileType javascript call JavaScriptFold()
-au FileType javascript setl fen
-au FileType javascript setl nocindent
-
-function! JavaScriptFold()
-    setl foldmethod=syntax
-    setl foldlevelstart=1
-    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-
-    function! FoldText()
-    return substitute(getline(v:foldstart), '{.*', '{...}', '')
-    endfunction
-    setl foldtext=FoldText()
-endfunction
-
-
-""""""""""""""""""""""""""""""
-" => MRU plugin
-""""""""""""""""""""""""""""""
-let MRU_Max_Entries = 400
-map <leader>f :MRU<CR>
+cmap cwd lcd %:p:h              
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SnipMate {
@@ -322,21 +268,6 @@ let g:snips_author = 'Francis Courchesne <fcourchesne@gmail.com>'
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Delimitmate {
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au FileType * let b:delimitMate_autoclose = 1
-" If using html auto complete (complete closing tag)
-au FileType xml,html,xhtml,py let b:delimitMate_matchpairs = "(:),[:],{:}"
-
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => MISC
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Execute file being edited with <Shift> + e:
-map <buffer> <S-e> :w<CR>:!/usr/bin/python2 %<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => "NerdTree
@@ -349,92 +280,11 @@ let NERDTreeChDirMode=0
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=0
-   
-map <F7> :TagbarToggle<CR>
-map <F8> :NERDTreeToggle<CR>
-inoremap <F9> <C-O>za
-nnoremap <F9> za
-onoremap <F9> <C-C>za
-vnoremap <F9> zf
-"          create fold by selecting text and hitting SPACE
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
-vnoremap <Space> zf
+
 if has("gui_running")
     " Hide icon bar and scrollbar
-    set go-=T  "no scrollbar by default
-    set go-=r  "no toolbar by default
-    set go-=m  "no menu displayed by default
     " Toggle toolbar/scrollbar/menu 
     map <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
     map <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
     map <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 endif
-map <C-s> :w<CR>
-map <S-s> :w<CR>
-map <C-b> :bn<CR>
-map <S-b> :bn<CR>
-command -nargs=1 E execute('silent! !mkdir -p "$(dirname "<args>")"') <Bar> e <args>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Taglist
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Tlist_Use_Right_Window   = 1
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction
-
-function! VisualSelection(direction) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Editing mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remap VIM 0 to first non-blank character
-map 0 ^
-
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
-endif
-
-" Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    en
-    return ''
-endfunction

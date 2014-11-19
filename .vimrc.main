@@ -1,6 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Main
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" silent !rm -rf ~/.vim/bundle/Vundle > /dev/null 2>&1
 " silent !mkdir -p ~/.vim/bundle/ > /dev/null 2>&1
 " silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
 

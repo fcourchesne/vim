@@ -31,6 +31,9 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'rking/ag.vim'
 
+" Windows
+Plugin 'tinymode.vim'
+
 " Building
 Plugin 'tpope/vim-dispatch'
 "Plugin 'mileszs/ack.vim'
@@ -113,6 +116,9 @@ if !exists("g:airline_symbols")
 let g:airline_symbols = {}
 endif
 let g:airline_theme="powerlineish"
+let g:airline_powerline_fonts=1
+" let g:airline_section_warning = airline#section#create([ "syntastic" ])
+let g:airline#extensions#branch#empty_message = "No SCM"
 let g:airline_powerline_fonts=1
 " let g:airline_section_warning = airline#section#create([ "syntastic" ])
 let g:airline#extensions#branch#empty_message = "No SCM"
@@ -270,9 +276,6 @@ set nowrap                      " wrap long lines
 set autoindent                  " indent at the same level of the previous line
 set expandtab                   " tabs are spaces, not tabs
 set tabstop=4                   " an indentation every four columns
-set softtabstop=4               " let backspace delete indent
-set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
-set smarttab                    " Be smart when using tabs ;)
 set shiftwidth=4                " 1 tab == 4 spaces
 set tabstop=4
 set lbr                         " Linebreak on 500 characters
@@ -350,6 +353,9 @@ map <S-b> :bn<CR>
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+call tinymode#Map("winsize", "+", "[N]wincmd +") 
+call tinymode#Map("winsize", "-", "[N]wincmd -") 
 
 cmap cwd lcd %:p:h              
 

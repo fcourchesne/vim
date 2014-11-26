@@ -1,0 +1,50 @@
+" Customization for W540 Laptop (High DPI)
+let g:thematic#theme_name = 'pencil_dark'
+
+if has("gui_running")
+    ""set gfn=DejaVu\ Sans\ Mono\ for\ Powerline\ 6
+    set gfn=Inconsolata\ for\ Powerline\ 10
+    " Light themes
+    " colorscheme Tomorrow
+    colorscheme Tomorrow-FC
+    "colorscheme ironman
+    "colorscheme tutticolori
+    "colorscheme summerfruit
+else
+    set t_Co=256 "" Set 256 colors
+    colorscheme Tomorrow-FC
+endif
+
+let g:thematic#defaults = {
+\ 'airline-theme': 'jellybeans',
+\ 'background': 'dark',
+\ 'laststatus': 2,
+\ }
+
+let g:thematic#themes = {
+\ 'bubblegum'  : { 'typeface': 'Menlo',
+\                  'font-size': 10,
+\                  'transparency': 10,
+\                  'linespace': 2,
+\                },
+\ 'pencil_dark' :{ 'colorscheme': 'pencil',
+\                  'background': 'dark',
+\                  'airline-theme': 'badwolf',
+\                  'ruler': 1,
+\                  'laststatus': 0,
+\                  'typeface': 'Source Code Pro Light',
+\                  'font-size': 10,
+\                  'transparency': 10,
+\                  'linespace': 8,
+\                },
+\ 'pencil_lite' :{ 'colorscheme': 'pencil',
+\                  'background': 'light',
+\                  'airline-theme': 'light',
+\                  'laststatus': 0,
+\                  'ruler': 1,
+\                  'typeface': 'Source Code Pro',
+\                  'fullscreen': 1,
+\                  'transparency': 0,
+\                  'font-size': 10,
+\                  'linespace': 6,
+\    

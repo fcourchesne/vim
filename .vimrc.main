@@ -1,9 +1,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Main
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" silent !rm -rf ~/.vim/bundle/Vundle > /dev/null 2>&1
-" silent !mkdir -p ~/.vim/bundle/ > /dev/null 2>&1
-" silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
+silent !rm -rf ~/.vim/bundle/Vundle > /dev/null 2>&1
+silent !mkdir -p ~/.vim/bundle/ > /dev/null 2>&1
+silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -38,6 +38,10 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate' 		"Close tags
+
+" Html
+Plugin 'flomotlik/vim-livereload'
+
 
 " Windows
 Plugin 'tinymode.vim'
@@ -131,18 +135,6 @@ if !exists("g:airline_symbols")
 let g:airline_symbols = {}
 endif
 let g:airline_theme="powerlineish"
-let g:airline_powerline_fonts=1
-" let g:airline_section_warning = airline#section#create([ "syntastic" ])
-let g:airline#extensions#branch#empty_message = "No SCM"
-let g:airline_powerline_fonts=1
-" let g:airline_section_warning = airline#section#create([ "syntastic" ])
-let g:airline#extensions#branch#empty_message = "No SCM"
-let g:airline_powerline_fonts=1
-" let g:airline_section_warning = airline#section#create([ "syntastic" ])
-let g:airline#extensions#branch#empty_message = "No SCM"
-let g:airline_powerline_fonts=1
-" let g:airline_section_warning = airline#section#create([ "syntastic" ])
-let g:airline#extensions#branch#empty_message = "No SCM"
 let g:airline_powerline_fonts=1
 " let g:airline_section_warning = airline#section#create([ "syntastic" ])
 let g:airline#extensions#branch#empty_message = "No SCM"

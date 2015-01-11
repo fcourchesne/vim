@@ -1,85 +1,77 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Main
+" => Uncomment this on first install
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-silent !rm -rf ~/.vim/bundle/Vundle > /dev/null 2>&1
-silent !mkdir -p ~/.vim/bundle/ > /dev/null 2>&1
-silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
+"silent !rm -rf ~/.vim/bundle/Vundle > /dev/null 2>&1
+"silent !mkdir -p ~/.vim/bundle/ > /dev/null 2>&1
+"silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vundle packages
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MANDATORY
 set nocompatible              " be iMproved, required
 filetype off                  " required
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
-
 Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
+
+" Go
+Plugin 'fatih/vim-go'
 
 " Appearance
 Plugin 'reedes/vim-thematic'
 Plugin 'fcourchesne/FC-vim-colors'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'guns/xterm-color-table.vim'
 
+" Files management
 "Plugin 'Xuyuanp/git-nerdtree'
 Plugin 'scrooloose/nerdtree'
-Plugin 'ervandew/supertab'
+Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
 
 Plugin 'sjl/gundo.vim' 				"Undo menu
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic.git'
-" Plugin 'vim-scripts/tComment'
 Plugin 'scrooloose/nerdcommenter' 	"Commenting
+Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround' 		"Change surrounding tags
-Plugin 'elzr/vim-json'
 
 " Auto completion
 Plugin 'fcourchesne/FC-Snippets'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
+	Plugin 'MarcWeber/vim-addon-mw-utils'
+	Plugin 'tomtom/tlib_vim'
+Plugin 'Raimondi/delimitMate' 		"Close tags
 Plugin 'garbas/vim-snipmate'
 Plugin 'rking/ag.vim'
-Plugin 'Raimondi/delimitMate' 		"Close tags
+Plugin 'ervandew/supertab'
+Plugin 'OmniSharp/omnisharp-vim' 	" C#
 
 " Html
-Plugin 'flomotlik/vim-livereload'
-
+"Plugin 'flomotlik/vim-livereload'
+Plugin 'wavded/vim-stylus' 			" .styl support for CSS compiling
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'groenewege/vim-less'
 
 " Windows
-Plugin 'tinymode.vim'
 Plugin 'Lokaltog/vim-easymotion' 	"Easy find strings in document
 
 " Building
-Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-dispatch' 		" Run async tasks like :Make
 Plugin 'mileszs/ack.vim' 			"Ack support in vim (grep replacement)
 Plugin 'edsono/vim-matchit'        	"Match html tags with % like standard tags
 Plugin 'tpope/vim-fugitive'
 Plugin 'mattn/gist-vim'
-"Plugin 'henrik/vim-indexed-search'
-"Plugin 'tpope/vim-abolish'
-"Plugin 'tpope/vim-repeat'
-"Plugin 'xolox/vim-session'
-"Plugin 'xolox/vim-misc'
-"Plugin 'editorconfig/editorconfig-vim'
-Plugin 'godlygeek/tabular'
+	Plugin 'WebAPI.vim' 			" Requirement for gist-vim
 Plugin 'plasticboy/vim-markdown'
 Plugin 'airblade/vim-gitgutter'
-"Plugin 'rhysd/clever-f.vim'
-" 'ogglable panel'
-"Plugin 'tpope/vim-vinegar'
-"Plugin 'vim-scripts/taglist.vim'
 Plugin 'majutsushi/tagbar'
-" language vundles
-"Plugin 'pangloss/vim-javascript'
+Plugin 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
 "Plugin 'marijnh/tern_for_vim'
 
 "Other
 Plugin 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
 
-" HTML
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'groenewege/vim-less'
-"Plugin 'kana/vim-textobj-user'
-"Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'fatih/vim-go'
+
 " Databases
 "Plugin 'krisajenkins/dbext.vim'
 "Plugin 'vim-scripts/SQLComplete.vim'
@@ -88,7 +80,6 @@ Plugin 'fatih/vim-go'
 "Plugin 'vim-scripts/dbext.vim'
 " Experimental vundle
 "Plugin 'gorodinskiy/vim-coloresque.git'
-"Plugin 'maxbrunsfeld/vim-yankstack'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -100,8 +91,10 @@ set ffs=unix,dos,mac                " Use Unix as the standard file type
 set cursorline                  " highlight current line
 set guicursor=a:blinkon600-blinkoff400  " Slow down cursor blinking speed
 
-if has('mouse')
-  set mouse=a
+if has("gui_running")
+	if has('mouse')
+	  set mouse=a
+	endif
 endif
 
 nmap :W :w
@@ -109,7 +102,6 @@ nmap :Q :q
 
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
-au BufWritePost .vimrc.main so ~/.vimrc
 
 if has("gui_running")
     set showmode                    " display the current mode
@@ -126,7 +118,127 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GitGutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:gitgutter_enabled = 0       "Activated by toggling
+" let g:gitgutter_enabled = 0       "Activated by toggling, disabled by default
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Gist
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gist_open_browser_after_post = 1
+let g:gist_detect_filetype = 1
+let g:gist_clip_command = 'xclip -selection clipboard'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => OmniSharp
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"This is the default value, setting it isn't actually necessary
+let g:OmniSharp_host = "http://localhost:2000"
+"Set the type lookup function to use the preview window instead of the status line
+"let g:OmniSharp_typeLookupInPreview = 1
+"Showmatch significantly slows down omnicomplete when the first match contains parentheses.
+set noshowmatch
+"Super tab settings - uncomment the next 4 lines
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+" let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
+" let g:SuperTabClosePreviewOnPopupClose = 1
+
+"don't autoselect first item in omnicomplete, show if only one item (for preview)
+"remove preview if you don't want to see any documentation whatsoever.
+" set completeopt=longest,menuone,preview
+" Fetch full documentation during omnicomplete requests. 
+" There is a performance penalty with this (especially on Mono)
+" By default, only Type/Method signatures are fetched. Full documentation can still be fetched when
+" you need it with the :OmniSharpDocumentation command.
+" let g:omnicomplete_fetch_documentation=1
+
+"Move the preview window (code documentation) to the bottom of the screen, so it doesn't move the code!
+"You might also want to look at the echodoc plugin
+set splitbelow
+" Get Code Issues and syntax errors
+" let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
+augroup omnisharp_commands
+    autocmd!
+
+    "Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
+    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+    " Synchronous build (blocks Vim)
+    "autocmd FileType cs nnoremap <F5> :wa!<cr>:OmniSharpBuild<cr>
+    " Builds can also run asynchronously with vim-dispatch installed
+    autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
+    " automatic syntax check on events (TextChanged requires Vim 7.4)
+    autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
+    " Automatically add new cs files to the nearest project on save
+    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
+
+    "show type information automatically when the cursor stops moving
+    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+
+    "The following commands are contextual, based on the current cursor position.
+
+    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
+    autocmd FileType cs nnoremap <leader>fi :OmniSharpFindImplementations<cr>
+    autocmd FileType cs nnoremap <leader>ft :OmniSharpFindType<cr>
+    autocmd FileType cs nnoremap <leader>fs :OmniSharpFindSymbol<cr>
+    autocmd FileType cs nnoremap <leader>fu :OmniSharpFindUsages<cr>
+    autocmd FileType cs nnoremap <leader>fm :OmniSharpFindMembers<cr> "finds members in the current buffer
+    " cursor can be anywhere on the line containing an issue 
+    autocmd FileType cs nnoremap <leader>x  :OmniSharpFixIssue<cr>  
+    autocmd FileType cs nnoremap <leader>fx :OmniSharpFixUsings<cr>
+    autocmd FileType cs nnoremap <leader>tt :OmniSharpTypeLookup<cr>
+    autocmd FileType cs nnoremap <leader>dc :OmniSharpDocumentation<cr>
+    autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr> "navigate up by method/property/field
+    autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr> "navigate down by method/property/field
+
+augroup END
+
+
+" this setting controls how long to wait (in ms) before fetching type / symbol information.
+set updatetime=500
+" Remove 'Press Enter to continue' message when type information is longer than one line.
+set cmdheight=2
+
+" Contextual code actions (requires CtrlP)
+nnoremap <leader><space> :OmniSharpGetCodeActions<cr>
+" Run code actions with text selected in visual mode to extract method
+vnoremap <leader><space> :call OmniSharp#GetCodeActions('visual')<cr>
+
+" rename with dialog
+nnoremap <leader>nm :OmniSharpRename<cr>
+nnoremap <F2> :OmniSharpRename<cr>      
+" rename without dialog - with cursor on the symbol to rename... ':Rename newname'
+command! -nargs=1 Rename :call OmniSharp#RenameTo("<args>")
+
+" Force OmniSharp to reload the solution. Useful when switching branches etc.
+nnoremap <leader>rl :OmniSharpReloadSolution<cr>
+nnoremap <leader>cf :OmniSharpCodeFormat<cr>
+" Load the current .cs file to the nearest project
+nnoremap <leader>tp :OmniSharpAddToProject<cr>
+
+" (Experimental - uses vim-dispatch or vimproc plugin) - Start the omnisharp server for the current solution
+nnoremap <leader>ss :OmniSharpStartServer<cr>
+nnoremap <leader>sp :OmniSharpStopServer<cr>
+
+" Add syntax highlighting for types and interfaces
+nnoremap <leader>th :OmniSharpHighlightTypes<cr>
+"Don't ask to save when changing buffers (i.e. when jumping to a type definition)
+set hidden
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"if exists("g:loaded_syntastic_plugin")
+    "finish
+"endif
+"let g:loaded_syntastic_plugin = 1
+"let g:syntastic_enable_highlighting = 1
+"let g:syntastic_enable_balloons = 1
+"let g:syntastic_always_populate_loc_list=1
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Airline
@@ -134,7 +246,6 @@ let g:gitgutter_enabled = 0       "Activated by toggling
 if !exists("g:airline_symbols")
 let g:airline_symbols = {}
 endif
-let g:airline_theme="powerlineish"
 let g:airline_powerline_fonts=1
 " let g:airline_section_warning = airline#section#create([ "syntastic" ])
 let g:airline#extensions#branch#empty_message = "No SCM"
@@ -144,7 +255,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
 let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Auto completion
@@ -187,8 +297,8 @@ nnoremap <leader>Gb :!go build<cr>
 nnoremap <leader>GB :!go build -race<cr>
 nnoremap <leader>Gi :!go install<cr>
 let g:go_fmt_command = "goimports"  "Enable goimports to automatically insert import paths instead of gofmt:
-let g:go_fmt_autosave = 0           "Run gofmt on save, without screen full output
-au BufWritePost *.go silent! !ctags -R &.
+let g:go_fmt_autosave = 1           "Run gofmt on save, without screen full output
+" au BufWritePost *.go silent! !ctags -R &.
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => HTML
@@ -234,7 +344,7 @@ scriptencoding utf-8
 set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
 set virtualedit=onemore         " allow for cursor beyond last character
-set spell                       " spell checking on
+set nospell                       " no spell checking 
 set backspace=indent,eol,start  " backspace for dummys
 set linespace=0                 " No extra spaces between rows
 set nu                          " Line numbers on
@@ -244,7 +354,7 @@ set wildmode=list:longest,full  " command <Tab> completion, list matches, then l
 set scrolljump=5                " lines to scroll when cursor leaves screen
 set scrolloff=3                 " minimum lines to keep above and below cursor
 "set foldenable                  " auto fold code
-set foldmethod=syntax
+set foldmethod=manual
 set foldnestmax=10
 set gdefault                    " the /g flag on :s substitutions by default
 
@@ -375,10 +485,9 @@ map <F5> :GundoToggle<CR>
 map <F6> :GitGutterToggle<CR>
 map <F7> :TagbarToggle<CR>
 map <F8> :NERDTreeToggle<CR>
-map <C-s> :w<CR>
-map <S-s> :w<CR>
-map <C-b> :bn<CR>
-map <S-b> :bn<CR>
+"map <C-s> :w<CR>
+map <C-b> :bnext<CR>
+map <C-S-b> :bprevious<CR>
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -411,7 +520,6 @@ nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 " => "NerdTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <C-o> :NERDTreeToggle<CR>
-map <S-o> :NERDTreeToggle<CR>
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.eep', '\.DSN', '\.lss', '\.lst', '\.map', '\.o', '\.sym', '\.DBK', '\.elf', '\.hex', 'tags']
 let NERDTreeChDirMode=0

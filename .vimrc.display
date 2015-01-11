@@ -1,0 +1,44 @@
+if !has("gui_running")
+	set t_Co=256
+endif
+
+let g:thematic#themes = {
+\ 'Default': { 
+\ 					 'background': 		'light',
+\ 					 'colorscheme': 	'vylight-FC',
+\ 					 'airline-theme': 	'sol',
+\                  },
+\ 'Blue': { 
+\ 					 'background': 		'dark',
+\ 					 'colorscheme': 	'blue',
+\ 					 'airline-theme': 	'kolor',
+\ 					 'linespace': 		4,
+\                  },
+\ 'Molokai': { 
+\ 					 'background': 		'dark',
+\ 					 'colorscheme': 	'molokai-FC',
+\ 					 'airline-theme': 	'molokai',
+\ 					 'linespace': 		4,
+\                  },
+\ 'Tomorrow-Elitebook': { 
+\ 					 'background': 		'light',
+\ 					 'colorscheme': 	'Tomorrow-FC',
+\ 					 'airline-theme': 	'sol',
+\                  	 'ruler': 			1,
+\                    'laststatus': 		1,
+\                  },
+\ }
+
+if hostname() == "FC-Elitebook"
+	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 9 }
+	let g:thematic#theme_name = 'Default'
+elseif hostname() == "FC-W540-Arch"
+	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 13 }
+	let g:thematic#theme_name = 'Default'
+elseif hostname() == "FC-XBMCLivingRoom"
+	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 13 }
+	let g:thematic#theme_name = 'Default'
+else
+	let g:thematic#defaults = { 'typeface': 'Source Code Pro Regular', 'font-size': 21 }
+	let g:thematic#theme_name = 'blue'
+endif

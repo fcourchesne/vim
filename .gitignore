@@ -3,8 +3,8 @@
 *.elf
 *.hex
 tags
-/backup
-/backups
-/bundle
-/swp
-/swap
+backup/
+backups/
+bundle/
+swp/
+swap/

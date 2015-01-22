@@ -1,3 +1,20 @@
+
+" Absolute numbers when focus is lost
+:au FocusLost * :set norelativenumber
+:au FocusGained * :set relativenumber
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Uncomment this on first install
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -351,8 +368,8 @@ set nu                          " Line numbers on
 set winminheight=0              " windows can be 0 line high 
 set wildmenu                    " show list instead of just completing
 set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
-set scrolljump=5                " lines to scroll when cursor leaves screen
-set scrolloff=3                 " minimum lines to keep above and below cursor
+"set scrolljump=2                " lines to scroll when cursor leaves screen
+"set scrolloff=5                 " minimum lines to keep above and below cursor
 "set foldenable                  " auto fold code
 set foldmethod=manual
 set foldnestmax=10
@@ -394,6 +411,8 @@ imap <C-A> <ESC><C-A>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
 " Turn backup off
 " set nobackup
 " set nowb

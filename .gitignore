@@ -3,3 +3,7 @@
 *.elf
 *.hex
 tags
+/backup
+/backups
+/swp
+/swap

@@ -1,20 +1,4 @@
 
-" Absolute numbers when focus is lost
-:au FocusLost * :set norelativenumber
-:au FocusGained * :set relativenumber
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
-
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set norelativenumber
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <C-n> :call NumberToggle()<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Uncomment this on first install
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -135,7 +119,8 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GitGutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:gitgutter_enabled = 0       "Activated by toggling, disabled by default
+let g:gitgutter_enabled = 0       "Activated by toggling, disabled by default
+let g:gitgutter_highlight_lines = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Gist
@@ -144,6 +129,23 @@ let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1
 let g:gist_clip_command = 'xclip -selection clipboard'
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Relative numbers when in normal mode, and window focussed
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+:au FocusLost * :set norelativenumber
+:au FocusGained * :set relativenumber
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set norelativenumber
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => OmniSharp
@@ -413,10 +415,11 @@ imap <C-A> <ESC><C-A>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
-" Turn backup off
-" set nobackup
-" set nowb
-" set noswapfile
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Indenting and wrapping
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set shiftwidth=4                " 1 tab == 4 spaces
 set tabstop=4
 set lbr                         " Linebreak on 500 characters

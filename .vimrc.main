@@ -1,10 +1,12 @@
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Uncomment this on first install
+" => Auto installs Vundle plugins if missing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"silent !rm -rf ~/.vim/bundle/Vundle > /dev/null 2>&1
-"silent !mkdir -p ~/.vim/bundle/ > /dev/null 2>&1
-"silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
+if !has('win32') && !has('win64')
+    if !isdirectory(expand("$HOME/.vim/bundle"))
+        silent !mkdir -p $HOME/.vim/bundle/ > /dev/null 2>&1
+        silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
+        :echom "Please reopen vim and execute :PluginInstall" 
+    else
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vundle packages
@@ -555,4 +557,12 @@ if has("gui_running")
     map <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
     map <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
     map <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
+endif
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => End of auto install of Vundle 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+endif
 endif

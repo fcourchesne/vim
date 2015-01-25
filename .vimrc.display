@@ -33,7 +33,7 @@ if hostname() == "FC-Elitebook"
 	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 9 }
 	let g:thematic#theme_name = 'Default'
 elseif hostname() == "FC-W540-Arch"
-	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 13 }
+	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 17 }
 	let g:thematic#theme_name = 'Default'
 elseif hostname() == "FC-XBMCLivingRoom"
 	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 13 }

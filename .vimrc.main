@@ -8,6 +8,7 @@ if !has('win32') && !has('win64')
         :echom "Please reopen vim and execute :PluginInstall" 
     else
 
+set ttimeoutlen=500
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vundle packages
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -31,6 +32,8 @@ Plugin 'guns/xterm-color-table.vim'
 "Plugin 'Xuyuanp/git-nerdtree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
+"Plugin 'chrisbra/Recover.vim' 		"Auto recover swap files
+"Plugin 'gioele/vim-autoswap.git'
 
 Plugin 'sjl/gundo.vim' 				"Undo menu
 Plugin 'bling/vim-airline'
@@ -94,11 +97,12 @@ set ffs=unix,dos,mac                " Use Unix as the standard file type
 set cursorline                  " highlight current line
 set guicursor=a:blinkon600-blinkoff400  " Slow down cursor blinking speed
 
-if has("gui_running")
-	if has('mouse')
-	  set mouse=a
-	endif
-endif
+" if has("gui_running")
+" 	if has('mouse')
+" 	  set mouse=a
+" 	endif
+" endif
+set mouse=a
 
 nmap :W :w
 nmap :Q :q

@@ -32,8 +32,6 @@ Plugin 'guns/xterm-color-table.vim'
 "Plugin 'Xuyuanp/git-nerdtree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
-"Plugin 'chrisbra/Recover.vim' 		"Auto recover swap files
-"Plugin 'gioele/vim-autoswap.git'
 
 Plugin 'sjl/gundo.vim' 				"Undo menu
 Plugin 'bling/vim-airline'
@@ -72,20 +70,9 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
-"Plugin 'marijnh/tern_for_vim'
 
 "Other
 Plugin 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
-
-
-" Databases
-"Plugin 'krisajenkins/dbext.vim'
-"Plugin 'vim-scripts/SQLComplete.vim'
-"Plugin 'vim-scripts/SQLUtilities'
-"Plugin 'NagatoPain/AutoSQLUpperCase.vim'
-"Plugin 'vim-scripts/dbext.vim'
-" Experimental vundle
-"Plugin 'gorodinskiy/vim-coloresque.git'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -474,8 +461,6 @@ set viminfo^=%                   " Remember info about open buffers on close
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Easymotion
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-hi link EasyMotionTarget ErrorMsg
-hi link EasyMotionShade  Comment
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)

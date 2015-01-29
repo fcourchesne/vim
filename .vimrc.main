@@ -32,6 +32,7 @@ Plugin 'guns/xterm-color-table.vim'
 "Plugin 'Xuyuanp/git-nerdtree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
+Plugin 'FredKSchott/CoVim' 			"Collaboration in editing
 
 Plugin 'sjl/gundo.vim' 				"Undo menu
 Plugin 'bling/vim-airline'

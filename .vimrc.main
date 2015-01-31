@@ -25,6 +25,7 @@ Plugin 'fatih/vim-go'
 " Appearance
 Plugin 'reedes/vim-thematic'
 Plugin 'fcourchesne/FC-vim-colors'
+Plugin 'fcourchesne/ViZuki' 		"Custom color scheme
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'guns/xterm-color-table.vim'
 
@@ -68,6 +69,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'mattn/gist-vim'
 	Plugin 'WebAPI.vim' 			" Requirement for gist-vim
 Plugin 'plasticboy/vim-markdown'
+Plugin 'groenewege/vim-markdown-preview'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
@@ -114,7 +116,7 @@ endif
 " => GitGutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled = 0       "Activated by toggling, disabled by default
-let g:gitgutter_highlight_lines = 1
+"let g:gitgutter_highlight_lines = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Gist
@@ -342,6 +344,7 @@ set noerrorbells                " No annoying sound on errors
 set novisualbell
 set t_vb=
 set tm=500
+"let g:mapleader = "<"
 let g:mapleader = ","
 set backspace=indent,eol,start "Allow backspacing over everything in insert mode.
 set undolevels=200      " Number of undo levels.
@@ -367,7 +370,7 @@ set wildmode=list:longest,full  " command <Tab> completion, list matches, then l
 "set scrolljump=2                " lines to scroll when cursor leaves screen
 "set scrolloff=5                 " minimum lines to keep above and below cursor
 "set foldenable                  " auto fold code
-set foldmethod=manual
+set foldmethod=indent
 set foldnestmax=10
 set gdefault                    " the /g flag on :s substitutions by default
 

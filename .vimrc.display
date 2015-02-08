@@ -30,15 +30,17 @@ let g:thematic#themes = {
 \ }
 
 if hostname() == "FC-Elitebook"
-	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 9 }
+	let g:thematic#defaults = { 'typeface': 'DejaVu Sans Mono for Powerline', 'font-size': 9 }
 	let g:thematic#theme_name = 'Default'
 elseif hostname() == "FC-W540-Arch"
-	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 15 }
+	let g:thematic#defaults = { 'typeface': 'DejaVu Sans Mono for Powerline', 'font-size': 15 }
 	let g:thematic#theme_name = 'Default'
 elseif hostname() == "FC-XBMCLivingRoom"
-	let g:thematic#defaults = { 'typeface': 'Source Code Pro for Powerline', 'font-size': 13 }
+	let g:thematic#defaults = { 'typeface': 'DejaVu Sans Mono for Powerline', 'font-size': 13 }
 	let g:thematic#theme_name = 'Default'
 else
-	let g:thematic#defaults = { 'typeface': 'Source Code Pro Regular', 'font-size': 21 }
+	let g:thematic#defaults = { 'typeface': 'Monospace', 'font-size': 21 }
 	let g:thematic#theme_name = 'blue'
 endif
+
+highlight Normal guifg=Black guibg=#D6D6D6 ctermfg=232 ctermbg=none

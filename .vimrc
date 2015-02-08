@@ -2,3 +2,4 @@
 " with 2 computers requiring different fonts/colors
 source ~/.vimrc.main
 source ~/.vimrc.display
+source ~/.vimrc.tests

@@ -88,15 +88,16 @@ filetype plugin indent on    " required
 set shell=$SHELL
 set encoding=utf8
 set ffs=unix,dos,mac                " Use Unix as the standard file type
-set guicursor=a:blinkon600-blinkoff400  " Slow down cursor blinking speed
+"set guicursor=a:blinkon600-blinkoff400  " Slow down cursor blinking speed
 
 " Cursor in terminal
-if &term =~ "xterm\\|rxvt\\|screen-256color"
+if &term =~ "rxvt\\|screen-256color"
+	let &t_SI .= "\<Esc>[3 q"
+	let &t_EI .= "\<Esc>[2 q"
   " 5 -> blinking vertical bar
-  let &t_SI .= "\<Esc>[5 q"
   " 1 or 0 -> blinking block
-  let &t_EI .= "\<Esc>[1 q"
   " 1 or 0 -> blinking block
+  " 2 -> non-blinking block
   " 3 -> blinking underscore
   " Recent versions of xterm (282 or above) also support
   " 5 -> blinking vertical bar
@@ -446,11 +447,13 @@ vmap <S-Insert>     <C-V>
 noremap <C-Q>       <C-V>
 " Select all (ctrl+a)
 map <silent> <C-A> gg0vG$
-imap <C-A> <ESC><C-A>"}}}
+imap <C-A> <ESC><C-A>
+"}}}
 
 " Files, backups and undo {{{
 set backupdir=~/.vim/backup
-set directory=~/.vim/swap"}}}
+set directory=~/.vim/swap
+"}}}
 
 " Indenting and wrapping {{{
 set shiftwidth=4                " 1 tab == 4 spaces

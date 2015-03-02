@@ -25,7 +25,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'fatih/vim-go'
 
 " Appearance
-Plugin 'reedes/vim-thematic'
+" Plugin 'reedes/vim-thematic'
 Plugin 'fcourchesne/FC-vim-colors'
 Plugin 'fcourchesne/ViZuki' 		"Custom color scheme
 Plugin 'altercation/vim-colors-solarized'

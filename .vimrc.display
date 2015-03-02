@@ -29,18 +29,47 @@ let g:thematic#themes = {
 \                  },
 \ }
 
-if hostname() == "FC-Elitebook"
-	let g:thematic#defaults = { 'typeface': 'DejaVu Sans Mono for Powerline', 'font-size': 9 }
-	let g:thematic#theme_name = 'Default'
+
+
+if hostname() == "FC-Elite-Arch"
+		if has('gui_running')
+		  if has('gui_win32')
+			set guifont=DejaVu_Sans_Mono_for_Powerline:h12:cANSI
+		  else
+			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
+		  endif
+		endif
+		colorscheme vizuki
+		let airline_theme="sol"
 elseif hostname() == "FC-W540-Arch"
-	let g:thematic#defaults = { 'typeface': 'DejaVu Sans Mono for Powerline', 'font-size': 15 }
-	let g:thematic#theme_name = 'Default'
+		if has('gui_running')
+		  if has('gui_win32')
+			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
+		  else
+			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 17
+		  endif
+		endif
+		colorscheme vizuki
+		let airline_theme="sol"
 elseif hostname() == "FC-XBMCLivingRoom"
-	let g:thematic#defaults = { 'typeface': 'DejaVu Sans Mono for Powerline', 'font-size': 13 }
-	let g:thematic#theme_name = 'Default'
+		if has('gui_running')
+		  if has('gui_win32')
+			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
+		  else
+			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 17
+		  endif
+		endif
+		colorscheme vizuki
+		let airline_theme="sol"
 else
-	let g:thematic#defaults = { 'typeface': 'Monospace', 'font-size': 21 }
-	let g:thematic#theme_name = 'blue'
+		if has('gui_running')
+		  if has('gui_win32')
+			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
+		  else
+			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 17
+		  endif
+		endif
+		colorscheme blue
 endif
 
 highlight Normal guifg=Black guibg=#D6D6D6 ctermfg=232 ctermbg=none

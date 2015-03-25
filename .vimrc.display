@@ -46,7 +46,7 @@ elseif hostname() == "FC-W540-Arch"
 		  if has('gui_win32')
 			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
 		  else
-			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 17
+			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 13
 		  endif
 		endif
 		colorscheme vizuki

@@ -81,6 +81,8 @@ Plugin 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
 Plugin 'peterhoeg/vim-qml'
 Plugin 'ivanov/vim-ipython'
 Plugin 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
+Plugin 'terryma/vim-smooth-scroll'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required

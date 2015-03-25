@@ -78,6 +78,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
 
 "Other
+Plugin 'peterhoeg/vim-qml'
+Plugin 'ivanov/vim-ipython'
 Plugin 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
 
 call vundle#end()            " required

@@ -40,7 +40,7 @@ Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer
 
 Plugin 'sjl/gundo.vim' 				"Undo menu
 Plugin 'bling/vim-airline'
-Plugin 'scrooloose/syntastic.git'
+"Plugin 'scrooloose/syntastic.git'
 Plugin 'scrooloose/nerdcommenter' 	"Commenting
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround' 		"Change surrounding tags

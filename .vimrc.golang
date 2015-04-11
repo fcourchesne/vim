@@ -21,3 +21,10 @@ nnoremap <leader>Gi :!go install<cr>
 let g:go_fmt_command = "goimports"  "Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_autosave = 1           "Run gofmt on save, without screen full output
 " au BufWritePost *.go silent! !ctags -R &."}}}
+"
+
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+

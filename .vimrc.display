@@ -2,35 +2,6 @@ if !has("gui_running")
 	set t_Co=256
 endif
 
-let g:thematic#themes = {
-\ 'Default': { 
-\ 					 'background': 		'light',
-\ 					 'colorscheme': 	'vizuki',
-\ 					 'airline-theme': 	'sol',
-\                  },
-\ 'Blue': { 
-\ 					 'background': 		'dark',
-\ 					 'colorscheme': 	'blue',
-\ 					 'airline-theme': 	'kolor',
-\ 					 'linespace': 		4,
-\                  },
-\ 'Molokai': { 
-\ 					 'background': 		'dark',
-\ 					 'colorscheme': 	'molokai-FC',
-\ 					 'airline-theme': 	'molokai',
-\ 					 'linespace': 		4,
-\                  },
-\ 'Tomorrow-Elitebook': { 
-\ 					 'background': 		'light',
-\ 					 'colorscheme': 	'Tomorrow-FC',
-\ 					 'airline-theme': 	'sol',
-\                  	 'ruler': 			1,
-\                    'laststatus': 		1,
-\                  },
-\ }
-
-
-
 if hostname() == "FC-Elite-Arch"
 		if has('gui_running')
 		  if has('gui_win32')
@@ -41,14 +12,27 @@ if hostname() == "FC-Elite-Arch"
 		endif
 		colorscheme vizuki
 		let airline_theme="sol"
+" elseif hostname() == "FC-W540-Arch"
+" 		if has('gui_running')
+" 		  if has('gui_win32')
+" 			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
+" 		  else
+" 			set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
+" 		  endif
+" 		endif
+" 		set background=light
+" 		colorscheme github
+" 		hi CursorLine term=none cterm=none guibg=Grey40
+" 		let airline_theme="sol"
 elseif hostname() == "FC-W540-Arch"
 		if has('gui_running')
 		  if has('gui_win32')
 			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
 		  else
-			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 13
+			set guifont=Inconsolata\ for\ Powerline\ Medium\ 17
 		  endif
 		endif
+		set background=light
 		colorscheme vizuki
 		let airline_theme="sol"
 elseif hostname() == "FC-XBMCLivingRoom"

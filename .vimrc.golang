@@ -1,4 +1,9 @@
-" GO lang {{{
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_fmt_command = "goimports"  "Enable goimports to automatically insert import paths instead of gofmt:
+let g:go_fmt_autosave = 1           "Run gofmt on save, without screen full output
+
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -11,20 +16,15 @@ au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
-nnoremap <leader>Gr :!go run %<cr>
-nnoremap <leader>GR :!go run -race %<cr>
-nnoremap <leader>Gt :!go test -v -cover<cr>
-nnoremap <leader>GT :!go test -race -v -cover<cr>
-nnoremap <leader>Gb :!go build<cr>
-nnoremap <leader>GB :!go build -race<cr>
-nnoremap <leader>Gi :!go install<cr>
-let g:go_fmt_command = "goimports"  "Enable goimports to automatically insert import paths instead of gofmt:
-let g:go_fmt_autosave = 1           "Run gofmt on save, without screen full output
-" au BufWritePost *.go silent! !ctags -R &."}}}
-"
+au FileType go nnoremap <leader>Gr :!go run %<cr>
+au FileType go nnoremap <leader>GR :!go run -race %<cr>
+au FileType go nnoremap <leader>Gt :!go test -v -cover<cr>
+au FileType go nnoremap <leader>GT :!go test -race -v -cover<cr>
+au FileType go nnoremap <leader>Gb :!go build<cr>
+au FileType go nnoremap <leader>GB :!go build -race<cr>
+au FileType go nnoremap <leader>Gi :!go install<cr>
 
-
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-
+" au BufNewFile,BufRead go set foldmethod=marker
+" au BufNewFile,BufRead go set foldmarker={,}
+au FileType go set foldmethod=marker
+au FileType go set foldmarker={,}

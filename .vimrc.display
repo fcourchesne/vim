@@ -2,7 +2,7 @@ if !has("gui_running")
 	set t_Co=256
 endif
 
-if hostname() == "FC-Elite-Arch"
+if hostname() == "FC-Elitebook"
 		if has('gui_running')
 		  if has('gui_win32')
 			set guifont=DejaVu_Sans_Mono_for_Powerline:h12:cANSI
@@ -11,19 +11,11 @@ if hostname() == "FC-Elite-Arch"
 		  endif
 		endif
 		colorscheme vizuki
-		let airline_theme="sol"
-" elseif hostname() == "FC-W540-Arch"
-" 		if has('gui_running')
-" 		  if has('gui_win32')
-" 			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
-" 		  else
-" 			set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
-" 		  endif
-" 		endif
-" 		set background=light
-" 		colorscheme github
-" 		hi CursorLine term=none cterm=none guibg=Grey40
-" 		let airline_theme="sol"
+		let airline_theme="pencil"
+		"let airline_theme="sol"
+		"colorscheme pencil
+		"let g:pencil_neutral_code_bg = 0
+		"let g:pencil_higher_contrast_ui = 1
 elseif hostname() == "FC-W540-Arch"
 		if has('gui_running')
 		  if has('gui_win32')

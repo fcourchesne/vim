@@ -11,7 +11,7 @@ if !has('win32') && !has('win64')
         :echom "Please reopen vim and execute :PluginInstall" 
     else
 set ttimeoutlen=500
-" }}}
+"}}}
 
 " Vundle packages {{{
 " MANDATORY
@@ -26,22 +26,23 @@ Plugin 'fatih/vim-go'
 
 " Appearance
 " Plugin 'reedes/vim-thematic'
+Plugin 'guns/xterm-color-table.vim'
 Plugin 'fcourchesne/FC-vim-colors'
-Plugin 'fcourchesne/ViZuki' 		"Custom color scheme
+Plugin 'fcourchesne/ViZuki'                   "Custom color scheme
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'reedes/vim-colors-pencil'
-Plugin 'guns/xterm-color-table.vim'
 Plugin 'john2x/flatui.vim'
 
 
 " Files management
-"Plugin 'Xuyuanp/git-nerdtree'
-Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/git-nerdtree'
+"Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
 "Plugin 'FredKSchott/CoVim' 			"Collaboration in editing
 
 Plugin 'sjl/gundo.vim' 				"Undo menu
-Plugin 'bling/vim-airline'
+"Plugin 'bling/vim-airline'
 "Plugin 'scrooloose/syntastic.git'
 Plugin 'scrooloose/nerdcommenter' 	"Commenting
 Plugin 'tpope/vim-commentary'
@@ -89,7 +90,7 @@ Plugin 'terryma/vim-smooth-scroll'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
-" }}}
+"}}}
 
 " OS and encoding specific {{{
 set shell=$SHELL
@@ -117,21 +118,31 @@ endif
 " 	endif
 " endif
 set mouse=a
-" }}}
+"}}}
+
+" Statusline {{{
+set statusline=%<%f
+set statusline+=\ %{fugitive#statusline()}
+set statusline+=\ %h%m%r
+set statusline+=%=    " Jump to right side
+set statusline+=(L:%l,\ C:%c%V)
+set statusline+=\ %y\ %P
+set laststatus=2
+"}}}
 
 " Folding {{{
 "set foldenable
 set foldcolumn=0
-set foldlevelstart=20
+set foldlevelstart=99
 set foldmarker={{{,}}}
 set foldmethod=expr
 set foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
 " Look for fold method in file
 set modelines=1
-set foldminlines=1
-set foldnestmax=4 
+set foldminlines=0
+set foldnestmax=4
 set foldopen=block,hor,jump,mark,percent,quickfix,search,tag,undo
-set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g') "}}}
+set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 set modelines=1
 
 autocmd Syntax c,cpp,tcl,xml set foldmethod=marker
@@ -188,18 +199,19 @@ endif
 "======================================================
 let g:gitgutter_enabled = 0       "Activated by toggling, disabled by default
 let g:gitgutter_highlight_lines = 0"
-" }}}
+"}}}
 
 " Gist {{{
 let g:gist_open_browser_after_post = 1
 let g:gist_detect_filetype = 1
-let g:gist_clip_command = 'xclip -selection clipboard'"}}}
+let g:gist_clip_command = 'xclip -selection clipboard'
+"}}}
 
 " Relative numbers when in normal mode, and window focussed {{{
-:au FocusLost * :set norelativenumber
-:au FocusGained * :set relativenumber
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
+autocmd FocusLost * set norelativenumber
+autocmd FocusGained * set relativenumber
+autocmd InsertEnter * set norelativenumber
+autocmd InsertLeave * set relativenumber
 
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -209,63 +221,65 @@ function! NumberToggle()
   endif
 endfunc
 
-nnoremap <C-n> :call NumberToggle()<CR>"}}}
+nnoremap <C-n> :call NumberToggle()<CR>
+"}}}
 
 " Syntastic {{{
-if exists("g:loaded_syntastic_plugin")"{{{
+if exists("g:loaded_syntastic_plugin")
     finish
-endif"}}}
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+endif
 
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height = 5"}}}
+let g:syntastic_loc_list_height = 5
+"}}}
 
 " Airline {{{
-if !exists("g:airline_symbols")
-let g:airline_symbols = {}
-endif
-let g:airline_powerline_fonts=1
-let g:airline_section_warning = airline#section#create([ "syntastic" ])
-let g:airline#extensions#branch#empty_message = "No SCM"
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
-let g:airline#extensions#hunks#non_zero_only = 1 " git gutter"}}}
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" if !exists("g:airline_symbols")
+" let g:airline_symbols = {}
+" endif
+" let g:airline_powerline_fonts=1
+" let g:airline_section_warning = airline#section#create([ "syntastic" ])
+" let g:airline#extensions#branch#empty_message = "No SCM"
+" let g:airline#extensions#whitespace#enabled = 0
+" let g:airline#extensions#syntastic#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+" let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
+" let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
+"}}}
 
 " Auto completion {{{
 set complete=.,i " Complete only the current buffer and includes
+"set complete=.,i,b,w,u " Complete only the current buffer and includes
 set completeopt=menu,menuone,longest " Complete options (disable preview scratch window)
 let g:SuperTabDefaultCompletionType = "context"
 set ofu=syntaxcomplete#Complete
-hi Pmenu guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-hi PmenuSbar guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-hi PmenuThumb guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags"}}}
-
+autocmd FileType python set list
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"}}}
 
 " HTML {{{
 " Map less to css
 nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
-" }}}
+"}}}
 
 " General {{{
-set so=7                        " Set 7 lines to the cursor - when moving vertically using j/k
+set so=1                        " Set 7 lines to the cursor - when moving vertically using j/k
 set wildmenu                    " Turn on the WiLd menu
 set wildignore=*.o,*~,*.pyc,*.exe,*.hex,*.elf   " Ignore compiled files
 set ruler                       "Always show current position
@@ -274,22 +288,19 @@ set hid                         " A buffer becomes hidden when it is abandoned
 set backspace=eol,start,indent  " Configure backspace so it acts as it should act
 set whichwrap+=<,>,h,l
 set ignorecase                  " Ignore case when searching
-set smartcase                   " When searching try to be smart about cases 
+set smartcase                   " When searching try to be smart about cases
 set hlsearch                    " Highlight search results
 set incsearch                   " Makes search act like search in modern browsers
 set lazyredraw                  " Don't redraw while executing macros (good performance config)
 set magic                       " For regular expressions turn magic on
 set showmatch                   " Show matching brackets when text indicator is over them
-set mat=2                       " How many tenths of a second to blink when matching brackets
+set mat=0                       " How many tenths of a second to blink when matching brackets
 set noerrorbells                " No annoying sound on errors
 set novisualbell
 set t_vb=
 set tm=500
 "let g:mapleader = "<"
 let g:mapleader = ","
-set backspace=indent,eol,start "Allow backspacing over everything in insert mode.
-set undolevels=200      " Number of undo levels.
-set history=1000                " Store a ton of history (default is 20)
 set ttyfast             " We have a fast terminal connection.
 set esckeys             " Cursor keys in insert mode.
 "if !has('win32') && !has('win64')
@@ -310,7 +321,8 @@ set wildmenu                    " show list instead of just completing
 set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
 "set scrolljump=2                " lines to scroll when cursor leaves screen
 "set scrolloff=5                 " minimum lines to keep above and below cursor
-set gdefault                    " the /g flag on :s substitutions by default"}}}
+set gdefault                    " the /g flag on :s substitutions by default
+"}}}
 
 " Typical Ctrl-C/V/X behavior and Select all {{{
 " CTRL-X and SHIFT-Del are Cut
@@ -339,23 +351,24 @@ imap <C-A> <ESC><C-A>
 " Files, backups and undo {{{
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
+set undolevels=200      " Number of undo levels.
+set history=1000                " Store a ton of history (default is 20)
 "}}}
 
 " Indenting and wrapping {{{
-set shiftwidth=4                " 1 tab == 4 spaces
 set tabstop=4
+set shiftwidth=4                " 1 tab == 4 spaces
+set expandtab
 set lbr                         " Linebreak on 500 characters
 set tw=500
-set ai "Auto indent
-set si "Smart indent
+"set ai "Auto indent
+"set si "Smart indent
 set wrap "Wrap lines
-""set list
-""set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+"set list
+set listchars=tab:⚫⚫,trail:⚫,extends:#,nbsp:. " Highlight problematic whitespace
 
 " Maximum width visually shown
 " let &colorcolumn="120,".join(range(120,999),",")
-
-
 "}}}
 
 " Movement, tabs and buffers {{{
@@ -375,10 +388,11 @@ map <leader>bd :Bclose<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove"}}}
+map <leader>tm :tabmove
+"}}}
 
 " Easymotion {{{
-let g:EasyMotion_startofline = 0 " keep cursor colum when JK motion
+let g:EasyMotion_startofline = 1 " keep cursor colum when JK motion
 "}}}
 
 " General {{{
@@ -388,7 +402,7 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 set viminfo^=%                   " Remember info about open buffers on close"
-" "}}}
+"}}}
 
 " Mappings {{{
 "Move a line of text using ALT+[jk] or Command+[jk] on mac
@@ -425,7 +439,7 @@ nnoremap ; :
 
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
-vnoremap > >gv 
+vnoremap > >gv
 map <C-f> :CtrlPMixed<CR>
 map 0 ^
 map <F5> :GundoToggle<CR>
@@ -441,12 +455,14 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
-cmap cwd lcd %:p:h              "}}}
+cmap cwd lcd %:p:h
+"}}}
 
 " SnipMate {{{
 let g:snips_author = 'Francis Courchesne <fcourchesne@gmail.com>'
 let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'"}}}
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+"}}}
 
 " Tmux seamless {{{
 let g:tmux_navigator_save_on_switch = 0
@@ -455,21 +471,23 @@ nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
 nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
 nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
 nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
-nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>"}}}
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+"}}}
 
 " NerdTree {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-o> :NERDTreeToggle<CR>
+map <C-o> :NERDTreeTabsToggle<CR>
+let g:nerdtree_tabs_open_on_gui_startup = 0
+let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.eep', '\.DSN', '\.lss', '\.lst', '\.map', '\.o', '\.sym', '\.DBK', '\.elf', '\.hex', '\.meta', 'tags']
 let NERDTreeChDirMode=0
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=0
-let NERDTreeKeepTreeInNewTab=0"}}}
+let NERDTreeKeepTreeInNewTab=0
+"}}}
 
 " DO NOT DELETE IN THIS FOLD {{{
 endif
 endif
-" }}}
-
-" vim: foldmethod=marker:foldlevel=0 :
+"}}}

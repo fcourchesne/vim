@@ -7,7 +7,8 @@ if hostname() == "FC-Elitebook"
 		  if has('gui_win32')
 			set guifont=DejaVu_Sans_Mono_for_Powerline:h12:cANSI
 		  else
-			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+			" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
+			set guifont=Inconsolata\ for\ Powerline\ Medium\ 11
 		  endif
 		endif
 		colorscheme vizuki
@@ -48,4 +49,4 @@ else
 		colorscheme blue
 endif
 
-highlight Normal guifg=Black guibg=#D6D6D6 ctermfg=232 ctermbg=none
+"highlight Normal guifg=Black guibg=#D6D6D6 ctermfg=232 ctermbg=none

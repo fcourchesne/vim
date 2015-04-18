@@ -74,8 +74,8 @@ Plugin 'edsono/vim-matchit'        	"Match html tags with % like standard tags
 Plugin 'tpope/vim-fugitive'
 Plugin 'mattn/gist-vim'
 	Plugin 'WebAPI.vim' 			" Requirement for gist-vim
-Plugin 'plasticboy/vim-markdown'
-Plugin 'groenewege/vim-markdown-preview'
+"Plugin 'godlygeek/tabular'
+"Plugin 'plasticboy/vim-markdown'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4

@@ -5,6 +5,7 @@ let g:go_fmt_command = "goimports"  "Enable goimports to automatically insert im
 let g:go_fmt_autosave = 1           "Run gofmt on save, without screen full output
 
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <Leader>gd <Plug>(go-def-split)
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>s <Plug>(go-implements)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)

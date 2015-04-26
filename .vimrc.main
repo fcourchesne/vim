@@ -103,7 +103,7 @@ set ffs=unix,dos,mac                " Use Unix as the standard file type
 
 " Cursor in terminal
 if &term =~ "rxvt\\|screen-256color"
-	let &t_SI .= "\<Esc>[3 q"
+	let &t_SI .= "\<Esc>[5 q"
 	let &t_EI .= "\<Esc>[2 q"
   " 5 -> blinking vertical bar
   " 1 or 0 -> blinking block

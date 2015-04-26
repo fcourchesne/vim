@@ -26,8 +26,10 @@ elseif hostname() == "FC-W540-Arch"
 		  endif
 		endif
 		set background=light
-		colorscheme vizuki
-		let airline_theme="sol"
+		" colorscheme vizuki
+		" let airline_theme="sol"
+		colorscheme fc-dark
+		let airline_theme="simple"
 elseif hostname() == "FC-XBMCLivingRoom"
 		if has('gui_running')
 		  if has('gui_win32')

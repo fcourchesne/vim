@@ -11,12 +11,14 @@ if hostname() == "FC-Elitebook"
 			set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
 		  endif
 		endif
-		colorscheme vizuki
-		let airline_theme="pencil"
+		"colorscheme vizuki
+		"let airline_theme="pencil"
 		"let airline_theme="sol"
 		"colorscheme pencil
 		"let g:pencil_neutral_code_bg = 0
 		"let g:pencil_higher_contrast_ui = 1
+		colorscheme fc-dark
+		let airline_theme="simple"
 elseif hostname() == "FC-W540-Arch"
 		if has('gui_running')
 		  if has('gui_win32')

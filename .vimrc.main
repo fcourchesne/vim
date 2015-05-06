@@ -43,6 +43,8 @@ Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer
 Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'FredKSchott/CoVim' 			"Collaboration in editing
 
+Plugin 'tasklist.vim'
+
 Plugin 'sjl/gundo.vim' 				"Undo menu
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/syntastic.git'

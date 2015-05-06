@@ -24,6 +24,7 @@ au FileType go nnoremap <leader>GT :!go test -race -v -cover<cr>
 au FileType go nnoremap <leader>Gb :!go build<cr>
 au FileType go nnoremap <leader>GB :!go build -race<cr>
 au FileType go nnoremap <leader>Gi :!go install<cr>
+au FileType go nnoremap <leader>td :vimgrep TODO **/*.go<cr>:copen<cr>
 
 " au BufNewFile,BufRead go set foldmethod=marker
 " au BufNewFile,BufRead go set foldmarker={,}

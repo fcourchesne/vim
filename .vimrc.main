@@ -151,6 +151,7 @@ set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 set modelines=1
 
 autocmd Syntax c,cpp,tcl,xml set foldmethod=marker
+autocmd Syntax makefile set !expandtab               " Need to use tabs in makefiles
 
 fu! CustomFoldText()
 	"get first non-blank line

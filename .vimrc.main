@@ -24,6 +24,11 @@ Plugin 'gmarik/Vundle.vim'
 " Go
 Plugin 'fatih/vim-go'
 
+" Rust
+" Plugin 'phildawes/racer'   "Not working 2015-05-10
+Plugin 'wting/rust.vim'
+
+
 " Appearance
 " Plugin 'reedes/vim-thematic'
 Plugin 'guns/xterm-color-table.vim'

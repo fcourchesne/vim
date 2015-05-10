@@ -1,0 +1,5 @@
+" set hidden
+" let g:racer_cmd = "<path-to-racer>/target/release/racer"
+" let $RUST_SRC_PATH="<path-to-rust-srcdir>/src/"
+autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
+autocmd BufRead,BufNewFile *.rs nmap <leader>r :!rustc % && ./% <cr>

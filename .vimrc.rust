@@ -2,4 +2,8 @@
 " let g:racer_cmd = "<path-to-racer>/target/release/racer"
 " let $RUST_SRC_PATH="<path-to-rust-srcdir>/src/"
 autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
-autocmd BufRead,BufNewFile *.rs nmap <leader>r :!rustc % && ./% <cr>
+" autocmd BufRead,BufNewFile *.rs nmap <leader>r :RustRun <cr>
+" autocmd FileType rust nmap <leader>r :RustRun <cr>
+" autocmd FileType rust nnoremap <leader>r :RustRun <cr> nmap <leader>r :RustRun <cr>
+
+" autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs nmap <leader>r :RustRun <cr>

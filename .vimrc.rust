@@ -1,9 +1,9 @@
 " set hidden
 let g:racer_cmd = "~/.vim/bundle/racer/target/debug/racer"
-" let $RUST_SRC_PATH="<path-to-rust-srcdir>/src/"
+let $RUST_SRC_PATH= "/usr/share/rust/src"
 autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
 " autocmd BufRead,BufNewFile *.rs nmap <leader>r :RustRun <cr>
-" autocmd FileType rust nmap <leader>r :RustRun <cr>
+autocmd FileType rust nmap <leader>r :!cargo run<cr>
 " autocmd FileType rust nnoremap <leader>r :RustRun <cr> nmap <leader>r :RustRun <cr>
 
 " autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs nmap <leader>r :RustRun <cr>

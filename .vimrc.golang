@@ -30,4 +30,4 @@ au FileType go nnoremap <leader>td :vimgrep TODO **/*.go<cr>:copen<cr>
 " au BufNewFile,BufRead go set foldmarker={,}
 au FileType go set foldmethod=marker
 au FileType go set foldmarker={,}
-au BufWritePost *.go silent! !ctags -R &
+" au BufWritePost *.go silent! !ctags -R &

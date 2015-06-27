@@ -24,14 +24,15 @@ elseif hostname() == "FC-W540"
 		  if has('gui_win32')
 			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
 		  else
-			set guifont=Inconsolata\ for\ Powerline\ Medium\ 11
+			set guifont=Inconsolata\ for\ Powerline\ Medium\ 15
 		  endif
 		endif
-		set background=light
-		" colorscheme vizuki
-		" let airline_theme="sol"
+		set background=dark
+		" colorscheme fc-dark
+		" let airline_theme="pencil"
 		colorscheme vizuki
-		let airline_theme="sol"
+		let airline_theme="pencil"
+		" let airline_theme="sol"
 elseif hostname() == "FC-XBMCLivingRoom"
 		if has('gui_running')
 		  if has('gui_win32')

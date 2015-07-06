@@ -2,13 +2,13 @@ if !has("gui_running")
 	set t_Co=256
 endif
 
-if hostname() == "FC-Elitebook"
+if hostname() == "FC-T420s"
 		if has('gui_running')
 		  if has('gui_win32')
 			set guifont=DejaVu_Sans_Mono_for_Powerline:h12:cANSI
 		  else
 			" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
-			set guifont=Inconsolata\ for\ Powerline\ Medium\ 13
+			set guifont=Ubuntu\ Mono\ Derivative\ Powerline\ Regular\ 11
 		  endif
 		endif
 		"colorscheme vizuki
@@ -17,7 +17,8 @@ if hostname() == "FC-Elitebook"
 		"colorscheme pencil
 		"let g:pencil_neutral_code_bg = 0
 		"let g:pencil_higher_contrast_ui = 1
-		colorscheme fc-dark
+        set background=dark
+		colorscheme pencil
 		let airline_theme="pencil"
 elseif hostname() == "FC-W540"
 		if has('gui_running')

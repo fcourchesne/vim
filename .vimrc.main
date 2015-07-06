@@ -40,10 +40,17 @@ Plugin 'john2x/flatui.vim'
 Plugin 'zefei/vim-colortuner'
 
 
+
+Plugin 'ekalinin/Dockerfile.vim'
+
+
 " Files management
-Plugin 'Xuyuanp/git-nerdtree'
+" Plugin 'Xuyuanp/git-nerdtree'
 "Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+" Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'ryanoasis/vim-webdevicons'
 Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
 Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'FredKSchott/CoVim' 			"Collaboration in editing
@@ -496,7 +503,8 @@ nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 " NerdTree {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-o> :NERDTreeTabsToggle<CR>
+" map <C-o> :NERDTreeTabsToggle<CR>
+map <C-o> :NERDTreeToggle<CR>
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeShowBookmarks=1

@@ -32,7 +32,8 @@ elseif hostname() == "FC-W540"
 		set background=dark
 		" colorscheme fc-dark
 		" let airline_theme="pencil"
-		colorscheme vizuki
+		" colorscheme vizuki
+		colorscheme pencil
 		let airline_theme="pencil"
 		" let airline_theme="sol"
 elseif hostname() == "FC-XBMCLivingRoom"

@@ -6,3 +6,5 @@ source ~/.vim/.vimrc.golang
 source ~/.vim/.vimrc.omnisharp
 source ~/.vim/.vimrc.rust
 source ~/.vim/.vimrc.tests
+
+set nonu

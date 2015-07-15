@@ -46,11 +46,10 @@ Plugin 'ekalinin/Dockerfile.vim'
 
 " Files management
 " Plugin 'Xuyuanp/git-nerdtree'
-"Plugin 'scrooloose/nerdtree'
 " Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'ryanoasis/vim-webdevicons'
+" Plugin 'ryanoasis/vim-webdevicons'
 Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
 Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'FredKSchott/CoVim' 			"Collaboration in editing
@@ -226,10 +225,10 @@ let g:gist_clip_command = 'xclip -selection clipboard'
 "}}}
 
 " Relative numbers when in normal mode, and window focussed {{{
-autocmd FocusLost * set norelativenumber
-autocmd FocusGained * set relativenumber
-autocmd InsertEnter * set norelativenumber
-autocmd InsertLeave * set relativenumber
+" autocmd FocusLost * set norelativenumber
+" autocmd FocusGained * set relativenumber
+" autocmd InsertEnter * set norelativenumber
+" autocmd InsertLeave * set relativenumber
 
 function! NumberToggle()
   if(&relativenumber == 1)
@@ -250,11 +249,12 @@ endif
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 let g:syntastic_loc_list_height = 5
-let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_error_symbol = "✘"
+let g:syntastic_warning_symbol = "▲"
 "}}}
 
 " Airline {{{
@@ -334,7 +334,7 @@ set virtualedit=onemore         " allow for cursor beyond last character
 set nospell                       " no spell checking 
 set backspace=indent,eol,start  " backspace for dummys
 set linespace=0                 " No extra spaces between rows
-set nu                          " Line numbers on
+"set nu                          " Line numbers on
 set winminheight=0              " windows can be 0 line high 
 set wildmenu                    " show list instead of just completing
 set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.

@@ -16,12 +16,18 @@ set ttimeoutlen=500
 " Vundle packages {{{
 " MANDATORY
 set nocompatible              " be iMproved, required
+set hidden
 filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
 
+" Main
+Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic.git'
+Plugin 'sjl/gundo.vim' 				"Undo menu
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-surround' 		"Change surrounding tags
+Plugin 'Lokaltog/vim-easymotion' 	"Easy find strings in document
 
 " Go
 Plugin 'fatih/vim-go'
@@ -29,23 +35,22 @@ Plugin 'fatih/vim-go'
 " Rust
 Plugin 'phildawes/racer'   "Not working 2015-05-10
 Plugin 'wting/rust.vim'
-"Plugin 'rust-lang/rust.vim'
 
+" C#
+" Plugin 'OmniSharp/omnisharp-vim' 	" C#
 
 " Appearance
 " Plugin 'reedes/vim-thematic'
-Plugin 'guns/xterm-color-table.vim'
-Plugin 'fcourchesne/FC-vim-colors'
 Plugin 'fcourchesne/ViZuki'                   "Custom color scheme
+Plugin 'fcourchesne/FC-vim-colors'
+" Plugin 'bling/vim-airline'
+Plugin 'guns/xterm-color-table.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'reedes/vim-colors-pencil'
 Plugin 'john2x/flatui.vim'
-Plugin 'zefei/vim-colortuner'
 
-
-
+" Docker
 Plugin 'ekalinin/Dockerfile.vim'
-
 
 " Files management
 " Plugin 'Xuyuanp/git-nerdtree'
@@ -54,16 +59,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Plugin 'ryanoasis/vim-webdevicons'
 Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
+Plugin 'szw/vim-ctrlspace'
 Plugin 'jlanzarotta/bufexplorer'
 "Plugin 'FredKSchott/CoVim' 			"Collaboration in editing
 
-Plugin 'tasklist.vim'
-
-Plugin 'sjl/gundo.vim' 				"Undo menu
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdcommenter' 	"Commenting
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-surround' 		"Change surrounding tags
 
 " Auto completion
 Plugin 'fcourchesne/FC-Snippets'
@@ -72,43 +71,44 @@ Plugin 'fcourchesne/FC-Snippets'
 Plugin 'Raimondi/delimitMate' 		"Close tags
 Plugin 'garbas/vim-snipmate'
 "Plugin 'sirver/ultisnips'
-Plugin 'rking/ag.vim'
+" Plugin 'rking/ag.vim'
 Plugin 'ervandew/supertab'
-Plugin 'OmniSharp/omnisharp-vim' 	" C#
 
 " Html
 "Plugin 'flomotlik/vim-livereload'
-Plugin 'wavded/vim-stylus' 			" .styl support for CSS compiling
-Plugin 'kchmck/vim-coffee-script'
+" Plugin 'wavded/vim-stylus' 			" .styl support for CSS compiling
+" Plugin 'kchmck/vim-coffee-script'
 Plugin 'groenewege/vim-less'
+Plugin 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
 
 " Windows
-Plugin 'Lokaltog/vim-easymotion' 	"Easy find strings in document
 
 " Building
-Plugin 'tpope/vim-dispatch' 		" Run async tasks like :Make
-Plugin 'mileszs/ack.vim' 			"Ack support in vim (grep replacement)
-Plugin 'edsono/vim-matchit'        	"Match html tags with % like standard tags
+" Plugin 'tpope/vim-dispatch' 		" Run async tasks like :Make
+" Plugin 'mileszs/ack.vim' 			"Ack support in vim (grep replacement)
 Plugin 'tpope/vim-fugitive'
 Plugin 'mattn/gist-vim'
-	Plugin 'WebAPI.vim' 			" Requirement for gist-vim
+Plugin 'WebAPI.vim' 			" Requirement for gist-vim
 "Plugin 'godlygeek/tabular'
 "Plugin 'plasticboy/vim-markdown'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
-Plugin 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
 
 "Other
-Plugin 'peterhoeg/vim-qml'
-Plugin 'ivanov/vim-ipython'
+" Plugin 'peterhoeg/vim-qml'
+" Plugin 'ivanov/vim-ipython'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
-Plugin 'terryma/vim-smooth-scroll'
+" Plugin 'terryma/vim-smooth-scroll'
+
+"Tests
+" Plugin 'terryma/vim-multiple-cursors'
 
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 "}}}
+
 
 " OS and encoding specific {{{
 set shell=$SHELL
@@ -162,6 +162,9 @@ set foldnestmax=4
 set foldopen=block,hor,jump,mark,percent,quickfix,search,tag,undo
 set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 set modelines=1
+" Auto save folds and reload on file open
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview 
 
 autocmd Syntax c,cpp,tcl,xml set foldmethod=marker
 autocmd Syntax makefile set !expandtab               " Need to use tabs in makefiles
@@ -260,21 +263,21 @@ let g:syntastic_warning_symbol = "▲"
 "}}}
 
 " Airline {{{
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-if !exists("g:airline_symbols")
-let g:airline_symbols = {}
-endif
-let g:airline_powerline_fonts=1
-let g:airline_section_warning = airline#section#create([ "syntastic" ])
-let g:airline#extensions#branch#empty_message = "No SCM"
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
-let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" if !exists("g:airline_symbols")
+" let g:airline_symbols = {}
+" endif
+" let g:airline_powerline_fonts=1
+" let g:airline_section_warning = airline#section#create([ "syntastic" ])
+" let g:airline#extensions#branch#empty_message = "No SCM"
+" let g:airline#extensions#whitespace#enabled = 1
+" let g:airline#extensions#syntastic#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+" let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
+" let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
 "}}}
 
 " Auto completion {{{
@@ -464,13 +467,13 @@ vnoremap < <gv
 vnoremap > >gv
 map <C-f> :CtrlPMixed<CR>
 "map <C-S-f> :CtrlPBuffer<CR>
-map <C-e> :BufExplorer<CR>
 map <F5> :GundoToggle<CR>
 map <F6> :GitGutterToggle<CR>
 map <F7> :TagbarToggle<CR>
 "map <F8> :<CR>
 map <C-b> :bnext<CR>
 map <C-S-b> :bprevious<CR>
+map <C-e> :BufExplorer<CR>
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>

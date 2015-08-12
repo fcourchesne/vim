@@ -3,7 +3,7 @@
 source ~/.vim/.vimrc.main
 source ~/.vim/.vimrc.display
 source ~/.vim/.vimrc.golang
-source ~/.vim/.vimrc.omnisharp
+" source ~/.vim/.vimrc.omnisharp
 source ~/.vim/.vimrc.rust
 source ~/.vim/.vimrc.tests
 

@@ -10,11 +10,15 @@ if hostname() == "FC-T420s"
 			" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 			set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Regular\ 13
 		  endif
+          " set background=dark
+          " colorscheme pencil
           set background=dark
-          colorscheme pencil
+          " colorscheme fc-dark
+          colorscheme gruvbox
         else
           set background=dark
-          colorscheme fc-dark
+          " colorscheme fc-dark
+          colorscheme gruvbox
 		endif
 		" let airline_theme="pencil"
 		"let g:pencil_neutral_code_bg = 0

@@ -8,7 +8,7 @@ if hostname() == "FC-T420s"
 			set guifont=DejaVu_Sans_Mono_for_Powerline:h13:cANSI
 		  else
 			" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
-			set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Regular\ 13
+			set guifont=Hack\ Medium\ 13
 		  endif
           " set background=dark
           " colorscheme pencil
@@ -31,14 +31,15 @@ elseif hostname() == "FC-W540"
 		  if has('gui_win32')
 			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
 		  else
-			set guifont=Inconsolata\ for\ Powerline\ Medium\ 15
+			set guifont=Hack\ Medium\ 13
 		  endif
 		endif
 		set background=dark
 		" colorscheme fc-dark
 		" let airline_theme="pencil"
 		" colorscheme vizuki
-		colorscheme pencil
+        " colorscheme pencil
+		colorscheme gruvbox
 		" let airline_theme="pencil"
 		" let airline_theme="sol"
 elseif hostname() == "FC-XBMCLivingRoom"

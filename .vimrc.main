@@ -8,7 +8,7 @@ if !has('win32') && !has('win64')
     if !isdirectory(expand("$HOME/.vim/bundle"))
         silent !mkdir -p $HOME/.vim/bundle/ > /dev/null 2>&1
         silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null 2>&1
-        :echom "Please reopen vim and execute :PluginInstall" 
+        :echom "Please reopen vim and execute :PluginInstall"
     else
 set ttimeoutlen=500
 "}}}
@@ -23,7 +23,7 @@ call vundle#begin()
 
 " Main
 Plugin 'gmarik/Vundle.vim'
-" Plugin 'scrooloose/syntastic.git'
+Plugin 'scrooloose/syntastic.git'
 Plugin 'sjl/gundo.vim' 				"Undo menu
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround' 		"Change surrounding tags
@@ -34,7 +34,8 @@ Plugin 'fatih/vim-go'
 
 " Rust
 Plugin 'phildawes/racer'   "Not working 2015-05-10
-Plugin 'wting/rust.vim'
+Plugin 'rust-lang/rust.vim'
+Plugin 'cespare/vim-toml'
 
 " C#
 " Plugin 'OmniSharp/omnisharp-vim' 	" C#
@@ -43,7 +44,7 @@ Plugin 'wting/rust.vim'
 " Plugin 'reedes/vim-thematic'
 Plugin 'fcourchesne/ViZuki'                   "Custom color scheme
 Plugin 'fcourchesne/FC-vim-colors'
-" Plugin 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 Plugin 'guns/xterm-color-table.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'reedes/vim-colors-pencil'
@@ -113,6 +114,12 @@ filetype plugin indent on    " required
 "}}}
 
 
+" {{{ Auto reload file on change
+" check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
+set autoread
+au CursorHold * checktime  
+" }}}
+
 " OS and encoding specific {{{
 set shell=$SHELL
 set encoding=utf8
@@ -167,7 +174,7 @@ set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 set modelines=1
 " Auto save folds and reload on file open
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
+autocmd BufWinEnter *.* silent loadview
 
 autocmd Syntax c,cpp,tcl,xml set foldmethod=marker
 autocmd Syntax makefile set !expandtab               " Need to use tabs in makefiles
@@ -214,7 +221,7 @@ if has("gui_running")
     map <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
     map <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
     map <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
-    set guitablabel=\[%N\]\ %t\ %M 
+    set guitablabel=\[%N\]\ %t\ %M
 else
     "Insert else
 endif
@@ -266,21 +273,21 @@ let g:syntastic_warning_symbol = "▲"
 "}}}
 
 " Airline {{{
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" if !exists("g:airline_symbols")
-" let g:airline_symbols = {}
-" endif
-" let g:airline_powerline_fonts=1
-" let g:airline_section_warning = airline#section#create([ "syntastic" ])
-" let g:airline#extensions#branch#empty_message = "No SCM"
-" let g:airline#extensions#whitespace#enabled = 1
-" let g:airline#extensions#syntastic#enabled = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-" let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
-" let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+if !exists("g:airline_symbols")
+let g:airline_symbols = {}
+endif
+let g:airline_powerline_fonts=1
+let g:airline_section_warning = airline#section#create([ "syntastic" ])
+let g:airline#extensions#branch#empty_message = "No SCM"
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
+let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
 "}}}
 
 " Auto completion {{{
@@ -305,6 +312,10 @@ au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
 "}}}
 
+" TOML {{{
+au BufNewFile,BufRead *.toml set syntax=toml
+"}}}
+
 " General {{{
 set so=1                        " Set 7 lines to the cursor - when moving vertically using j/k
 set wildmenu                    " Turn on the WiLd menu
@@ -324,6 +335,13 @@ set showmatch                   " Show matching brackets when text indicator is 
 set mat=0                       " How many tenths of a second to blink when matching brackets
 set noerrorbells                " No annoying sound on errors
 set novisualbell
+set vb t_vb=
+" Flash screen on error
+" set vb 
+"let &t_vb = "\<C-G>" . &t_vb 
+"if has("autocmd") && has("gui") 
+"	au GUIEnter * let &t_vb = "\<C-G>\e|50f" 
+" endif 
 set t_vb=
 set tm=500
 "let g:mapleader = "<"
@@ -339,11 +357,11 @@ scriptencoding utf-8
 set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
 set virtualedit=onemore         " allow for cursor beyond last character
-set nospell                       " no spell checking 
+set nospell                       " no spell checking
 set backspace=indent,eol,start  " backspace for dummys
 set linespace=0                 " No extra spaces between rows
 "set nu                          " Line numbers on
-set winminheight=0              " windows can be 0 line high 
+set winminheight=0              " windows can be 0 line high
 set wildmenu                    " show list instead of just completing
 set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
 "set scrolljump=2                " lines to scroll when cursor leaves screen

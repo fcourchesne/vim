@@ -1,7 +1,7 @@
 " set hidden
-let g:racer_cmd = "/usr/bin/racer"
+let g:racer_cmd = "/usr/share/racer/target/release/racer"
 let $RUST_SRC_PATH= "/usr/share/rust/src"
-autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
+"autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
 autocmd FileType rust nmap <leader>r :!cargo run<cr>
 
 " Test

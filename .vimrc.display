@@ -2,34 +2,10 @@ if !has("gui_running")
 	set t_Co=256
 endif
 
-if hostname() == "FC-T420s"
+if hostname() == "FC-Spectre"
 		if has('gui_running')
 		  if has('gui_win32')
-			set guifont=DejaVu_Sans_Mono_for_Powerline:h13:cANSI
-		  else
-			" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
-			set guifont=Hack\ Medium\ 13
-		  endif
-          " set background=dark
-          " colorscheme pencil
-          set background=dark
-          " colorscheme fc-dark
-          colorscheme gruvbox
-        else
-          set background=dark
-          " colorscheme fc-dark
-          colorscheme gruvbox
-		endif
-		" let airline_theme="pencil"
-		"let g:pencil_neutral_code_bg = 0
-		"let g:pencil_higher_contrast_ui = 1
-        " set background=light
-		" colorscheme vizuki
-		" let airline_theme="sol"
-elseif hostname() == "FC-W540"
-		if has('gui_running')
-		  if has('gui_win32')
-			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
+			set guifont=Hack:h17:cANSI
 		  else
 			set guifont=Hack\ Medium\ 13
 		  endif

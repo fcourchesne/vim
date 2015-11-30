@@ -53,6 +53,8 @@ if !has('win32') && !has('win64')
         Plugin 'gilgigilgil/anderson.vim'
         Plugin 'morhetz/gruvbox'
         Plugin 'john2x/flatui.vim'
+        Plugin 'NLKNguyen/papercolor-theme'
+        Plugin 'w0ng/vim-hybrid'
 
         " Docker
         Plugin 'ekalinin/Dockerfile.vim'

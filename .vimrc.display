@@ -10,14 +10,22 @@ if hostname() == "FC-Spectre"
 			set guifont=Hack\ Medium\ 13
 		  endif
 		endif
-		set background=dark
+
+        " Using rxvt-unicode default colors
+        let g:hybrid_use_Xresources = 1
+        set background=dark
+        colorscheme hybrid
+
+		" set background=dark
+		" colorscheme gruvbox
+
+		" set background=light
+		" colorscheme vizuki
+
 		" colorscheme fc-dark
 		" let airline_theme="pencil"
-		" colorscheme vizuki
         " colorscheme pencil
-		colorscheme gruvbox
-		" let airline_theme="pencil"
-		" let airline_theme="sol"
+
 elseif hostname() == "FC-XBMCLivingRoom"
 		if has('gui_running')
 		  if has('gui_win32')

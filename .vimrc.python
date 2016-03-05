@@ -1,0 +1,1 @@
+autocmd FileType python nmap <leader>r :!clear; python %<cr>

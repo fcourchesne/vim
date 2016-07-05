@@ -1,10 +1,34 @@
 " set hidden
 let g:racer_cmd = "/usr/share/racer/target/release/racer"
+" let g:rustfmt_autosave = 1
 let $RUST_SRC_PATH= "/usr/share/rust/src"
-"autocmd BufRead,BufNewFile Cargo.toml,Cargo.lock,*.rs compiler cargo
-autocmd FileType rust nmap <leader>r :!clear && cargo run<cr>
-autocmd FileType rust nmap <leader>b :!clean && cargo build<cr>
-" au BufWrite *.rs :Autoformat
+
+autocmd FileType rust nmap <leader>b :call VimuxRunCommand("clear; cargo build") <CR>
+autocmd FileType rust nmap <leader>r :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo run") <CR>
+autocmd FileType rust nmap <leader>t :call VimuxRunCommand("clear; cargo test") <CR>
+autocmd FileType rust nmap <leader>bm :call VimuxRunCommand("clear; cargo bench") <CR>
+autocmd FileType rust nmap <leader>bq :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>bb :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>bmq :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>bmm :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>rq :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>rr :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>tq :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>tt :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>z :call VimuxZoomRunner() <CR>
+" autocmd FileType rust nmap <buffer> gd :call racer#JumpToDefinition()<CR>
+autocmd BufWrite *.rs silent RustFmt
+" autocmd BufWrite *.rs silent !rustfmt % <cr>
+" autocmd FileType rust set colorcolumn=100
+autocmd FileType rust match ErrorMsg '\%>100v.\+'
+
+
+
+" autocmd BufWrite *.rs :!rustfmt<CR>
+
+" autocmd FileType rust setlocal omnifunc=racer#Complete
+
+au FileType rust set foldmethod=syntax
 
 " Test
 "

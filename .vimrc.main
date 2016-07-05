@@ -5,7 +5,8 @@
 
 " Vundle packages {{{
 " MANDATORY
-set nocompatible              " be iMproved, required
+scriptencoding utf-8
+" set nocompatible              " be iMproved, required
 set hidden
 filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -15,9 +16,11 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'sjl/gundo.vim' 				"Undo menu
 Plugin 'scrooloose/syntastic.git'
+Plugin 'Nonius/cargo.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'Lokaltog/vim-easymotion' 	"Easy find strings in document
-" Plugin 'tpope/vim-surround' 		"Change surrounding tags
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'tpope/vim-surround' 		"Change surrounding tags
 " Plugin 'Chiel92/vim-autoformat'
 
 " Go
@@ -25,26 +28,27 @@ Plugin 'fatih/vim-go'
 
 " Rust
 Plugin 'rust-lang/rust.vim'
-Plugin 'phildawes/racer'   "Not working 2015-05-10
+Plugin 'racer-rust/vim-racer'
 Plugin 'cespare/vim-toml'
 
 " Appearance
 Plugin 'guns/xterm-color-table.vim'
 " Plugin 'reedes/vim-thematic'
 Plugin 'fcourchesne/vizuki2'                   "Custom color scheme
-" Plugin 'fcourchesne/FC-vim-colors'
+Plugin 'fcourchesne/FC-vim-colors'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'itchyny/lightline.vim'
 
 " Plugin 'guns/xterm-color-table.vim'
-" Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 " Plugin 'reedes/vim-colors-pencil'
 " Plugin 'geoffharcourt/one-dark.vim.git'
 Plugin 'gilgigilgil/anderson.vim'
 Plugin 'morhetz/gruvbox'
 " Plugin 'john2x/flatui.vim'
 " Plugin 'NLKNguyen/papercolor-theme'
-" Plugin 'w0ng/vim-hybrid'
+Plugin 'w0ng/vim-hybrid'
 
 " Docker
 Plugin 'ekalinin/Dockerfile.vim'
@@ -71,7 +75,7 @@ Plugin 'Raimondi/delimitMate' 		"Close tags
 Plugin 'garbas/vim-snipmate'
 "Plugin 'sirver/ultisnips'
 " Plugin 'rking/ag.vim'
-" Plugin 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 
 " Html
 "Plugin 'flomotlik/vim-livereload'
@@ -98,6 +102,8 @@ Plugin 'majutsushi/tagbar'
 " Plugin 'ivanov/vim-ipython'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
+Plugin 'benmills/vimux'
+Plugin 'edkolev/tmuxline.vim'
 " Plugin 'terryma/vim-smooth-scroll'
 
 "Tests
@@ -141,6 +147,11 @@ endif
 " 	endif
 " endif
 set mouse=a
+"}}}
+
+" Vimux {{{
+let g:VimuxHeight = "30"
+let g:VimuxOrientation = "h"
 "}}}
 
 " Statusline {{{
@@ -261,12 +272,13 @@ endif
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_error_symbol = "✘"
 let g:syntastic_warning_symbol = "▲"
+let g:syntastic_aggregate_errors = 1
 "}}}
 
 " Autoformat {{{
@@ -278,36 +290,82 @@ let g:syntastic_warning_symbol = "▲"
 " }}}
 
 " Airline {{{
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" if !exists("g:airline_symbols")
+"     let g:airline_symbols = {}
+" endif
+" let g:airline_section_warning = airline#section#create([ "syntastic" ])
+" let g:airline#extensions#branch#empty_message = "No SCM"
+" let g:airline#extensions#whitespace#enabled = 1
+" let g:airline#extensions#syntastic#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+" let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
+" let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
+
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 1
+let g:Powerline_sybols = 'unicode'
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-if !exists("g:airline_symbols")
+if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-let g:airline_powerline_fonts=1
-let g:airline_section_warning = airline#section#create([ "syntastic" ])
-let g:airline#extensions#branch#empty_message = "No SCM"
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
-let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+"let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+
+
+
+
+
+
+
+
+
+
 "}}}
 
 " Auto completion {{{
 " set complete=.,i " Complete only the current buffer and includes
-" "set complete=.,i,b,w,u " Complete only the current buffer and includes
-" set completeopt=menu,menuone,longest " Complete options (disable preview scratch window)
-" let g:SuperTabDefaultCompletionType = "context"
-" set ofu=syntaxcomplete#Complete
+set complete=.,i,b,w,u " Complete only the current buffer and includes
+set completeopt=menu,menuone,longest " Complete options (disable preview scratch window)
+let g:SuperTabDefaultCompletionType = "context"
+set ofu=syntaxcomplete#Complete
 
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType python set list
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python set list
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "}}}
 
 " HTML {{{
@@ -358,7 +416,6 @@ set esckeys             " Cursor keys in insert mode.
 "endif
 filetype plugin indent on   " Automatically detect file types.
 syntax on                   " syntax highlighting
-scriptencoding utf-8
 set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
 set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
 set virtualedit=onemore         " allow for cursor beyond last character
@@ -415,7 +472,8 @@ set tw=500
 "set si "Smart indent
 set wrap "Wrap lines
 "set list
-set listchars=tab:⚫⚫,trail:⚫,extends:#,nbsp:. " Highlight problematic whitespace
+" Highlight problematic whitespace
+set listchars=tab:⚫⚫,trail:⚫,extends:#,nbsp:.
 
 " Maximum width visually shown
 " let &colorcolumn="120,".join(range(120,999),",")
@@ -539,7 +597,7 @@ map <C-o> :NERDTreeToggle<CR>
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeShowBookmarks=1
-let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.eep', '\.DSN', '\.lss', '\.lst', '\.map', '\.o', '\.sym', '\.DBK', '\.elf', '\.hex', '\.meta', 'tags', 'Makefile']
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.eep', '\.DSN', 'Cargo.lock', '\.lss', '\.lst', '\.map', '\.o', '\.sym', '\.DBK', '\.elf', '\.hex', '\.meta', 'tags', 'Makefile', '\.rs.bk']
 let NERDTreeChDirMode=0
 let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=0

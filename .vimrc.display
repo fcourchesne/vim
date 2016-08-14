@@ -7,26 +7,26 @@ if hostname() == "FC-Spectre"
             if has('gui_win32')
                 set guifont=Hack:h13:cANSI
             else
-                " set guifont=Ubuntu\ Mono\ 13
+                set guifont=Ubuntu\ Mono\ 14
                 " set guifont=Fira\ Mono\ for\ Powerline\ 11
-                set guifont=Hack\ 10
+                " set guifont=Hack\ 13
             endif
 
-            set background=dark
-            " let airline_theme="vizuki2"
-            " colorscheme vizuki2
-            colorscheme gruvbox
-            let airline_theme="gruvbox"
+            set background=light
+            let airline_theme="vizuki2"
+            colorscheme vizuki2
+            "colorscheme gruvbox
+            "let airline_theme="gruvbox"
         else
             " set background=dark
             " colorscheme onedark
             " let airline_theme="onedark"
             "
-            " let airline_theme="hybrid"
-            let airline_theme="base16_embers"
+            " let airline_theme="base16_embers"
             let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
             let g:hybrid_use_Xresources = 1
-            set background=dark
+            let airline_theme="hybrid"
+            set background=light
             colorscheme hybrid
 
             " set background=light

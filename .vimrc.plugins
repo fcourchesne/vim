@@ -1,0 +1,108 @@
+" Plugins vimrc sub file
+" Author: Francis Courchesne
+" Email: fcourchesne@gmail.com
+" Feel free to hack upon!
+
+scriptencoding utf-8
+
+" Vim-Plug packages {{{
+call plug#begin('~/.vim/plugged')
+
+" Main
+Plug 'gmarik/Vundle.vim'
+Plug 'sjl/gundo.vim' 				"Undo menu
+Plug 'scrooloose/syntastic'
+Plug 'Nonius/cargo.vim'
+Plug 'tpope/vim-commentary'
+Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-surround' 		"Change surrounding tags
+" Plug 'Chiel92/vim-autoformat'
+
+" Go
+Plug 'fatih/vim-go'
+
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'cespare/vim-toml'
+
+" Appearance
+Plug 'guns/xterm-color-table.vim'
+" Plug 'reedes/vim-thematic'
+Plug 'fcourchesne/vizuki2'                   "Custom color scheme
+Plug 'fcourchesne/FC-vim-colors'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Plug 'itchyny/lightline.vim'
+
+" Plug 'guns/xterm-color-table.vim'
+Plug 'altercation/vim-colors-solarized'
+" Plug 'reedes/vim-colors-pencil'
+" Plug 'geoffharcourt/one-dark.vim.git'
+Plug 'gilgigilgil/anderson.vim'
+Plug 'morhetz/gruvbox'
+" Plug 'john2x/flatui.vim'
+" Plug 'NLKNguyen/papercolor-theme'
+Plug 'w0ng/vim-hybrid'
+
+" Docker
+Plug 'ekalinin/Dockerfile.vim'
+
+" Files management
+Plug 'scrooloose/nerdtree'
+"Plug 'albfan/nerdtree'
+"Plug 'albfan/nerdtree-git-plugin'
+"Plug 'Xuyuanp/git-nerdtree'
+" Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'ryanoasis/vim-webdevicons'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
+" Plug 'szw/vim-ctrlspace'
+Plug 'jlanzarotta/bufexplorer'
+"Plug 'FredKSchott/CoVim' 			"Collaboration in editing
+
+
+" Auto completion
+Plug 'fcourchesne/FC-Snippets'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'Raimondi/delimitMate' 		"Close tags
+Plug 'garbas/vim-snipmate'
+"Plug 'sirver/ultisnips'
+" Plug 'rking/ag.vim'
+Plug 'ervandew/supertab'
+
+" Html
+"Plug 'flomotlik/vim-livereload'
+" Plug 'wavded/vim-stylus' 			" .styl support for CSS compiling
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'groenewege/vim-less'
+" Plug 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
+
+" Windows
+
+" Building
+" Plug 'tpope/vim-dispatch' 		" Run async tasks like :Make
+" Plug 'mileszs/ack.vim' 			"Ack support in vim (grep replacement)
+Plug 'tpope/vim-fugitive'
+Plug 'mattn/gist-vim'
+Plug 'WebAPI.vim' 			" Requirement for gist-vim
+"Plug 'godlygeek/tabular'
+"Plug 'plasticboy/vim-markdown'
+Plug 'airblade/vim-gitgutter'
+Plug 'majutsushi/tagbar'
+
+"Other
+" Plug 'peterhoeg/vim-qml'
+" Plug 'ivanov/vim-ipython'
+Plug 'tikhomirov/vim-glsl'
+Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
+Plug 'benmills/vimux'
+Plug 'edkolev/tmuxline.vim'
+" Plug 'terryma/vim-smooth-scroll'
+
+"Tests
+" Plug 'terryma/vim-multiple-cursors'
+call plug#end()
+""}}}

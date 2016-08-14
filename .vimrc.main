@@ -3,118 +3,6 @@
 " Email: fcourchesne@gmail.com
 " Feel free to hack upon!
 
-" Vundle packages {{{
-" MANDATORY
-scriptencoding utf-8
-" set nocompatible              " be iMproved, required
-set hidden
-filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-
-" Main
-Plugin 'gmarik/Vundle.vim'
-Plugin 'sjl/gundo.vim' 				"Undo menu
-Plugin 'scrooloose/syntastic.git'
-Plugin 'Nonius/cargo.vim'
-Plugin 'tpope/vim-commentary'
-Plugin 'Lokaltog/vim-easymotion' 	"Easy find strings in document
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'tpope/vim-surround' 		"Change surrounding tags
-" Plugin 'Chiel92/vim-autoformat'
-
-" Go
-Plugin 'fatih/vim-go'
-
-" Rust
-Plugin 'rust-lang/rust.vim'
-Plugin 'racer-rust/vim-racer'
-Plugin 'cespare/vim-toml'
-
-" Appearance
-Plugin 'guns/xterm-color-table.vim'
-" Plugin 'reedes/vim-thematic'
-Plugin 'fcourchesne/vizuki2'                   "Custom color scheme
-Plugin 'fcourchesne/FC-vim-colors'
-Plugin 'bling/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" Plugin 'itchyny/lightline.vim'
-
-" Plugin 'guns/xterm-color-table.vim'
-Plugin 'altercation/vim-colors-solarized'
-" Plugin 'reedes/vim-colors-pencil'
-" Plugin 'geoffharcourt/one-dark.vim.git'
-Plugin 'gilgigilgil/anderson.vim'
-Plugin 'morhetz/gruvbox'
-" Plugin 'john2x/flatui.vim'
-" Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'w0ng/vim-hybrid'
-
-" Docker
-Plugin 'ekalinin/Dockerfile.vim'
-
-" Files management
-Plugin 'scrooloose/nerdtree'
-"Plugin 'albfan/nerdtree'
-"Plugin 'albfan/nerdtree-git-plugin'
-"Plugin 'Xuyuanp/git-nerdtree'
-" Plugin 'jistr/vim-nerdtree-tabs'
-"Plugin 'ryanoasis/vim-webdevicons'
-" Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
-" Plugin 'szw/vim-ctrlspace'
-Plugin 'jlanzarotta/bufexplorer'
-"Plugin 'FredKSchott/CoVim' 			"Collaboration in editing
-
-
-" Auto completion
-Plugin 'fcourchesne/FC-Snippets'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'Raimondi/delimitMate' 		"Close tags
-Plugin 'garbas/vim-snipmate'
-"Plugin 'sirver/ultisnips'
-" Plugin 'rking/ag.vim'
-Plugin 'ervandew/supertab'
-
-" Html
-"Plugin 'flomotlik/vim-livereload'
-" Plugin 'wavded/vim-stylus' 			" .styl support for CSS compiling
-" Plugin 'kchmck/vim-coffee-script'
-" Plugin 'groenewege/vim-less'
-" Plugin 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
-
-" Windows
-
-" Building
-" Plugin 'tpope/vim-dispatch' 		" Run async tasks like :Make
-" Plugin 'mileszs/ack.vim' 			"Ack support in vim (grep replacement)
-Plugin 'tpope/vim-fugitive'
-Plugin 'mattn/gist-vim'
-Plugin 'WebAPI.vim' 			" Requirement for gist-vim
-"Plugin 'godlygeek/tabular'
-"Plugin 'plasticboy/vim-markdown'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'majutsushi/tagbar'
-
-"Other
-" Plugin 'peterhoeg/vim-qml'
-" Plugin 'ivanov/vim-ipython'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
-Plugin 'benmills/vimux'
-Plugin 'edkolev/tmuxline.vim'
-" Plugin 'terryma/vim-smooth-scroll'
-
-"Tests
-" Plugin 'terryma/vim-multiple-cursors'
-
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-"}}}
-
-
 " {{{ Auto reload file on change
 " check file change every 4 seconds ('CursorHold') and reload the buffer upon detecting change
 set autoread
@@ -179,8 +67,8 @@ set foldopen=block,hor,jump,mark,percent,quickfix,search,tag,undo
 set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 set modelines=1
 " Auto save folds and reload on file open
-" autocmd BufWinLeave *.* mkview
-" autocmd BufWinEnter *.* silent loadview
+autocmd BufWinLeave ?* mkview
+autocmd BufWinEnter ?* silent loadview
 
 autocmd Syntax c,cpp,tcl,xml set foldmethod=marker
 autocmd Syntax makefile set !expandtab               " Need to use tabs in makefiles

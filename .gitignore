@@ -9,3 +9,7 @@ bundle/
 swp/
 swap/
 view/
+autoload
+autoload/plug.vim
+plugged/
+vim_startup_counter.txt

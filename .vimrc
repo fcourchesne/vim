@@ -23,6 +23,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 		let nb_vim_startups = join(readfile(vim_start_counter_path), "\n")
 		if nb_vim_startups % 100 == 0
             echo "Beginning plugins update ..."
+            PlugClean!
 			PlugUpdate
 			PlugUpgrade	
             bd

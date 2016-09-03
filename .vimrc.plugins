@@ -9,10 +9,8 @@ scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
 " Main
-Plug 'gmarik/Vundle.vim'
-Plug 'sjl/gundo.vim' 				"Undo menu
-Plug 'scrooloose/syntastic'
-Plug 'Nonius/cargo.vim'
+" Plug 'sjl/gundo.vim' 				"Undo menu
+" Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
 Plug 'editorconfig/editorconfig-vim'
@@ -20,47 +18,42 @@ Plug 'tpope/vim-surround' 		"Change surrounding tags
 " Plug 'Chiel92/vim-autoformat'
 
 " Go
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': 'go'}
 
 " Rust
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'cespare/vim-toml'
+Plug 'rust-lang/rust.vim', { 'for': 'rust'}
+Plug 'racer-rust/vim-racer', { 'for': 'rust'}
+Plug 'cespare/vim-toml', { 'for': 'rust'}
+Plug 'Nonius/cargo.vim', { 'for': 'rust'}
 
 " Appearance
-Plug 'guns/xterm-color-table.vim'
-" Plug 'reedes/vim-thematic'
 Plug 'fcourchesne/vizuki2'                   "Custom color scheme
 Plug 'fcourchesne/FC-vim-colors'
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'guns/xterm-color-table.vim'
+" Plug 'reedes/vim-thematic'
+" Plug 'bling/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 " Plug 'itchyny/lightline.vim'
 
-" Plug 'guns/xterm-color-table.vim'
-Plug 'altercation/vim-colors-solarized'
-" Plug 'reedes/vim-colors-pencil'
-" Plug 'geoffharcourt/one-dark.vim.git'
-Plug 'gilgigilgil/anderson.vim'
-Plug 'morhetz/gruvbox'
-" Plug 'john2x/flatui.vim'
-" Plug 'NLKNguyen/papercolor-theme'
 Plug 'w0ng/vim-hybrid'
+" Plug 'guns/xterm-color-table.vim'
+" Plug 'NLKNguyen/papercolor-theme'
 
 " Docker
 Plug 'ekalinin/Dockerfile.vim'
 
 " Files management
 Plug 'scrooloose/nerdtree'
-"Plug 'albfan/nerdtree'
-"Plug 'albfan/nerdtree-git-plugin'
-"Plug 'Xuyuanp/git-nerdtree'
-" Plug 'jistr/vim-nerdtree-tabs'
-"Plug 'ryanoasis/vim-webdevicons'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
-" Plug 'szw/vim-ctrlspace'
 Plug 'jlanzarotta/bufexplorer'
-"Plug 'FredKSchott/CoVim' 			"Collaboration in editing
+" Plug 'albfan/nerdtree'
+" Plug 'albfan/nerdtree-git-plugin'
+" Plug 'Xuyuanp/git-nerdtree'
+" Plug 'jistr/vim-nerdtree-tabs'
+" Plug 'ryanoasis/vim-webdevicons'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'szw/vim-ctrlspace'
+" Plug 'FredKSchott/CoVim' 			"Collaboration in editing
 
 
 " Auto completion
@@ -83,15 +76,15 @@ Plug 'ervandew/supertab'
 " Windows
 
 " Building
+Plug 'tpope/vim-fugitive' " Git operations in vim
+Plug 'airblade/vim-gitgutter'
+" Plug 'majutsushi/tagbar'
 " Plug 'tpope/vim-dispatch' 		" Run async tasks like :Make
 " Plug 'mileszs/ack.vim' 			"Ack support in vim (grep replacement)
-Plug 'tpope/vim-fugitive'
-Plug 'mattn/gist-vim'
-Plug 'WebAPI.vim' 			" Requirement for gist-vim
+" Plug 'mattn/gist-vim'
+" Plug 'WebAPI.vim' 			" Requirement for gist-vim
 "Plug 'godlygeek/tabular'
 "Plug 'plasticboy/vim-markdown'
-Plug 'airblade/vim-gitgutter'
-Plug 'majutsushi/tagbar'
 
 "Other
 " Plug 'peterhoeg/vim-qml'

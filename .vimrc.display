@@ -2,68 +2,35 @@ if !has("gui_running")
 	set t_Co=256
 endif
 
-if hostname() == "FC-Spectre"
-        if has('gui_running')
-            if has('gui_win32')
-                set guifont=Hack:h13:cANSI
-            else
-                set guifont=Ubuntu\ Mono\ 14
-                " set guifont=Fira\ Mono\ for\ Powerline\ 11
-                " set guifont=Hack\ 13
-            endif
+if has('gui_running')
+    if has('gui_win32')
+        set guifont=Hack:h13:cANSI
+    else
+        set guifont=Ubuntu\ Mono\ 14
+        " set guifont=Fira\ Mono\ for\ Powerline\ 11
+        " set guifont=Hack\ 13
+    endif
 
-            set background=light
-            let airline_theme="vizuki2"
-            colorscheme vizuki2
-            "colorscheme gruvbox
-            "let airline_theme="gruvbox"
-        else
-            " set background=dark
-            " colorscheme onedark
-            " let airline_theme="onedark"
-            "
-            " let airline_theme="base16_embers"
-            let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-            let g:hybrid_use_Xresources = 1
-            let airline_theme="hybrid"
-            set background=light
-            colorscheme hybrid
+    set background=light
+    colorscheme hemisu
 
-            " set background=light
-            " let airline_theme="vizuki2"
-            " colorscheme vizuki2
-
-            " colorscheme tutticolori
-            " let airline_theme="pencil"
-
-            " set background=dark
-            " colorscheme gruvbox
-            " let airline_theme="gruvbox"
-
-            " set background=dark
-            " colorscheme lucius
-            " let airline_theme="lucius"
-        endif
-
-elseif hostname() == "FC-XBMCLivingRoom"
-		if has('gui_running')
-		  if has('gui_win32')
-			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
-		  else
-			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 17
-		  endif
-		endif
-		colorscheme vizuki
-		" let airline_theme="sol"
+    " set background=light
+    " let airline_theme="vizuki2"
+    " colorscheme vizuki2
 else
-		if has('gui_running')
-		  if has('gui_win32')
-			set guifont=DejaVu_Sans_Mono_for_Powerline:h17:cANSI
-		  else
-			set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 17
-		  endif
-		endif
-		colorscheme blue
+    " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+    " let g:hybrid_use_Xresources = 1
+    " let airline_theme="hybrid"
+    " set background=light
+    " colorscheme hybrid
+
+    set background=light
+    colorscheme hemisu
+
+    " set background=light
+    " let airline_theme="vizuki2"
+    " colorscheme vizuki2
 endif
+
 
 "highlight Normal guifg=Black guibg=#D6D6D6 ctermfg=232 ctermbg=none

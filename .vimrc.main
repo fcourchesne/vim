@@ -12,22 +12,23 @@ au CursorHold * checktime
 " OS and encoding specific {{{
 set shell=$SHELL
 set encoding=utf8
+scriptencoding utf-8
 set ffs=unix,dos,mac                " Use Unix as the standard file type
 "set guicursor=a:blinkon600-blinkoff400  " Slow down cursor blinking speed
 
 " Cursor in terminal
-if &term =~ "rxvt\\|screen-256color"
-    let &t_SI .= "\<Esc>[5 q"
-    let &t_EI .= "\<Esc>[2 q"
-    " 5 -> blinking vertical bar
-    " 1 or 0 -> blinking block
-    " 1 or 0 -> blinking block
-    " 2 -> non-blinking block
-    " 3 -> blinking underscore
-    " Recent versions of xterm (282 or above) also support
-    " 5 -> blinking vertical bar
-    " 6 -> solid vertical bar
-endif
+" if &term =~ "rxvt\\|screen-256color"
+"     let &t_SI .= "\<Esc>[5 q"
+"     let &t_EI .= "\<Esc>[2 q"
+"     " 5 -> blinking vertical bar
+"     " 1 or 0 -> blinking block
+"     " 1 or 0 -> blinking block
+"     " 2 -> non-blinking block
+"     " 3 -> blinking underscore
+"     " Recent versions of xterm (282 or above) also support
+"     " 5 -> blinking vertical bar
+"     " 6 -> solid vertical bar
+" endif
 
 " if has("gui_running")
 " 	if has('mouse')
@@ -44,7 +45,7 @@ let g:VimuxOrientation = "h"
 
 " Statusline {{{
 set statusline=%<%f
-set statusline+=\ %{fugitive#statusline()}
+" set statusline+=\ %{fugitive#statusline()}
 set statusline+=\ %h%m%r
 set statusline+=%=    " Jump to right side
 set statusline+=(L:%l,\ C:%c%V)
@@ -153,20 +154,20 @@ set nu
 "}}}
 
 " Syntastic {{{
-if exists("g:loaded_syntastic_plugin")
-    finish
-endif
+" if exists("g:loaded_syntastic_plugin")
+"     finish
+" endif
 
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_enable_balloons = 1
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_error_symbol = "✘"
-let g:syntastic_warning_symbol = "▲"
-let g:syntastic_aggregate_errors = 1
+" let g:syntastic_enable_highlighting = 1
+" let g:syntastic_enable_balloons = 1
+" let g:syntastic_always_populate_loc_list = 0
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 1
+" let g:syntastic_loc_list_height = 5
+" let g:syntastic_error_symbol = "✘"
+" let g:syntastic_warning_symbol = "▲"
+" let g:syntastic_aggregate_errors = 1
 "}}}
 
 " Autoformat {{{
@@ -193,52 +194,41 @@ let g:syntastic_aggregate_errors = 1
 " let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
 " let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
 
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 1
-let g:Powerline_sybols = 'unicode'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
+" let g:airline_powerline_fonts=1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tmuxline#enabled = 1
+" let g:Powerline_sybols = 'unicode'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" if !exists('g:airline_symbols')
+"     let g:airline_symbols = {}
+" endif
 
-" unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
+" " unicode symbols
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.notexists = '∄'
+" let g:airline_symbols.whitespace = 'Ξ'
 
-" powerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-"let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-
-
-
-
-
-
-
-
-
-
+" " powerline symbols
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" "let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ''
 "}}}
 
 " Auto completion {{{
@@ -361,7 +351,7 @@ set tw=500
 set wrap "Wrap lines
 "set list
 " Highlight problematic whitespace
-set listchars=tab:⚫⚫,trail:⚫,extends:#,nbsp:.
+" set listchars=tab:⚫⚫,trail:⚫,extends:#,nbsp:.
 
 " Maximum width visually shown
 " let &colorcolumn="120,".join(range(120,999),",")

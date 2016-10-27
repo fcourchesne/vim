@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 
 " Main
 " Plug 'sjl/gundo.vim' 				"Undo menu
-" Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
 Plug 'editorconfig/editorconfig-vim'
@@ -21,22 +21,22 @@ Plug 'tpope/vim-surround' 		"Change surrounding tags
 Plug 'fatih/vim-go', { 'for': 'go'}
 
 " Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rust'}
-Plug 'racer-rust/vim-racer', { 'for': 'rust'}
-Plug 'cespare/vim-toml', { 'for': 'rust'}
-Plug 'Nonius/cargo.vim', { 'for': 'rust'}
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'cespare/vim-toml'
+Plug 'Nonius/cargo.vim'
 
 " Appearance
 Plug 'fcourchesne/vizuki2'                   "Custom color scheme
 Plug 'fcourchesne/FC-vim-colors'
 " Plug 'guns/xterm-color-table.vim'
 " Plug 'reedes/vim-thematic'
-" Plug 'bling/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " Plug 'itchyny/lightline.vim'
+Plug 'ap/vim-buftabline'
 
 Plug 'w0ng/vim-hybrid'
-" Plug 'guns/xterm-color-table.vim'
 " Plug 'NLKNguyen/papercolor-theme'
 
 " Docker
@@ -78,7 +78,9 @@ Plug 'ervandew/supertab'
 " Building
 Plug 'tpope/vim-fugitive' " Git operations in vim
 Plug 'airblade/vim-gitgutter'
-" Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
+" Plug 'xolox/vim-easytags'
+Plug 'xolox/vim-misc'
 " Plug 'tpope/vim-dispatch' 		" Run async tasks like :Make
 " Plug 'mileszs/ack.vim' 			"Ack support in vim (grep replacement)
 " Plug 'mattn/gist-vim'

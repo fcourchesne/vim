@@ -11,12 +11,17 @@ if has('gui_running')
         " set guifont=Hack\ 13
     endif
 
-    set background=light
-    colorscheme hemisu
+    " set background=light
+    " colorscheme hemisu
+    " let airline_theme="sol"
 
     " set background=light
     " let airline_theme="vizuki2"
     " colorscheme vizuki2
+
+    set background=dark
+    let airline_theme="monochrome"
+    colorscheme enigma
 else
     " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
     " let g:hybrid_use_Xresources = 1
@@ -24,12 +29,17 @@ else
     " set background=light
     " colorscheme hybrid
 
-    set background=light
-    colorscheme hemisu
+    " set background=light
+    " colorscheme hemisu
+    " let airline_theme="sol"
 
     " set background=light
     " let airline_theme="vizuki2"
     " colorscheme vizuki2
+
+    set background=dark
+    let airline_theme="monochrome"
+    colorscheme enigma
 endif
 
 

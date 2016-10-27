@@ -1,6 +1,7 @@
 " set hidden
 let g:racer_cmd = "/usr/share/racer/target/release/racer"
-" let g:rustfmt_autosave = 1
+let g:rustfmt_autosave = 1
+" let g:rust_fold = 2
 let $RUST_SRC_PATH= "/usr/share/rust/src"
 
 autocmd FileType rust nmap <leader>b :call VimuxRunCommand("clear; cargo build") <CR>
@@ -17,17 +18,12 @@ autocmd FileType rust nmap <leader>tq :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>tt :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>z :call VimuxZoomRunner() <CR>
 " autocmd FileType rust nmap <buffer> gd :call racer#JumpToDefinition()<CR>
-autocmd BufWrite *.rs silent RustFmt
+" autocmd BufWrite *.rs silent RustFmt
 " autocmd BufWrite *.rs silent !rustfmt % <cr>
 " autocmd FileType rust set colorcolumn=100
-autocmd FileType rust match ErrorMsg '\%>100v.\+'
-
-
-
-" autocmd BufWrite *.rs :!rustfmt<CR>
-
-" autocmd FileType rust setlocal omnifunc=racer#Complete
-
+autocmd FileType rust match ErrorMsg '\%>140v.\+'
+" setlocal tags=./rusty-tags.vi;/
+" autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
 au FileType rust set foldmethod=syntax
 
 " Test

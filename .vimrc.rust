@@ -1,8 +1,8 @@
 " set hidden
-let g:racer_cmd = "/usr/share/racer/target/release/racer"
+let g:racer_cmd = "~/.bin/racer"
 let g:rustfmt_autosave = 1
 " let g:rust_fold = 2
-let $RUST_SRC_PATH= "/usr/share/rust/src"
+let $RUST_SRC_PATH= "~/.apps/rust/src"
 
 autocmd FileType rust nmap <leader>b :call VimuxRunCommand("clear; cargo build") <CR>
 autocmd FileType rust nmap <leader>r :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo run") <CR>

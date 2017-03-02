@@ -1,9 +1,12 @@
 " set hidden
-let g:racer_cmd = "~/.bin/racer"
+" let g:racer_cmd = "/home/fc/.bin/racer"
 let g:rustfmt_autosave = 1
 " let g:rust_fold = 2
-let $RUST_SRC_PATH= "~/.apps/rust/src"
+let $RUST_SRC_PATH= "/home/fc/.apps/rust/src"
 
+let g:racer_experimental_completer = 1
+
+autocmd FileType rust setlocal omnifunc=racer#RacerComplete
 autocmd FileType rust nmap <leader>b :call VimuxRunCommand("clear; cargo build") <CR>
 autocmd FileType rust nmap <leader>r :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo run") <CR>
 autocmd FileType rust nmap <leader>t :call VimuxRunCommand("clear; cargo test") <CR>
@@ -24,11 +27,9 @@ autocmd FileType rust nmap <leader>z :call VimuxZoomRunner() <CR>
 autocmd FileType rust match ErrorMsg '\%>140v.\+'
 " setlocal tags=./rusty-tags.vi;/
 " autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
-au FileType rust set foldmethod=syntax
+autocmd FileType rust set foldmethod=syntax
 
-" Test
-"
-let g:tagbar_type_rust = {
+ let g:tagbar_type_rust = {
     \ 'ctagstype' : 'rust',
     \ 'kinds' : [
         \'T:types,type definitions',
@@ -41,3 +42,4 @@ let g:tagbar_type_rust = {
         \'i:impls,trait implementations',
     \]
     \}
+

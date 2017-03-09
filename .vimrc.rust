@@ -1,9 +1,8 @@
 " set hidden
-" let g:racer_cmd = "/home/fc/.bin/racer"
+let g:racer_cmd = "/home/fc/.bin/racer"
 let g:rustfmt_autosave = 1
 " let g:rust_fold = 2
-let $RUST_SRC_PATH= "/home/fc/.apps/rust/src"
-
+let $RUST_SRC_PATH= "/home/fc/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
 let g:racer_experimental_completer = 1
 
 autocmd FileType rust setlocal omnifunc=racer#RacerComplete
@@ -20,9 +19,10 @@ autocmd FileType rust nmap <leader>rr :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>tq :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>tt :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>z :call VimuxZoomRunner() <CR>
-" autocmd FileType rust nmap <buffer> gd :call racer#JumpToDefinition()<CR>
-" autocmd BufWrite *.rs silent RustFmt
-" autocmd BufWrite *.rs silent !rustfmt % <cr>
+autocmd FileType rust nmap gd <Plug>(rust-def)
+autocmd FileType rust nmap gs <Plug>(rust-def-split)
+autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
+autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
 " autocmd FileType rust set colorcolumn=100
 autocmd FileType rust match ErrorMsg '\%>140v.\+'
 " setlocal tags=./rusty-tags.vi;/
@@ -41,5 +41,4 @@ autocmd FileType rust set foldmethod=syntax
         \'t:traits,traits',
         \'i:impls,trait implementations',
     \]
-    \}
-
+\}

@@ -8,7 +8,7 @@ scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
 " Main
-" Plug 'sjl/gundo.vim' 				"Undo menu
+Plug 'sjl/gundo.vim' 				"Undo menu
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-commentary'
 Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document

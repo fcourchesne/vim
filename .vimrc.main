@@ -283,7 +283,7 @@ set tm=500
 "let g:mapleader = "<"
 let g:mapleader = ","
 set ttyfast             " We have a fast terminal connection.
-set esckeys             " Cursor keys in insert mode.
+" set esckeys             " Cursor keys in insert mode.
 "if !has('win32') && !has('win64')
 "    set term=$TERM       " Make arrow and other keys work
 "endif

@@ -28,15 +28,18 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 			PlugUpgrade	
             bd
             echo "Plugin update complete"
-            call writefile([nb_vim_startups + 1], vim_start_counter_path, "o")
+            " call writefile([nb_vim_startups + 1], vim_start_counter_path, "o")
+            call writefile([nb_vim_startups + 1], vim_start_counter_path)
 		else
 			" nb_vim_startups + 1 > vim_start_counter_path
             " TODO
-            call writefile([nb_vim_startups + 1], vim_start_counter_path, "o")
+            " call writefile([nb_vim_startups + 1], vim_start_counter_path, "o")
+            call writefile([nb_vim_startups + 1], vim_start_counter_path)
 		endif
 	else
         " TODO
-        call writefile([1], vim_start_counter_path, "o")
+        " call writefile([1], vim_start_counter_path, "o")
+        call writefile([1], vim_start_counter_path)
     endif
 
 else

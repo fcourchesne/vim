@@ -32,6 +32,7 @@ Plug 'fcourchesne/FC-vim-colors'
 " Plug 'reedes/vim-thematic'
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'dikiaap/minimalist'
 " Plug 'itchyny/lightline.vim'
 Plug 'ap/vim-buftabline'
 

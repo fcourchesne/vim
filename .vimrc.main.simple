@@ -1,0 +1,244 @@
+" Main vimrc sub file
+" Author: Francis Courchesne
+" Email: fcourchesne@gmail.com
+" Feel free to hack upon!
+" Simplified version for SSH use
+"
+" Vim-Plug packages {{{
+call plug#begin('~/.vim/plugged')
+    Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
+    Plug 'tpope/vim-surround' 		"Change surrounding tags
+    Plug 'fatih/vim-go', { 'for': 'go'}
+    Plug 'rust-lang/rust.vim'
+    Plug 'fcourchesne/vizuki2'                   "Custom color scheme
+    Plug 'fcourchesne/FC-vim-colors'
+    Plug 'dikiaap/minimalist'
+    Plug 'ap/vim-buftabline'
+
+    Plug 'w0ng/vim-hybrid'
+
+    Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
+    Plug 'fcourchesne/FC-Snippets'
+    Plug 'MarcWeber/vim-addon-mw-utils'
+    Plug 'tomtom/tlib_vim'
+    Plug 'ervandew/supertab'
+    Plug 'xolox/vim-misc'
+    Plug 'tikhomirov/vim-glsl'
+    Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
+call plug#end()
+""}}}
+
+colorscheme minimalist
+
+set autoread
+au CursorHold * checktime  
+
+set shell=$SHELL
+set encoding=utf8
+scriptencoding utf-8
+set ffs=unix,dos,mac                " Use Unix as the standard file type
+set mouse=a
+
+" Statusline {{{
+set statusline=%<%f
+" set statusline+=\ %{fugitive#statusline()}
+set statusline+=\ %h%m%r
+set statusline+=%=    " Jump to right side
+set statusline+=(L:%l,\ C:%c%V)
+set statusline+=\ %y\ %P
+set laststatus=2
+"}}}
+
+set foldcolumn=0
+set foldlevelstart=99
+set foldmarker={{{,}}}
+set foldmethod=expr
+set foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
+" Look for fold method in file
+set modelines=1
+set foldminlines=0
+set foldnestmax=4
+set foldopen=block,hor,jump,mark,percent,quickfix,search,tag,undo
+set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
+set modelines=1
+" Auto save folds and reload on file open
+autocmd BufWinLeave ?* mkview
+autocmd BufWinEnter ?* silent loadview
+
+" GUI {{{
+if has("gui_running")
+    set showmode                    " display the current mode
+    set guioptions+=e
+    set guioptions-=L
+    set guioptions-=T  "no scrollbar by default
+    set guioptions-=r  "no toolbar by default
+    set guioptions-=m  "no menu displayed by default
+    map <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+    map <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
+    map <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
+    set guitablabel=\[%N\]\ %t\ %M
+endif
+
+" GitGutter {{{
+"======================================================
+let g:gitgutter_enabled = 1       "Activated by toggling, disabled by default
+let g:gitgutter_highlight_lines = 0"
+let g:gitgutter_max_signs = 1000  " default value = 500, any higher may slow down vim
+"}}}
+
+" Auto completion {{{
+" set complete=.,i " Complete only the current buffer and includes
+set complete=.,i,b,w,u " Complete only the current buffer and includes
+set completeopt=menu,menuone,longest " Complete options (disable preview scratch window)
+let g:SuperTabDefaultCompletionType = "context"
+set ofu=syntaxcomplete#Complete
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python set list
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"}}}
+
+" General {{{
+set so=1                        " Set 7 lines to the cursor - when moving vertically using j/k
+set wildmenu                    " Turn on the WiLd menu
+set wildignore=*.o,*~,*.pyc,*.exe,*.hex,*.elf   " Ignore compiled files
+set ruler                       "Always show current position
+set cmdheight=1                 " Height of the command bar
+set hid                         " A buffer becomes hidden when it is abandoned
+set backspace=eol,start,indent  " Configure backspace so it acts as it should act
+set whichwrap+=<,>,h,l
+set ignorecase                  " Ignore case when searching
+set smartcase                   " When searching try to be smart about cases
+set hlsearch                    " Highlight search results
+set incsearch                   " Makes search act like search in modern browsers
+set lazyredraw                  " Don't redraw while executing macros (good performance config)
+set magic                       " For regular expressions turn magic on
+set showmatch                   " Show matching brackets when text indicator is over them
+set mat=0                       " How many tenths of a second to blink when matching brackets
+set noerrorbells                " No annoying sound on errors
+set novisualbell
+set tm=500
+let g:mapleader = ","
+filetype plugin indent on   " Automatically detect file types.
+syntax on                   " syntax highlighting
+set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
+set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
+set virtualedit=onemore         " allow for cursor beyond last character
+set nospell                       " no spell checking
+set linespace=0                 " No extra spaces between rows
+set winminheight=0              " windows can be 0 line high
+set wildmenu                    " show list instead of just completing
+set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
+set gdefault                    " the /g flag on :s substitutions by default
+"}}}
+
+" Typical Ctrl-C/V/X behavior and Select all {{{
+vnoremap <C-X> "+x
+vnoremap <C-C> "+y
+map <C-V>       "+gP
+cmap <C-V>      <C-R>+
+cmap <S-Insert>     <C-R>+
+exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
+exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
+imap <S-Insert>     <C-V>
+vmap <S-Insert>     <C-V>
+noremap <C-Q>       <C-V>
+map <silent> <C-A> gg0vG$
+imap <C-A> <ESC><C-A>
+"}}}
+
+" Files, backups and undo {{{
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
+set undolevels=200      " Number of undo levels.
+set history=1000                " Store a ton of history (default is 20)
+"}}}
+
+" Indenting and wrapping {{{
+set tabstop=4
+set shiftwidth=4                " 1 tab == 4 spaces
+set expandtab
+set lbr                         " Linebreak on 500 characters
+set tw=500
+set wrap "Wrap lines
+
+" Movement, tabs and buffers {{{
+map j gj
+map k gk
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+"}}}
+
+" Easymotion {{{
+let g:EasyMotion_startofline = 1 " keep cursor colum when JK motion
+"}}}
+
+" General {{{
+" Return to last edit position when opening files
+autocmd BufReadPost *
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
+set viminfo^=%                   " Remember info about open buffers on close"
+"}}}
+
+" Useful mapping to work around capslock
+nmap :W :w
+nmap :Q :q
+
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+"Pressing ,ss will toggle and un-toggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" For when you forget to sudo.. Really Write the file.
+cmap w!! w !sudo tee % >/dev/null
+
+" Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
+nnoremap ; :
+
+" visual shifting (does not exit Visual mode)
+map 0 ^
+vnoremap < <gv
+vnoremap > >gv
+map <C-f> :CtrlPMixed<CR>
+map <C-b> :bprevious<CR>
+map <C-S-b> :bnext<CR>
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+cmap cwd lcd %:p:h
+"}}}
+
+" Tmux seamless {{{
+let g:tmux_navigator_save_on_switch = 0
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+"}}}
+
+" DO NOT DELETE IN THIS FOLD {{{

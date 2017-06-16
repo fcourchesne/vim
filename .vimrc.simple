@@ -29,7 +29,7 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 ""}}}
 
-colorscheme minimalist
+colorscheme solarized
 
 set autoread
 au CursorHold * checktime  

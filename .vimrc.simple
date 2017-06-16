@@ -10,9 +10,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround' 		"Change surrounding tags
     Plug 'fatih/vim-go', { 'for': 'go'}
     Plug 'rust-lang/rust.vim'
-    Plug 'fcourchesne/vizuki2'                   "Custom color scheme
-    Plug 'fcourchesne/FC-vim-colors'
-    Plug 'dikiaap/minimalist'
+    " Plug 'fcourchesne/vizuki2'                   "Custom color scheme
+    " Plug 'fcourchesne/FC-vim-colors'
+    Plug 'altercation/vim-colors-solarized'
+    " Plug 'dikiaap/minimalist'
     Plug 'ap/vim-buftabline'
 
     Plug 'w0ng/vim-hybrid'

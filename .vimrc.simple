@@ -9,11 +9,18 @@ call plug#begin('~/.vim/plugged')
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
     Plug 'tpope/vim-surround' 		"Change surrounding tags
     Plug 'fatih/vim-go', { 'for': 'go'}
-    Plug 'rust-lang/rust.vim'
-    Plug 'fcourchesne/vizuki2'                   "Custom color scheme
-    Plug 'fcourchesne/FC-vim-colors'
-    Plug 'dikiaap/minimalist'
+    Plug 'rust-lang/rust.vim', { 'for': 'rust'}
+    Plug 'tpope/vim-commentary'
+    " Plug 'fcourchesne/vizuki2'                   "Custom color scheme
+    " Plug 'fcourchesne/FC-vim-colors'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'owickstrom/vim-colors-paramount'
+    " Plug 'dikiaap/minimalist'
     Plug 'ap/vim-buftabline'
+    Plug 'Raimondi/delimitMate'         "Close tags
+    Plug 'ervandew/supertab'
+
+
 
     Plug 'w0ng/vim-hybrid'
 
@@ -28,7 +35,9 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 ""}}}
 
-colorscheme minimalist
+" set background=light
+set background=dark
+colorscheme paramount
 
 set autoread
 au CursorHold * checktime  
@@ -64,6 +73,33 @@ set modelines=1
 " Auto save folds and reload on file open
 autocmd BufWinLeave ?* mkview
 autocmd BufWinEnter ?* silent loadview
+
+" Rust {{{
+let g:racer_cmd = "/home/fc/.bin/racer"
+let g:rustfmt_autosave = 1
+" let g:rust_fold = 2
+" let $RUST_SRC_PATH= "$HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+" let g:racer_experimental_completer = 1
+autocmd FileType rust setlocal omnifunc=racer#RacerComplete
+autocmd FileType rust set foldmethod=syntax
+autocmd FileType rust nmap gd <Plug>(rust-def)
+autocmd FileType rust nmap gs <Plug>(rust-def-split)
+autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
+autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
+let g:tagbar_type_rust = {
+ \ 'ctagstype' : 'rust',
+ \ 'kinds' : [
+     \'T:types,type definitions',
+     \'f:functions,function definitions',
+     \'g:enum,enumeration names',
+     \'s:structure names',
+     \'m:modules,module names',
+     \'c:consts,static constants',
+     \'t:traits,traits',
+     \'i:impls,trait implementations',
+ \]
+ \}
+" "}}}
 
 " GUI {{{
 if has("gui_running")

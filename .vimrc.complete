@@ -28,6 +28,7 @@ Plug 'fcourchesne/FC-vim-colors'
 " Plug 'guns/xterm-color-table.vim'
 " Plug 'reedes/vim-thematic'
 Plug 'bling/vim-airline'
+Plug 'altercation/vim-colors-solarized'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'dikiaap/minimalist'
 " Plug 'itchyny/lightline.vim'
@@ -133,9 +134,11 @@ if has('gui_running')
         " set guifont=Fira\ Mono\ for\ Powerline\ 11
         set guifont=Hack\ 10
     endif
-        set background=light
-        let airline_theme="vizuki2"
-        colorscheme vizuki2
+        " set background=light
+        " let airline_theme="vizuki2"
+        set background=dark
+        let airline_theme="solarized"
+        colorscheme solarized
 
     " set background=light
     " colorscheme hemisu
@@ -146,9 +149,9 @@ if has('gui_running')
     " colorscheme vizuki2
 
 else
-        set background=dark
-        let airline_theme="monochrome"
-        colorscheme enigma
+    set background=dark
+    let airline_theme="solarized"
+    colorscheme solarized
     " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
     " let g:hybrid_use_Xresources = 1
     " let airline_theme="hybrid"
@@ -158,14 +161,6 @@ else
     " set background=light
     " colorscheme hemisu
     " let airline_theme="sol"
-
-    " set background=light
-    " let airline_theme="vizuki2"
-    " colorscheme vizuki2
-
-    set background=dark
-    let airline_theme="monochrome"
-    colorscheme enigma
 endif
 
 

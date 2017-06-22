@@ -64,7 +64,7 @@ set foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.
 set modelines=1
 set foldminlines=0
 set foldnestmax=4
-set foldopen=block,hor,jump,mark,percent,quickfix,search,tag,undo
+set foldopen=block,hor,jump,mark,percent,quickfix,search,tag
 set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 set modelines=1
 " Auto save folds and reload on file open

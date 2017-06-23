@@ -29,6 +29,8 @@ Plug 'fcourchesne/FC-vim-colors'
 " Plug 'reedes/vim-thematic'
 Plug 'bling/vim-airline'
 Plug 'altercation/vim-colors-solarized'
+Plug 'pbrisbin/vim-colors-off'
+Plug 'owickstrom/vim-colors-paramount'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'dikiaap/minimalist'
 " Plug 'itchyny/lightline.vim'
@@ -137,8 +139,8 @@ if has('gui_running')
         " set background=light
         " let airline_theme="vizuki2"
         set background=dark
-        let airline_theme="solarized"
-        colorscheme solarized
+        let airline_theme="monochrome"
+        colorscheme paramount
 
     " set background=light
     " colorscheme hemisu
@@ -150,8 +152,8 @@ if has('gui_running')
 
 else
     set background=dark
-    let airline_theme="solarized"
-    colorscheme solarized
+    let airline_theme="monochrome"
+    colorscheme paramount
     " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
     " let g:hybrid_use_Xresources = 1
     " let airline_theme="hybrid"

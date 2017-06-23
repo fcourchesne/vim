@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
     " Plug 'fcourchesne/FC-vim-colors'
     Plug 'altercation/vim-colors-solarized'
     Plug 'owickstrom/vim-colors-paramount'
+    Plug 'pbrisbin/vim-colors-off'
     " Plug 'dikiaap/minimalist'
     Plug 'ap/vim-buftabline'
     Plug 'Raimondi/delimitMate'         "Close tags

@@ -11,12 +11,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'fatih/vim-go', { 'for': 'go'}
     Plug 'rust-lang/rust.vim', { 'for': 'rust'}
     Plug 'tpope/vim-commentary'
-    " Plug 'fcourchesne/vizuki2'                   "Custom color scheme
-    " Plug 'fcourchesne/FC-vim-colors'
+    Plug 'fcourchesne/vizuki2'                   "Custom color scheme
+    Plug 'fcourchesne/FC-vim-colors'
     Plug 'altercation/vim-colors-solarized'
+    Plug 'fcourchesne/vizuki2'
     Plug 'owickstrom/vim-colors-paramount'
+    Plug 'dikiaap/minimalist'
     Plug 'pbrisbin/vim-colors-off'
-    " Plug 'dikiaap/minimalist'
     Plug 'ap/vim-buftabline'
     Plug 'Raimondi/delimitMate'         "Close tags
     Plug 'ervandew/supertab'
@@ -36,9 +37,25 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 ""}}}
 
-" set background=light
-set background=dark
+set background=light
 colorscheme paramount
+
+if has('gui_running')
+    set lines=50 columns=130
+
+    if has('gui_win32')
+        set guifont=Hack:h13:cANSI
+    else
+        set guifont=Hack\ 10
+    endif
+
+    set background=light
+    let airline_theme="vizuki2"
+    colorscheme vizuki2
+else
+    set background=dark
+    colorscheme industry
+endif
 
 set autoread
 au CursorHold * checktime  

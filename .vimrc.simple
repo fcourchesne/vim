@@ -8,8 +8,8 @@
 call plug#begin('~/.vim/plugged')
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
     Plug 'tpope/vim-surround' 		"Change surrounding tags
-    Plug 'fatih/vim-go', { 'for': 'go'}
-    Plug 'rust-lang/rust.vim', { 'for': 'rust'}
+    Plug 'fatih/vim-go'
+    Plug 'rust-lang/rust.vim'
     Plug 'tpope/vim-commentary'
     Plug 'fcourchesne/vizuki2'                   "Custom color scheme
     Plug 'fcourchesne/FC-vim-colors'
@@ -53,8 +53,8 @@ if has('gui_running')
     let airline_theme="vizuki2"
     colorscheme vizuki2
 else
-    set background=dark
-    colorscheme industry
+    set background=light
+    colorscheme zellner
 endif
 
 set autoread
@@ -117,6 +117,18 @@ let g:tagbar_type_rust = {
      \'i:impls,trait implementations',
  \]
  \}
+" "}}}
+
+
+" GO {{{
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
+let g:go_highlight_fields = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+
 " "}}}
 
 " GUI {{{

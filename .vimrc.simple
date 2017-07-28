@@ -48,10 +48,15 @@ if has('gui_running')
     else
         set guifont=Hack\ 10
     endif
-
-    set background=light
-    let airline_theme="vizuki2"
-    colorscheme vizuki2
+    
+    if has('win32')
+        set background=dark
+        colorscheme koehler
+    else
+        set background=light
+        let airline_theme="vizuki2"
+        colorscheme vizuki2
+    endif
 else
     set background=light
     colorscheme zellner
@@ -60,7 +65,9 @@ endif
 set autoread
 au CursorHold * checktime  
 
-set shell=$SHELL
+if has('unix')
+    set shell=$SHELL
+endif
 set encoding=utf8
 scriptencoding utf-8
 set ffs=unix,dos,mac                " Use Unix as the standard file type
@@ -217,8 +224,14 @@ imap <C-A> <ESC><C-A>
 "}}}
 
 " Files, backups and undo {{{
-set backupdir=~/.vim/backup
-set directory=~/.vim/swap
+if has('win32')
+    set backupdir=%HOMEPATH%/vimfiles/backup
+    set directory=%HOMEPATH%/vimfiles/swap
+else
+    set backupdir=~/.vim/backup
+    set directory=~/.vim/swap
+endif
+
 set undolevels=200      " Number of undo levels.
 set history=1000                " Store a ton of history (default is 20)
 "}}}

@@ -440,6 +440,10 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " au BufNewFile,BufRead *.mako set ft=mako
 "}}}
 
+" GLSL {{{ 
+autocmd FileType vs,fs set ft=glsl
+" }}}
+
 " TOML {{{
 " au BufNewFile,BufRead *.toml set syntax=toml
 "}}}
@@ -710,7 +714,7 @@ autocmd FileType rust nmap gs <Plug>(rust-def-split)
 autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
 autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
 " autocmd FileType rust set colorcolumn=100
-autocmd FileType rust match ErrorMsg '\%>140v.\+'
+autocmd FileType rust match ErrorMsg '\%>160v.\+'
 " setlocal tags=./rusty-tags.vi;/
 " autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
 autocmd FileType rust set foldmethod=syntax

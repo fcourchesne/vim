@@ -8,32 +8,36 @@
 call plug#begin('~/.vim/plugged')
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
     Plug 'tpope/vim-surround' 		"Change surrounding tags
-    Plug 'fatih/vim-go'
-    Plug 'rust-lang/rust.vim'
     Plug 'tpope/vim-commentary'
-    Plug 'fcourchesne/vizuki2'                   "Custom color scheme
-    Plug 'fcourchesne/FC-vim-colors'
-    Plug 'altercation/vim-colors-solarized'
-    Plug 'fcourchesne/vizuki2'
-    Plug 'owickstrom/vim-colors-paramount'
-    Plug 'dikiaap/minimalist'
     Plug 'pbrisbin/vim-colors-off'
     Plug 'ap/vim-buftabline'
     Plug 'Raimondi/delimitMate'         "Close tags
     Plug 'ervandew/supertab'
-
-
-
     Plug 'w0ng/vim-hybrid'
-
     Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
     Plug 'fcourchesne/FC-Snippets'
     Plug 'MarcWeber/vim-addon-mw-utils'
     Plug 'tomtom/tlib_vim'
     Plug 'ervandew/supertab'
     Plug 'xolox/vim-misc'
-    Plug 'tikhomirov/vim-glsl'
     Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
+
+    Plug 'fcourchesne/vizuki2'                   "Custom color scheme
+    Plug 'fcourchesne/FC-vim-colors'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'fcourchesne/vizuki2'
+    Plug 'owickstrom/vim-colors-paramount'
+    Plug 'dikiaap/minimalist'
+
+    " OpenGL
+    Plug 'tikhomirov/vim-glsl'
+
+    " Go
+    Plug 'fatih/vim-go'
+
+    " Rust
+    Plug 'rust-lang/rust.vim'
+    Plug 'cespare/vim-toml'
 call plug#end()
 ""}}}
 
@@ -59,7 +63,7 @@ if has('gui_running')
     endif
 else
     set background=light
-    colorscheme zellner
+    colorscheme ironman
 endif
 
 set autoread

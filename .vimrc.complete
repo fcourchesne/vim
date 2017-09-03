@@ -14,13 +14,13 @@ Plug 'tpope/vim-surround' 		"Change surrounding tags
 " Plug 'Chiel92/vim-autoformat'
 
 " Go
-Plug 'fatih/vim-go', { 'for': 'go'}
+Plug 'fatih/vim-go'
 
 " Rust
-Plug 'rust-lang/rust.vim', { 'for': 'rust'}
-Plug 'racer-rust/vim-racer', { 'for': 'rust'}
-Plug 'cespare/vim-toml', { 'for': 'rust'}
-Plug 'Nonius/cargo.vim', { 'for': 'rust'}
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'cespare/vim-toml'
+Plug 'Nonius/cargo.vim'
 
 " Appearance
 Plug 'fcourchesne/vizuki2'                   "Custom color scheme
@@ -260,8 +260,8 @@ set foldopen=block,hor,jump,mark,percent,quickfix,search,tag
 set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 set modelines=1
 " Auto save folds and reload on file open
-autocmd BufWinLeave ?* mkview
-autocmd BufWinEnter ?* silent loadview
+"autocmd BufWinLeave ?* mkview
+"autocmd BufWinEnter ?* silent loadview
 
 autocmd Syntax c,cpp,tcl,xml set foldmethod=marker
 autocmd Syntax makefile set !expandtab               " Need to use tabs in makefiles

@@ -97,8 +97,8 @@ set foldopen=block,hor,jump,mark,percent,quickfix,search,tag,undo
 set foldtext=substitute(getline(v:foldstart),'/\\*\\\|\\*/\\\|{{{\\d\\=','','g')
 set modelines=1
 " Auto save folds and reload on file open
-autocmd BufWinLeave ?* mkview
-autocmd BufWinEnter ?* silent loadview
+" autocmd BufWinLeave ?* mkview
+" autocmd BufWinEnter ?* silent loadview
 
 " Rust {{{
 let g:racer_cmd = "/home/fc/.bin/racer"

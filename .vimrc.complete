@@ -689,7 +689,7 @@ let NERDTreeKeepTreeInNewTab=0
 
 
 " set hidden
-let g:racer_cmd = "/home/fc/.bin/racer"
+" let g:racer_cmd = "/home/fc/.bin/racer"
 let g:rustfmt_autosave = 1
 " let g:rust_fold = 2
 let $RUST_SRC_PATH= "/home/fc/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"

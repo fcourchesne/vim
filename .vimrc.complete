@@ -32,7 +32,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'pbrisbin/vim-colors-off'
 Plug 'owickstrom/vim-colors-paramount'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'dikiaap/minimalist'
+Plug 'dikiaap/minimalist'
 " Plug 'itchyny/lightline.vim'
 Plug 'ap/vim-buftabline'
 
@@ -128,66 +128,17 @@ endif
 
 if has('gui_running')
     set lines=50 columns=130
-
     if has('gui_win32')
         set guifont=Hack:h13:cANSI
     else
-        " set guifont=Ubuntu\ Mono\ 14
-        " set guifont=Fira\ Mono\ for\ Powerline\ 11
         set guifont=Hack\ 10
     endif
-        " set background=light
-        " let airline_theme="vizuki2"
-        set background=dark
-        let airline_theme="monochrome"
-        colorscheme paramount
-
-    " set background=light
-    " colorscheme hemisu
-    " let airline_theme="sol"
-
-    " set background=light
-    " let airline_theme="vizuki2"
-    " colorscheme vizuki2
-
-else
-    set background=dark
-    let airline_theme="monochrome"
-    colorscheme paramount
-    " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-    " let g:hybrid_use_Xresources = 1
-    " let airline_theme="hybrid"
-    " set background=light
-    " colorscheme hybrid
-
-    " set background=light
-    " colorscheme hemisu
-    " let airline_theme="sol"
 endif
 
-
-"highlight Normal guifg=Black guibg=#D6D6D6 ctermfg=232 ctermbg=none
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+set background=dark
+colorscheme minimalist
+let airline_theme="minimalist"
+highlight Normal ctermbg=none
 
 
 " Main vimrc sub file
@@ -354,10 +305,10 @@ set nu
  let g:syntastic_enable_balloons = 1
  let g:syntastic_always_populate_loc_list = 0
  let g:syntastic_auto_loc_list = 1
- let g:syntastic_check_on_open = 1
+ let g:syntastic_check_on_open = 0
  let g:syntastic_check_on_wq = 0
  let g:syntastic_check_on_w = 1
- let g:syntastic_loc_list_height = 5
+ let g:syntastic_loc_list_height = 8
  let g:syntastic_error_symbol = "✘"
  let g:syntastic_warning_symbol = "▲"
  let g:syntastic_aggregate_errors = 1
@@ -689,12 +640,12 @@ let NERDTreeKeepTreeInNewTab=0
 
 
 " set hidden
-" let g:racer_cmd = "/home/fc/.bin/racer"
 let g:rustfmt_autosave = 1
 " let g:rust_fold = 2
 let $RUST_SRC_PATH= "/home/fc/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
 let g:racer_experimental_completer = 1
 
+let g:syntastic_rust_checkers = ['cargo']
 autocmd FileType rust setlocal omnifunc=racer#RacerComplete
 autocmd FileType rust nmap <leader>b :call VimuxRunCommand("clear; cargo build") <CR>
 autocmd FileType rust nmap <leader>r :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo run") <CR>
@@ -747,7 +698,6 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-"let g:syntastic_go_checkers = ['go', 'golint', 'govet', 'errcheck']
 let g:syntastic_go_checkers = ['go', 'govet', 'errcheck']
 let g:go_fmt_command = "goimports"  "Enable goimports to automatically insert import paths instead of gofmt:
 let g:go_fmt_autosave = 1           "Run gofmt on save, without screen full output
@@ -853,3 +803,9 @@ autocmd FileType c,cpp nmap <leader>bq :call VimuxCloseRunner() <CR>
 autocmd FileType c,cpp nmap <leader>rr :call VimuxCloseRunner() <CR>
 autocmd FileType c,cpp nmap <leader>bb :call VimuxCloseRunner() <CR>
 autocmd FileType c,cpp nmap <leader>z :call VimuxZoomRunner() <CR>
+
+
+
+
+
+highlight Normal ctermbg=none

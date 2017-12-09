@@ -5,7 +5,11 @@
 " Simplified version for SSH use
 "
 " Vim-Plug packages {{{
-call plug#begin('~/.vim/plugged')
+if has("win32")
+	call plug#begin('/c/Users/fc/vimfiles/plugged')
+else
+	call plug#begin('~/.vim/plugged')
+endif
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
     Plug 'tpope/vim-surround' 		"Change surrounding tags
     Plug 'tpope/vim-commentary'

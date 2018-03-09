@@ -5,98 +5,97 @@ scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
 " Main
-"Plug 'sjl/gundo.vim' 				"Undo menu
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-commentary'
-Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-surround' 		"Change surrounding tags
-" Plug 'Chiel92/vim-autoformat'
+    "Plug 'sjl/gundo.vim' 				"Undo menu
+    "Plug 'scrooloose/syntastic'
+    " Plug 'w0rp/ale' "Code building
+    Plug 'tpope/vim-commentary'
+    Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
+    Plug 'editorconfig/editorconfig-vim'
+    Plug 'tpope/vim-surround' 		"Change surrounding tags
+    " Plug 'Chiel92/vim-autoformat'
 
 " Go
-Plug 'fatih/vim-go'
+    Plug 'fatih/vim-go'
 
 " Rust
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'cespare/vim-toml'
-Plug 'Nonius/cargo.vim'
+    "Plug 'racer-rust/vim-racer'
+    Plug 'cespare/vim-toml'
+    Plug 'Nonius/cargo.vim'
+
+    Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh',}
+    " (Optional) Multi-entry selection UI.
+    Plug 'junegunn/fzf'
+
+    " (Completion plugin option 1)
+    Plug 'roxma/nvim-completion-manager'
 
 " Appearance
-Plug 'fcourchesne/vizuki2'                   "Custom color scheme
-Plug 'fcourchesne/FC-vim-colors'
-" Plug 'guns/xterm-color-table.vim'
-" Plug 'reedes/vim-thematic'
-Plug 'bling/vim-airline'
-Plug 'altercation/vim-colors-solarized'
-Plug 'pbrisbin/vim-colors-off'
-Plug 'owickstrom/vim-colors-paramount'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'dikiaap/minimalist'
-" Plug 'itchyny/lightline.vim'
-Plug 'ap/vim-buftabline'
+    Plug 'fcourchesne/vizuki2'
+    Plug 'fcourchesne/FC-vim-colors'
+    Plug 'guns/xterm-color-table.vim'
+    "Plug 'bling/vim-airline'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'pbrisbin/vim-colors-off'
+    Plug 'owickstrom/vim-colors-paramount'
+    Plug 'dikiaap/minimalist'
+    Plug 'ap/vim-buftabline'
+    Plug 'w0ng/vim-hybrid'
 
-Plug 'w0ng/vim-hybrid'
-" Plug 'NLKNguyen/papercolor-theme'
-
-" Docker
-Plug 'ekalinin/Dockerfile.vim'
+" Syntax highlight
+    Plug 'rust-lang/rust.vim'
+    Plug 'ekalinin/Dockerfile.vim'
+    Plug 'tikhomirov/vim-glsl'
+" Plug 'kchmck/vim-coffee-script'
 
 " Files management
-Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
-
-"Plug 'jlanzarotta/bufexplorer'
-" Plug 'albfan/nerdtree'
-" Plug 'albfan/nerdtree-git-plugin'
-" Plug 'Xuyuanp/git-nerdtree'
-" Plug 'jistr/vim-nerdtree-tabs'
-" Plug 'ryanoasis/vim-webdevicons'
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'szw/vim-ctrlspace'
-" Plug 'FredKSchott/CoVim' 			"Collaboration in editing
+    Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
+    "Plug 'scrooloose/nerdtree'
+    "Plug 'jlanzarotta/bufexplorer'
+    " Plug 'albfan/nerdtree'
+    " Plug 'albfan/nerdtree-git-plugin'
+    " Plug 'Xuyuanp/git-nerdtree'
+    " Plug 'jistr/vim-nerdtree-tabs'
+    " Plug 'ryanoasis/vim-webdevicons'
+    " Plug 'szw/vim-ctrlspace'
 
 
 " Auto completion
-Plug 'fcourchesne/FC-Snippets'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'Raimondi/delimitMate' 		"Close tags
-Plug 'garbas/vim-snipmate'
-"Plug 'sirver/ultisnips'
-" Plug 'rking/ag.vim'
-Plug 'ervandew/supertab'
+    Plug 'fcourchesne/FC-Snippets'
+    Plug 'MarcWeber/vim-addon-mw-utils'
+    Plug 'tomtom/tlib_vim'
+    Plug 'ervandew/supertab'
+    "Plug 'sirver/ultisnips'
+
+" Delimiters
+    Plug 'Raimondi/delimitMate' 		"Close tags
+    Plug 'garbas/vim-snipmate'
 
 " Html
-"Plug 'flomotlik/vim-livereload'
-" Plug 'wavded/vim-stylus' 			" .styl support for CSS compiling
-" Plug 'kchmck/vim-coffee-script'
-" Plug 'groenewege/vim-less'
-" Plug 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
-
-" Windows
+    "Plug 'flomotlik/vim-livereload'
+    " Plug 'wavded/vim-stylus' 			" .styl support for CSS compiling
+    " Plug 'groenewege/vim-less'
+    " Plug 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
 
 " Building
-"Plug 'tpope/vim-fugitive' " Git operations in vim
-"Plug 'airblade/vim-gitgutter'
-"Plug 'majutsushi/tagbar'
-" Plug 'xolox/vim-easytags'
-"Plug 'xolox/vim-misc'
-" Plug 'tpope/vim-dispatch' 		" Run async tasks like :Make
-" Plug 'mileszs/ack.vim' 			"Ack support in vim (grep replacement)
-" Plug 'mattn/gist-vim'
-" Plug 'WebAPI.vim' 			" Requirement for gist-vim
-"Plug 'godlygeek/tabular'
-"Plug 'plasticboy/vim-markdown'
+    "Plug 'tpope/vim-fugitive' " Git operations in vim
+    "Plug 'airblade/vim-gitgutter'
+    "Plug 'majutsushi/tagbar'
+    " Plug 'xolox/vim-easytags'
+    "Plug 'xolox/vim-misc'
+    " Plug 'tpope/vim-dispatch' 		" Run async tasks like :Make
+    " Plug 'mileszs/ack.vim' 			"Ack support in vim (grep replacement)
+    " Plug 'mattn/gist-vim'
+    " Plug 'WebAPI.vim' 			" Requirement for gist-vim
+    "Plug 'godlygeek/tabular'
+    "Plug 'plasticboy/vim-markdown'
 
 "Other
-" Plug 'peterhoeg/vim-qml'
-" Plug 'ivanov/vim-ipython'
-Plug 'tikhomirov/vim-glsl'
-Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
-Plug 'benmills/vimux'
-Plug 'edkolev/tmuxline.vim'
-" Plug 'terryma/vim-smooth-scroll'
+    " Plug 'peterhoeg/vim-qml'
+    " Plug 'ivanov/vim-ipython'
+    Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
+    Plug 'benmills/vimux'
+    "Plug 'edkolev/tmuxline.vim'
+    " Plug 'terryma/vim-smooth-scroll'
 
 "Tests
 " Plug 'terryma/vim-multiple-cursors'
@@ -135,8 +134,8 @@ if has('gui_running')
     endif
 endif
 
+colorscheme enigma
 set background=dark
-colorscheme minimalist
 let airline_theme="minimalist"
 highlight Normal ctermbg=none
 
@@ -279,21 +278,29 @@ let g:gitgutter_max_signs = 1000  " default value = 500, any higher may slow dow
 "}}}
 
 " Relative numbers when in normal mode, and window focussed {{{
-" autocmd FocusLost * set norelativenumber
-" autocmd FocusGained * set relativenumber
-" autocmd InsertEnter * set norelativenumber
-" autocmd InsertLeave * set relativenumber
+autocmd FocusLost * set norelativenumber
+autocmd FocusGained * set relativenumber
+autocmd InsertEnter * set norelativenumber
+autocmd InsertLeave * set relativenumber
 
 set nu
-" function! NumberToggle()
-"     if(&relativenumber == 1)
-"         set norelativenumber
-"     else
-"         set relativenumber
-"     endif
-" endfunc
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
+endfunc
 
-" nnoremap <C-n> :call NumberToggle()<CR>
+nnoremap <C-n> :call NumberToggle()<CR>
+"}}}
+
+
+"" Ale {{{
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+"let g:ale_linters = {'rust': ['rustc']}
+let g:ale_rust_cargo_use_check = 1
 "}}}
 
 "" Syntastic {{{
@@ -323,41 +330,41 @@ set nu
 " }}}
 
 " Airline {{{
-let g:airline_section_warning = airline#section#create([ "syntastic" ])
-let g:airline#extensions#branch#empty_message = "No SCM"
-let g:airline#extensions#whitespace#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
-let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
+" let g:airline_section_warning = airline#section#create([ "syntastic" ])
+" let g:airline#extensions#branch#empty_message = "No SCM"
+" let g:airline#extensions#whitespace#enabled = 1
+" let g:airline#extensions#syntastic#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+" let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
+" let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
 
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 1
-let g:Powerline_sybols = 'unicode'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
+" let g:airline_powerline_fonts=1
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tmuxline#enabled = 1
+" let g:Powerline_sybols = 'unicode'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" if !exists('g:airline_symbols')
+"     let g:airline_symbols = {}
+" endif
 
 " " unicode symbols
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline_symbols.crypt = '🔒'
-let g:airline_symbols.linenr = '␊'
-let g:airline_symbols.linenr = '␤'
-let g:airline_symbols.linenr = '¶'
-let g:airline_symbols.branch = '⎇'
-let g:airline_symbols.paste = 'ρ'
-let g:airline_symbols.paste = 'Þ'
-let g:airline_symbols.paste = '∥'
-let g:airline_symbols.notexists = '∄'
-let g:airline_symbols.whitespace = 'Ξ'
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.notexists = '∄'
+" let g:airline_symbols.whitespace = 'Ξ'
 
 " " powerline symbols
 " let g:airline_left_sep = ''
@@ -457,8 +464,8 @@ vnoremap <C-X> "+x
 " CTRL-C and CTRL-Insert are Copy
 vnoremap <C-C> "+y
 " CTRL-V and SHIFT-Insert are Paste
-map <C-V>       "+gP
-cmap <C-V>      <C-R>+
+" map <C-V>       "+gP
+" cmap <C-V>      <C-R>+
 cmap <S-Insert>     <C-R>+
 " Pasting blockwise and linewise selections is not possible in Insert and
 " Visual mode without the +virtualedit feature.  They are pasted as if they
@@ -639,33 +646,45 @@ let NERDTreeKeepTreeInNewTab=0
 
 
 
-" set hidden
+set hidden
 let g:rustfmt_autosave = 1
 " let g:rust_fold = 2
-let $RUST_SRC_PATH= "/home/fc/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
-let g:racer_experimental_completer = 1
+let $RUST_SRC_PATH= "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+autocmd FileType rust nmap<silent> gd :call LanguageClient_textDocument_definition()<CR>
+autocmd FileType rust nmap<silent> gs :call LanguageClient_textDocument_hover()<CR>
+autocmd FileType rust nmap<silent> gr :call LanguageClient_textDocument_references()<CR>
+autocmd FileType rust nmap<silent> <leader>s :call LanguageClient_textDocument_hover()<CR>
+autocmd FileType rust nmap<silent> gf :call LanguageClient_textDocument_documentSymbol()<CR>
+" autocmd FileType rust nmap gd <Plug>(rust-def)
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 let g:syntastic_rust_checkers = ['cargo']
 autocmd FileType rust setlocal omnifunc=racer#RacerComplete
-autocmd FileType rust nmap <leader>b :call VimuxRunCommand("clear; cargo build") <CR>
+autocmd FileType rust nmap <leader>b :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo build") <CR>
+autocmd FileType rust nmap <leader>bm :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo bench") <CR>
+autocmd FileType rust nmap <leader>bc :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo clippy") <CR>
 autocmd FileType rust nmap <leader>r :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo run") <CR>
-autocmd FileType rust nmap <leader>t :call VimuxRunCommand("clear; cargo test") <CR>
-autocmd FileType rust nmap <leader>bm :call VimuxRunCommand("clear; cargo bench") <CR>
-autocmd FileType rust nmap <leader>bq :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>t :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo test") <CR>
 autocmd FileType rust nmap <leader>bb :call VimuxCloseRunner() <CR>
-autocmd FileType rust nmap <leader>bmq :call VimuxCloseRunner() <CR>
+autocmd FileType rust nmap <leader>cc :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>bmm :call VimuxCloseRunner() <CR>
-autocmd FileType rust nmap <leader>rq :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>rr :call VimuxCloseRunner() <CR>
-autocmd FileType rust nmap <leader>tq :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>tt :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>z :call VimuxZoomRunner() <CR>
-autocmd FileType rust nmap gd <Plug>(rust-def)
+" autocmd FileType rust nmap gd <Plug>(rust-def)
 autocmd FileType rust nmap gs <Plug>(rust-def-split)
 autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
 autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
 " autocmd FileType rust set colorcolumn=100
-autocmd FileType rust match ErrorMsg '\%>160v.\+'
+autocmd FileType rust match ErrorMsg '\%>120v.\+'
+let g:racer_experimental_completer = 1
 " setlocal tags=./rusty-tags.vi;/
 " autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
 autocmd FileType rust set foldmethod=syntax

@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround' 		"Change surrounding tags
     Plug 'nathanaelkane/vim-indent-guides'
     " Plug 'Chiel92/vim-autoformat'
+    Plug 'tpope/vim-obsession'
 
 " Go
     Plug 'fatih/vim-go'
@@ -55,7 +56,7 @@ call plug#begin('~/.vim/plugged')
 
 " Files management
     Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
-    "Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree'
     "Plug 'jlanzarotta/bufexplorer'
     " Plug 'albfan/nerdtree'
     " Plug 'albfan/nerdtree-git-plugin'
@@ -96,6 +97,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
     Plug 'benmills/vimux'
     Plug 'edkolev/tmuxline.vim'
+    Plug 'leafgarland/typescript-vim'
 
 "Tests
 " Plug 'terryma/vim-multiple-cursors'
@@ -123,7 +125,9 @@ if has('gui_running')
     endif
 endif
 
-colorscheme enigma
+" colorscheme enigma
+" colorscheme hybrid
+colorscheme minimalist
 set background=dark
 let airline_theme="minimalist"
 highlight Normal ctermbg=none

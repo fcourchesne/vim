@@ -34,7 +34,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf'
 
     " (Completion plugin option 1)
-    Plug 'roxma/nvim-completion-manager'
+    Plug 'ncm2/ncm2'
 
 " Appearance
     Plug 'fcourchesne/vizuki2'
@@ -86,7 +86,7 @@ call plug#begin('~/.vim/plugged')
 " Building
     "Plug 'tpope/vim-fugitive' " Git operations in vim
     "Plug 'airblade/vim-gitgutter'
-    " Plug 'majutsushi/tagbar'
+    Plug 'majutsushi/tagbar'
     " Plug 'dan-t/rusty-tags'
     " Plug 'xolox/vim-easytags'
     " Plug 'xolox/vim-misc'

@@ -6,8 +6,8 @@ call plug#begin('~/.vim/plugged')
 
 " Main
     "Plug 'sjl/gundo.vim' 				"Undo menu
-    Plug 'scrooloose/syntastic'
-    " Plug 'w0rp/ale' "Code building
+    " Plug 'scrooloose/syntastic'
+    Plug 'w0rp/ale' "async syntax checker
     Plug 'rizzatti/dash.vim' "Send requests to Dash
     Plug 'tpope/vim-commentary'
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
@@ -15,43 +15,48 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-surround' 		"Change surrounding tags
     Plug 'nathanaelkane/vim-indent-guides'
     " Plug 'Chiel92/vim-autoformat'
-    Plug 'tpope/vim-obsession'
+    " Plug 'tpope/vim-obsession'
 
 " Go
-    Plug 'fatih/vim-go'
+    " Plug 'fatih/vim-go'
 
 " Rust
     "Plug 'racer-rust/vim-racer'
     Plug 'cespare/vim-toml'
-    Plug 'Nonius/cargo.vim'
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    " Plug 'Nonius/cargo.vim'
+    " Plug 'prabirshrestha/async.vim'
+    " Plug 'prabirshrestha/vim-lsp'
+    " Plug 'prabirshrestha/asyncomplete.vim'
+    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
     " Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh',}
     " (Optional) Multi-entry selection UI.
-    Plug 'junegunn/fzf'
+    " Plug 'junegunn/fzf'
 
     " (Completion plugin option 1)
-    Plug 'ncm2/ncm2'
+    " Plug 'ncm2/ncm2'
 
 " Appearance
-    Plug 'fcourchesne/vizuki2'
-    Plug 'fcourchesne/FC-vim-colors'
-    Plug 'guns/xterm-color-table.vim'
+    " Plug 'fcourchesne/vizuki2'
+    " Plug 'fcourchesne/FC-vim-colors'
+    " Plug 'joshdick/onedark.vim'
+    " Plug 'chriskempson/vim-tomorrow-theme'
+    " Plug 'treycucco/vim-monotonic'
+    " Plug 'chriskempson/base16-vim'
+    " Plug 'guns/xterm-color-table.vim'
     Plug 'bling/vim-airline'
-    Plug 'altercation/vim-colors-solarized'
-    Plug 'pbrisbin/vim-colors-off'
-    Plug 'owickstrom/vim-colors-paramount'
-    Plug 'dikiaap/minimalist'
-    Plug 'ap/vim-buftabline'
+    " Plug 'altercation/vim-colors-solarized'
+    " Plug 'pbrisbin/vim-colors-off'
+    " Plug 'owickstrom/vim-colors-paramount'
+    Plug 'sonph/onehalf', {'rtp': 'vim/'}
+    " Plug 'dikiaap/minimalist'
+    " Plug 'ap/vim-buftabline'
     Plug 'w0ng/vim-hybrid'
 
 " Syntax highlight
     Plug 'rust-lang/rust.vim'
     Plug 'ekalinin/Dockerfile.vim'
-    Plug 'tikhomirov/vim-glsl'
+    " Plug 'tikhomirov/vim-glsl'
 " Plug 'kchmck/vim-coffee-script'
 
 " Files management
@@ -86,7 +91,7 @@ call plug#begin('~/.vim/plugged')
 " Building
     "Plug 'tpope/vim-fugitive' " Git operations in vim
     "Plug 'airblade/vim-gitgutter'
-    Plug 'majutsushi/tagbar'
+    " Plug 'majutsushi/tagbar'
     " Plug 'dan-t/rusty-tags'
     " Plug 'xolox/vim-easytags'
     " Plug 'xolox/vim-misc'
@@ -112,9 +117,9 @@ augroup remember_folds
 augroup END
 " }}}
 
-if !has("gui_running")
-	set t_Co=256
-endif
+" if !has("gui_running")
+set t_Co=256
+" endif
 
 if has('gui_running')
     set lines=50 columns=130
@@ -127,10 +132,14 @@ endif
 
 " colorscheme enigma
 " colorscheme hybrid
-colorscheme minimalist
-set background=dark
-let airline_theme="minimalist"
-highlight Normal ctermbg=none
+" colorscheme minimalist
+let airline_theme="onehalfdark"
+colorscheme onehalfdark
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
+" set background=dark
+" colorscheme Tomorrow-Night
+" highlight Normal ctermbg=none
 
 
 " Main vimrc sub file

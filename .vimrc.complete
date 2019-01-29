@@ -37,7 +37,7 @@ call plug#begin('~/.vim/plugged')
     " Plug 'ncm2/ncm2'
 
 " Appearance
-    " Plug 'fcourchesne/vizuki2'
+    Plug 'fcourchesne/vizuki2'
     " Plug 'fcourchesne/FC-vim-colors'
     " Plug 'joshdick/onedark.vim'
     " Plug 'chriskempson/vim-tomorrow-theme'

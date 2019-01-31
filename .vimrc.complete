@@ -8,7 +8,9 @@ call plug#begin('~/.vim/plugged')
     "Plug 'sjl/gundo.vim' 				"Undo menu
     " Plug 'scrooloose/syntastic'
     Plug 'w0rp/ale' "async syntax checker
-    Plug 'rizzatti/dash.vim' "Send requests to Dash
+	Plug 'maximbaz/lightline-ale'
+
+    " Plug 'rizzatti/dash.vim' "Send requests to Dash
     Plug 'tpope/vim-commentary'
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
     Plug 'editorconfig/editorconfig-vim'
@@ -44,7 +46,8 @@ call plug#begin('~/.vim/plugged')
     " Plug 'treycucco/vim-monotonic'
     " Plug 'chriskempson/base16-vim'
     " Plug 'guns/xterm-color-table.vim'
-    Plug 'bling/vim-airline'
+    " Plug 'bling/vim-airline'
+	Plug 'itchyny/lightline.vim'
     " Plug 'altercation/vim-colors-solarized'
     " Plug 'pbrisbin/vim-colors-off'
     " Plug 'owickstrom/vim-colors-paramount'
@@ -299,28 +302,28 @@ nnoremap <C-n> :call NumberToggle()<CR>
 
 
 "" Ale {{{
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-"let g:ale_linters = {'rust': ['rustc']}
-let g:ale_rust_cargo_use_check = 1
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '▲'
+"nmap <C-e> :ALEPreviousWrap<CR>
+nmap <C-e> :ALENextWrap<CR>
 "}}}
 
 "" Syntastic {{{
- if exists("g:loaded_syntastic_plugin")
-     finish
- endif
+ " if exists("g:loaded_syntastic_plugin")
+ "     finish
+ " endif
 
- let g:syntastic_enable_highlighting = 1
- let g:syntastic_enable_balloons = 1
- let g:syntastic_always_populate_loc_list = 0
- let g:syntastic_auto_loc_list = 1
- let g:syntastic_check_on_open = 0
- let g:syntastic_check_on_wq = 0
- let g:syntastic_check_on_w = 1
- let g:syntastic_loc_list_height = 8
- let g:syntastic_error_symbol = "✘"
- let g:syntastic_warning_symbol = "▲"
- let g:syntastic_aggregate_errors = 1
+ " let g:syntastic_enable_highlighting = 1
+ " let g:syntastic_enable_balloons = 1
+ " let g:syntastic_always_populate_loc_list = 0
+ " let g:syntastic_auto_loc_list = 1
+ " let g:syntastic_check_on_open = 0
+ " let g:syntastic_check_on_wq = 0
+ " let g:syntastic_check_on_w = 1
+ " let g:syntastic_loc_list_height = 8
+ " let g:syntastic_error_symbol = "✘"
+ " let g:syntastic_warning_symbol = "▲"
+ " let g:syntastic_aggregate_errors = 1
 ""}}}
 
 " Autoformat {{{
@@ -329,6 +332,31 @@ let g:ale_rust_cargo_use_check = 1
 " nmap <Leader>f :Autoformat<CR>
 " nmap <Leader>ff :Autoformat<CR>
 " nnoremap <Leader>f :Autoformat<CR>
+" }}}
+
+" Lightline {{{
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ }
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
 " }}}
 
 " Airline {{{
@@ -586,7 +614,7 @@ map <F7> :TagbarToggle<CR>
 "map <F8> :<CR>
 map <C-b> :bprevious<CR>
 map <C-S-b> :bnext<CR>
-map <C-e> :BufExplorer<CR>
+" map <C-e> :BufExplorer<CR>
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
@@ -648,7 +676,10 @@ let NERDTreeKeepTreeInNewTab=0
 
 set hidden
 let g:rustfmt_autosave = 1
-" let g:rust_fold = 2
+let g:ale_rust_cargo_use_check = 1
+let g:ale_rust_cargo_check_tests = 1
+let g:ale_rust_cargo_use_clippy = 1
+
 if has('macunix')
     let $RUST_SRC_PATH= "~/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust"
 else
@@ -656,35 +687,14 @@ else
         let $RUST_SRC_PATH= "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
     endif
 endif
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['javascript-typescript-stdio'],
-    \ }
 
-autocmd FileType rust nmap<silent> gd :LspDefinition<CR>
-autocmd FileType rust nmap<silent> gs :LspSymbol<CR>
-autocmd FileType rust nmap<silent> gh :LspHover<CR>
-autocmd FileType rust nmap<silent> gr :LspReferences<CR>
-autocmd FileType rust nmap<silent> grn :LspRename<CR>
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" autocmd FileType rust nmap<silent> gd :call LanguageClient_textDocument_definition()<CR>
-" autocmd FileType rust nmap<silent> gs :call LanguageClient_textDocument_hover()<CR>
-" autocmd FileType rust nmap<silent> gr :call LanguageClient_textDocument_references()<CR>
-" autocmd FileType rust nmap<silent> <leader>s :call LanguageClient_textDocument_hover()<CR>
-" autocmd FileType rust nmap<silent> gf :call LanguageClient_textDocument_documentSymbol()<CR>
-" " autocmd FileType rust nmap gd <Plug>(rust-def)
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-if executable('rls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'rls',
-        \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-        \ 'whitelist': ['rust'],
-        \ })
-endif 
-
-let g:syntastic_rust_checkers = ['cargo']
 autocmd FileType rust setlocal omnifunc=racer#RacerComplete
+autocmd FileType rust nmap<silent> gd :ALEGoToDefinition<CR>
+autocmd FileType rust nmap<silent> gh :ALEHover<CR>
+autocmd FileType rust nmap<silent> gr :ALEFindReferences<CR>
+autocmd FileType rust nmap<silent> gf :ALESymbolSearch<CR>
+" autocmd FileType rust nmap<silent> gs :LspHover<CR>
+" autocmd FileType rust nmap<silent> grn :LspRename<CR>
 autocmd FileType rust nmap <leader>b :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo build") <CR>
 autocmd FileType rust nmap <leader>bm :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo bench") <CR>
 autocmd FileType rust nmap <leader>bc :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo clippy") <CR>
@@ -696,15 +706,39 @@ autocmd FileType rust nmap <leader>bmm :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>rr :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>tt :call VimuxCloseRunner() <CR>
 autocmd FileType rust nmap <leader>z :call VimuxZoomRunner() <CR>
-" autocmd FileType rust nmap gd <Plug>(rust-def)
 autocmd FileType rust nmap gs <Plug>(rust-def-split)
 autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
 autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
-" autocmd FileType rust set colorcolumn=100
 autocmd FileType rust match ErrorMsg '\%>120v.\+'
-" let g:racer_experimental_completer = 1
-" autocmd BufWrite *.rs :silent exec "!rusty-tags vi --start-dir=" . expand('%:p:h') . "&"
 autocmd FileType rust set foldmethod=syntax
+" let g:LanguageClient_serverCommands = {
+"     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+"     \ 'javascript': ['javascript-typescript-stdio'],
+"     \ 'javascript.jsx': ['javascript-typescript-stdio'],
+"     \ }
+
+" autocmd FileType rust nmap<silent> gd :LspDefinition<CR>
+" autocmd FileType rust nmap<silent> gs :LspSymbol<CR>
+" autocmd FileType rust nmap<silent> gh :LspHover<CR>
+" autocmd FileType rust nmap<silent> gr :LspReferences<CR>
+" autocmd FileType rust nmap<silent> grn :LspRename<CR>
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" autocmd FileType rust nmap<silent> gd :call LanguageClient_textDocument_definition()<CR>
+" autocmd FileType rust nmap<silent> gs :call LanguageClient_textDocument_hover()<CR>
+" autocmd FileType rust nmap<silent> gr :call LanguageClient_textDocument_references()<CR>
+" autocmd FileType rust nmap<silent> <leader>s :call LanguageClient_textDocument_hover()<CR>
+" autocmd FileType rust nmap<silent> gf :call LanguageClient_textDocument_documentSymbol()<CR>
+" " autocmd FileType rust nmap gd <Plug>(rust-def)
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" if executable('rls')
+"     au User lsp_setup call lsp#register_server({
+"         \ 'name': 'rls',
+"         \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
+"         \ 'whitelist': ['rust'],
+"         \ })
+" endif 
+
+" let g:syntastic_rust_checkers = ['cargo']
 
 "  let g:tagbar_type_rust = {
 "     \ 'ctagstype' : 'rust',

@@ -13,4 +13,5 @@ view/
 autoload
 autoload/plug.vim
 plugged/
+undo/*
 vim_startup_counter.txt

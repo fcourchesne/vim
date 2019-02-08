@@ -5,41 +5,24 @@ scriptencoding utf-8
 call plug#begin('~/.vim/plugged')
 
 " Main
-    "Plug 'sjl/gundo.vim' 				"Undo menu
-    " Plug 'scrooloose/syntastic'
     Plug 'w0rp/ale' "async syntax checker
 	Plug 'maximbaz/lightline-ale'
-
-    " Plug 'rizzatti/dash.vim' "Send requests to Dash
+    Plug 'airblade/vim-rooter'
     Plug 'tpope/vim-commentary'
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
-    Plug 'editorconfig/editorconfig-vim'
-    Plug 'tpope/vim-surround' 		"Change surrounding tags
-    Plug 'nathanaelkane/vim-indent-guides'
-    " Plug 'Chiel92/vim-autoformat'
-    " Plug 'tpope/vim-obsession'
 
 " Go
     " Plug 'fatih/vim-go'
 
 " Rust
-    "Plug 'racer-rust/vim-racer'
     Plug 'cespare/vim-toml'
-    " Plug 'Nonius/cargo.vim'
-    " Plug 'prabirshrestha/async.vim'
-    " Plug 'prabirshrestha/vim-lsp'
-    " Plug 'prabirshrestha/asyncomplete.vim'
-    " Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
-    " Plug 'autozimu/LanguageClient-neovim', {'branch': 'next', 'do': 'bash install.sh',}
-    " (Optional) Multi-entry selection UI.
-    " Plug 'junegunn/fzf'
-
-    " (Completion plugin option 1)
     " Plug 'ncm2/ncm2'
 
 " Appearance
     Plug 'fcourchesne/vizuki2'
+	Plug 'itchyny/lightline.vim'
+    Plug 'sonph/onehalf', {'rtp': 'vim/'}
+    Plug 'w0ng/vim-hybrid'
     " Plug 'fcourchesne/FC-vim-colors'
     " Plug 'joshdick/onedark.vim'
     " Plug 'chriskempson/vim-tomorrow-theme'
@@ -47,31 +30,18 @@ call plug#begin('~/.vim/plugged')
     " Plug 'chriskempson/base16-vim'
     " Plug 'guns/xterm-color-table.vim'
     " Plug 'bling/vim-airline'
-	Plug 'itchyny/lightline.vim'
     " Plug 'altercation/vim-colors-solarized'
-    " Plug 'pbrisbin/vim-colors-off'
     " Plug 'owickstrom/vim-colors-paramount'
-    Plug 'sonph/onehalf', {'rtp': 'vim/'}
     " Plug 'dikiaap/minimalist'
-    " Plug 'ap/vim-buftabline'
-    Plug 'w0ng/vim-hybrid'
 
 " Syntax highlight
     Plug 'rust-lang/rust.vim'
     Plug 'ekalinin/Dockerfile.vim'
-    " Plug 'tikhomirov/vim-glsl'
-" Plug 'kchmck/vim-coffee-script'
 
 " Files management
     Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
     Plug 'scrooloose/nerdtree'
-    "Plug 'jlanzarotta/bufexplorer'
-    " Plug 'albfan/nerdtree'
-    " Plug 'albfan/nerdtree-git-plugin'
-    " Plug 'Xuyuanp/git-nerdtree'
-    " Plug 'jistr/vim-nerdtree-tabs'
-    " Plug 'ryanoasis/vim-webdevicons'
-    " Plug 'szw/vim-ctrlspace'
+    Plug 'jremmen/vim-ripgrep'
 
 
 " Auto completion
@@ -79,11 +49,11 @@ call plug#begin('~/.vim/plugged')
     Plug 'MarcWeber/vim-addon-mw-utils'
     Plug 'tomtom/tlib_vim'
     Plug 'ervandew/supertab'
+    Plug 'garbas/vim-snipmate'
     "Plug 'sirver/ultisnips'
 
 " Delimiters
     Plug 'Raimondi/delimitMate' 		"Close tags
-    Plug 'garbas/vim-snipmate'
 
 " Html
     "Plug 'flomotlik/vim-livereload'
@@ -157,7 +127,7 @@ au CursorHold * checktime
 " }}}
 
 " OS and encoding specific {{{
-set shell=$SHELL
+set shell=/bin/bash
 set encoding=utf8
 scriptencoding utf-8
 set ffs=unix,dos,mac                " Use Unix as the standard file type
@@ -516,6 +486,8 @@ imap <C-A> <ESC><C-A>
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 set undolevels=200      " Number of undo levels.
+set undodir=~/.vim/undo
+set undofile
 set history=1000                " Store a ton of history (default is 20)
 "}}}
 
@@ -606,8 +578,8 @@ nnoremap ; :
 map 0 ^
 vnoremap < <gv
 vnoremap > >gv
-map <C-f> :CtrlPMixed<CR>
-"map <C-S-f> :CtrlPBuffer<CR>
+map <C-f> :CtrlP<CR>
+map <C-S-f> :CtrlPBuffer<CR>
 map <F5> :GundoToggle<CR>
 map <F6> :GitGutterToggle<CR>
 map <F7> :TagbarToggle<CR>
@@ -655,6 +627,10 @@ let g:tmuxline_preset = {
       \'y'    : '#W %R',
       \'z'    : '#H'}
 "}}}
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir': 'node_modules\|DS_Store\|.git'
+  \ }
 
 " NerdTree {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

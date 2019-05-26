@@ -1,1 +1,1 @@
-/home/fc/.vimrc
+/home/fc/.vim/.vimrc.complete

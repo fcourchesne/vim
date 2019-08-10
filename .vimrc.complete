@@ -6,8 +6,9 @@ call plug#begin('~/.vim/plugged')
 
 " Main
     Plug 'w0rp/ale' "async syntax checker
-	" Plug 'maximbaz/lightline-ale'
-    Plug 'bling/vim-airline'
+	Plug 'itchyny/lightline.vim'
+	Plug 'maximbaz/lightline-ale'
+    " Plug 'bling/vim-airline'
     Plug 'airblade/vim-rooter'
     Plug 'tpope/vim-commentary'
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
@@ -21,19 +22,19 @@ call plug#begin('~/.vim/plugged')
 
 " Appearance
     Plug 'fcourchesne/vizuki2'
-	Plug 'itchyny/lightline.vim'
     Plug 'sonph/onehalf', {'rtp': 'vim/'}
     Plug 'w0ng/vim-hybrid'
     Plug 'NLKNguyen/papercolor-theme'
-    " Plug 'fcourchesne/FC-vim-colors'
+    Plug 'dracula/vim'
+    Plug 'fcourchesne/FC-vim-colors'
     " Plug 'joshdick/onedark.vim'
-    " Plug 'chriskempson/vim-tomorrow-theme'
+    Plug 'chriskempson/vim-tomorrow-theme'
     " Plug 'treycucco/vim-monotonic'
-    " Plug 'chriskempson/base16-vim'
+    Plug 'chriskempson/base16-vim'
     " Plug 'guns/xterm-color-table.vim'
-    " Plug 'altercation/vim-colors-solarized'
-    " Plug 'owickstrom/vim-colors-paramount'
-    " Plug 'dikiaap/minimalist'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'owickstrom/vim-colors-paramount'
+    Plug 'dikiaap/minimalist'
 
 " Syntax highlight
     Plug 'rust-lang/rust.vim'
@@ -100,23 +101,12 @@ if has('gui_running')
     if has('gui_win32')
         set guifont=Hack:h15:cANSI
     else
-        set guifont=Hack\ 15
+        set guifont=UbuntuMono\ Nerd\ Font\ Regular\ 18
     endif
 endif
-
-" colorscheme enigma
-" colorscheme hybrid
-" colorscheme minimalist
-" let airline_theme="onehalfdark"
-" colorscheme onehalfdark
-let airline_theme="onehalfdark"
-colorscheme PaperColor
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
-" set background=dark
-" colorscheme Tomorrow-Night
-" highlight Normal ctermbg=none
-
+colorscheme Tomorrow-Night
+"highlight Normal ctermbg=NONE
+"highlight nonText ctermbg=NONE
 
 " Main vimrc sub file
 " Author: Francis Courchesne
@@ -256,28 +246,29 @@ let g:gitgutter_max_signs = 1000  " default value = 500, any higher may slow dow
 "}}}
 
 " Relative numbers when in normal mode, and window focussed {{{
-autocmd FocusLost * set norelativenumber
-autocmd FocusGained * set relativenumber
-autocmd InsertEnter * set norelativenumber
-autocmd InsertLeave * set relativenumber
+" autocmd FocusLost * set norelativenumber
+" autocmd FocusGained * set relativenumber
+" autocmd InsertEnter * set norelativenumber
+" autocmd InsertLeave * set relativenumber
 
 set nu
-function! NumberToggle()
-    if(&relativenumber == 1)
-        set norelativenumber
-    else
-        set relativenumber
-    endif
-endfunc
+set norelativenumber
+" function! NumberToggle()
+"     if(&relativenumber == 1)
+"         set norelativenumber
+"     else
+"         set relativenumber
+"     endif
+" endfunc
 
-nnoremap <C-n> :call NumberToggle()<CR>
+" nnoremap <C-n> :call NumberToggle()<CR>
 "}}}
 
 
 "" Ale {{{
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '▲'
-"nmap <C-e> :ALEPreviousWrap<CR>
+nmap <C-S-e> :ALEPreviousWrap<CR>
 nmap <C-e> :ALENextWrap<CR>
 "}}}
 
@@ -383,8 +374,10 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 " set complete=.,i " Complete only the current buffer and includes
 set complete=.,i,b,w,u " Complete only the current buffer and includes
 set completeopt=menu,menuone,longest " Complete options (disable preview scratch window)
-let g:ynuperTabDefaultCompletionType = "context"
-set ofu=syntaxcomplete#Complete
+let g:SuperTabDefaultCompletionType = "context"
+" let g:ale_completion_enabled = 1
+set omnifunc=ale#completion#OmniFunc
+" set omnifunc=syntaxcomplete#Complete
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -653,21 +646,21 @@ let NERDTreeKeepTreeInNewTab=0
 "
 "
 
-set hidden
+" set hidden
 let g:rustfmt_autosave = 1
-let g:ale_rust_cargo_use_check = 1
-let g:ale_rust_cargo_check_tests = 1
+" let g:ale_rust_cargo_use_check = 1
+" let g:ale_rust_cargo_check_tests = 1
 let g:ale_rust_cargo_use_clippy = 1
 
-if has('macunix')
-    let $RUST_SRC_PATH= "~/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust"
-else
-    if has('unix')
-        let $RUST_SRC_PATH= "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
-    endif
-endif
+" if has('macunix')
+"     let $RUST_SRC_PATH= "~/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust"
+" else
+"     if has('unix')
+"         let $RUST_SRC_PATH= "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+"     endif
+" endif
 
-autocmd FileType rust setlocal omnifunc=racer#RacerComplete
+" autocmd FileType rust setlocal omnifunc=racer#RacerComplete
 autocmd FileType rust nmap<silent> gd :ALEGoToDefinition<CR>
 autocmd FileType rust nmap<silent> gh :ALEHover<CR>
 autocmd FileType rust nmap<silent> gr :ALEFindReferences<CR>

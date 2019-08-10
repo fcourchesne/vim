@@ -6,9 +6,10 @@ call plug#begin('~/.vim/plugged')
 
 " Main
     Plug 'w0rp/ale' "async syntax checker
-	Plug 'itchyny/lightline.vim'
-	Plug 'maximbaz/lightline-ale'
-    " Plug 'bling/vim-airline'
+	" Plug 'itchyny/lightline.vim'
+	" Plug 'maximbaz/lightline-ale'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     Plug 'airblade/vim-rooter'
     Plug 'tpope/vim-commentary'
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
@@ -105,6 +106,7 @@ if has('gui_running')
     endif
 endif
 colorscheme Tomorrow-Night
+let g:airline_theme='minimalist'
 "highlight Normal ctermbg=NONE
 "highlight nonText ctermbg=NONE
 
@@ -324,41 +326,40 @@ let g:lightline#ale#indicator_ok = "\uf00c"
 " }}}
 
 " Airline {{{
-" let g:airline_section_warning = airline#section#create([ "syntastic" ])
-" let g:airline#extensions#branch#empty_message = "No SCM"
-" let g:airline#extensions#whitespace#enabled = 1
-" let g:airline#extensions#syntastic#enabled = 1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-" let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
-" let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
+let g:airline_section_warning = airline#section#create([ "syntastic" ])
+let g:airline#extensions#branch#empty_message = "No SCM"
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+let g:airline#extensions#tabline#fnamecollapse = 1 " /a/m/model.rb
+let g:airline#extensions#hunks#non_zero_only = 1 " git gutter
 
-" let g:airline_powerline_fonts=1
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tmuxline#enabled = 1
-" let g:Powerline_sybols = 'unicode'
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" if !exists('g:airline_symbols')
-"     let g:airline_symbols = {}
-" endif
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tmuxline#enabled = 1
+let g:Powerline_sybols = 'unicode'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
 
-" " unicode symbols
-" let g:airline_left_sep = '»'
-" let g:airline_left_sep = '▶'
-" let g:airline_right_sep = '«'
-" let g:airline_right_sep = '◀'
-" let g:airline_symbols.crypt = '🔒'
-" let g:airline_symbols.linenr = '␊'
-" let g:airline_symbols.linenr = '␤'
-" let g:airline_symbols.linenr = '¶'
-" let g:airline_symbols.branch = '⎇'
-" let g:airline_symbols.paste = 'ρ'
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.paste = '∥'
-" let g:airline_symbols.notexists = '∄'
-" let g:airline_symbols.whitespace = 'Ξ'
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
 
 " " powerline symbols
 " let g:airline_left_sep = ''

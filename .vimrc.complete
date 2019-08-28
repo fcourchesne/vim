@@ -1,5 +1,6 @@
-
 scriptencoding utf-8
+set encoding=utf-8
+
 
 " Vim-Plug packages {{{
 call plug#begin('~/.vim/plugged')
@@ -32,7 +33,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'chriskempson/vim-tomorrow-theme'
     " Plug 'treycucco/vim-monotonic'
     Plug 'chriskempson/base16-vim'
-    " Plug 'guns/xterm-color-table.vim'
+    Plug 'guns/xterm-color-table.vim'
     Plug 'altercation/vim-colors-solarized'
     Plug 'owickstrom/vim-colors-paramount'
     Plug 'dikiaap/minimalist'
@@ -102,10 +103,12 @@ if has('gui_running')
     if has('gui_win32')
         set guifont=Hack:h15:cANSI
     else
-        set guifont=UbuntuMono\ Nerd\ Font\ Regular\ 18
+        set guifont=UbuntuMono\ Nerd\ Font\ Regular\ 15
     endif
 endif
 colorscheme Tomorrow-Night
+" set background=light
+" colorscheme vizuki2
 let g:airline_theme='minimalist'
 "highlight Normal ctermbg=NONE
 "highlight nonText ctermbg=NONE
@@ -148,6 +151,7 @@ set ffs=unix,dos,mac                " Use Unix as the standard file type
 " 	endif
 " endif
 set mouse=a
+
 "}}}
 
 " Vimux {{{
@@ -499,11 +503,10 @@ set tw=500
 set wrap "Wrap lines
 "set list
 " Highlight problematic whitespace
-" set listchars=tab:⚫⚫,trail:⚫,extends:#,nbsp:.
+set listchars=eol:~,tab:>.,trail:~,extends:>,precedes:<,space:_
 
-" Maximum width visually shown
-" let &colorcolumn="120,".join(range(120,999),",")
-"}}}
+"" Maximum width visually shown
+"let &colorcolumn="120,".join(range(120,999),",")
 
 " Movement, tabs and buffers {{{
 map j gj
@@ -575,8 +578,11 @@ nnoremap ; :
 map 0 ^
 vnoremap < <gv
 vnoremap > >gv
-map <C-f> :CtrlP<CR>
-map <C-S-f> :CtrlPBuffer<CR>
+
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|\.git'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" map <c-f> :CtrlPMixed<CR>
+map <Leader>f :CtrlPMixed<CR>
 map <F5> :GundoToggle<CR>
 map <F6> :GitGutterToggle<CR>
 map <F7> :TagbarToggle<CR>
@@ -625,14 +631,11 @@ let g:tmuxline_preset = {
       \'z'    : '#H'}
 "}}}
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir': 'node_modules\|DS_Store\|.git'
-  \ }
-
 " NerdTree {{{
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map <C-o> :NERDTreeTabsToggle<CR>
 map <C-o> :NERDTreeToggle<CR>
+map <Leader>o :NERDTreeToggle<CR>
 let g:nerdtree_tabs_open_on_gui_startup = 0
 let g:nerdtree_tabs_open_on_console_startup = 0
 let NERDTreeShowBookmarks=1
@@ -649,17 +652,17 @@ let NERDTreeKeepTreeInNewTab=0
 
 " set hidden
 let g:rustfmt_autosave = 1
-" let g:ale_rust_cargo_use_check = 1
-" let g:ale_rust_cargo_check_tests = 1
+let g:ale_rust_cargo_use_check = 1
+let g:ale_rust_cargo_check_tests = 0
 let g:ale_rust_cargo_use_clippy = 1
 
-" if has('macunix')
-"     let $RUST_SRC_PATH= "~/.rustup/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust"
-" else
-"     if has('unix')
-"         let $RUST_SRC_PATH= "~/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
-"     endif
-" endif
+if has('macunix')
+    let $RUST_SRC_PATH= "~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust"
+else
+    if has('unix')
+        let $RUST_SRC_PATH= "~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+    endif
+endif
 
 " autocmd FileType rust setlocal omnifunc=racer#RacerComplete
 autocmd FileType rust nmap<silent> gd :ALEGoToDefinition<CR>
@@ -684,54 +687,6 @@ autocmd FileType rust nmap gx <Plug>(rust-def-vertical)
 autocmd FileType rust nmap <leader>gd <Plug>(rust-doc)
 autocmd FileType rust match ErrorMsg '\%>120v.\+'
 autocmd FileType rust set foldmethod=syntax
-" let g:LanguageClient_serverCommands = {
-"     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-"     \ 'javascript': ['javascript-typescript-stdio'],
-"     \ 'javascript.jsx': ['javascript-typescript-stdio'],
-"     \ }
-
-" autocmd FileType rust nmap<silent> gd :LspDefinition<CR>
-" autocmd FileType rust nmap<silent> gs :LspSymbol<CR>
-" autocmd FileType rust nmap<silent> gh :LspHover<CR>
-" autocmd FileType rust nmap<silent> gr :LspReferences<CR>
-" autocmd FileType rust nmap<silent> grn :LspRename<CR>
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" autocmd FileType rust nmap<silent> gd :call LanguageClient_textDocument_definition()<CR>
-" autocmd FileType rust nmap<silent> gs :call LanguageClient_textDocument_hover()<CR>
-" autocmd FileType rust nmap<silent> gr :call LanguageClient_textDocument_references()<CR>
-" autocmd FileType rust nmap<silent> <leader>s :call LanguageClient_textDocument_hover()<CR>
-" autocmd FileType rust nmap<silent> gf :call LanguageClient_textDocument_documentSymbol()<CR>
-" " autocmd FileType rust nmap gd <Plug>(rust-def)
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-" if executable('rls')
-"     au User lsp_setup call lsp#register_server({
-"         \ 'name': 'rls',
-"         \ 'cmd': {server_info->['rustup', 'run', 'nightly', 'rls']},
-"         \ 'whitelist': ['rust'],
-"         \ })
-" endif 
-
-" let g:syntastic_rust_checkers = ['cargo']
-
-"  let g:tagbar_type_rust = {
-"     \ 'ctagstype' : 'rust',
-"     \ 'kinds' : [
-"         \'T:types,type definitions',
-"         \'f:functions,function definitions',
-"         \'g:enum,enumeration names',
-"         \'s:structure names',
-"         \'m:modules,module names',
-"         \'c:consts,static constants',
-"         \'t:traits,traits',
-"         \'i:impls,trait implementations',
-"     \]
-" \}
-" command! CtagsRust !ctags -R --links=no --languages=C,C++,Asm,Go,Rust --c-kinds=+p --c++-kinds=+p --fields=+iaS --extra=+q .
-" " Rusty-tags
-" autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/
-" autocmd BufWritePost *.rs :silent! exec "!rusty-tags vi --quiet --start-dir=" . expand('%:p:h') . "&"
-" autocmd BufRead *.rs :setlocal tags=./rusty-tags.vi;/,$RUST_SRC_PATH/rusty-tags.vi
-
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1

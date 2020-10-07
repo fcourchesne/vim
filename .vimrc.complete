@@ -14,29 +14,33 @@ call plug#begin('~/.vim/plugged')
     Plug 'airblade/vim-rooter'
     Plug 'tpope/vim-commentary'
     Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
+    Plug 'aserebryakov/vim-todo-lists'
+    Plug 'Yggdroot/indentLine'
 
 " Go
     " Plug 'fatih/vim-go'
 
 " Rust
-    Plug 'cespare/vim-toml'
+    " Plug 'cespare/vim-toml'
     " Plug 'ncm2/ncm2'
 
 " Appearance
     Plug 'fcourchesne/vizuki2'
-    Plug 'sonph/onehalf', {'rtp': 'vim/'}
+    " Plug 'sonph/onehalf', {'rtp': 'vim/'}
     Plug 'w0ng/vim-hybrid'
-    Plug 'NLKNguyen/papercolor-theme'
-    Plug 'dracula/vim'
+    Plug 'ayu-theme/ayu-vim'
+    " Plug 'NLKNguyen/papercolor-theme'
+    " Plug 'dracula/vim'
     Plug 'fcourchesne/FC-vim-colors'
+    Plug 'morhetz/gruvbox'
     " Plug 'joshdick/onedark.vim'
     Plug 'chriskempson/vim-tomorrow-theme'
     " Plug 'treycucco/vim-monotonic'
-    Plug 'chriskempson/base16-vim'
-    Plug 'guns/xterm-color-table.vim'
+    " Plug 'chriskempson/base16-vim'
+    " Plug 'guns/xterm-color-table.vim'
     Plug 'altercation/vim-colors-solarized'
-    Plug 'owickstrom/vim-colors-paramount'
-    Plug 'dikiaap/minimalist'
+    " Plug 'owickstrom/vim-colors-paramount'
+    " Plug 'dikiaap/minimalist'
 
 " Syntax highlight
     Plug 'rust-lang/rust.vim'
@@ -45,7 +49,7 @@ call plug#begin('~/.vim/plugged')
 " Files management
     Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
     Plug 'scrooloose/nerdtree'
-    Plug 'jremmen/vim-ripgrep'
+    " Plug 'jremmen/vim-ripgrep'
 
 
 " Auto completion
@@ -101,15 +105,35 @@ set t_Co=256
 if has('gui_running')
     set lines=50 columns=130
     if has('gui_win32')
-        set guifont=Hack:h15:cANSI
+        " set guifont=UbuntuMonoRegular:h12:cANSI
     else
-        set guifont=UbuntuMono\ Nerd\ Font\ Regular\ 15
+        set guifont=UbuntuMono\ Nerd\ Font\ Regular\ 13
     endif
 endif
-colorscheme Tomorrow-Night
+
+" DARK
 " set background=light
-" colorscheme vizuki2
-let g:airline_theme='minimalist'
+" colorscheme Tomorrow
+" let g:airline_theme='tomorrow'
+
+" DARK 2
+set background=dark
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
+
+" colorscheme delek
+" let ayucolor="mirage"
+" colorscheme ayu
+" IndentLine {{
+" let g:indentLine_char = ''
+" let g:indentLine_first_char = ''
+" let g:indentLine_showFirstIndentLevel = 1
+" let g:indentLine_setColors = 0
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" }}
+
+"
+" let g:airline_theme='minimalist'
 "highlight Normal ctermbg=NONE
 "highlight nonText ctermbg=NONE
 

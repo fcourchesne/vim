@@ -107,7 +107,7 @@ if has('gui_running')
     if has('gui_win32')
         " set guifont=UbuntuMonoRegular:h12:cANSI
     else
-        set guifont=UbuntuMono\ Nerd\ Font\ Regular\ 13
+        set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Regular\ 13
     endif
 endif
 
@@ -117,9 +117,9 @@ endif
 " let g:airline_theme='tomorrow'
 
 " DARK 2
+let g:airline_theme='gruvbox'
 set background=dark
 colorscheme gruvbox
-let g:airline_theme='gruvbox'
 
 " colorscheme delek
 " let ayucolor="mirage"
@@ -129,7 +129,7 @@ let g:airline_theme='gruvbox'
 " let g:indentLine_first_char = ''
 " let g:indentLine_showFirstIndentLevel = 1
 " let g:indentLine_setColors = 0
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " }}
 
 "
@@ -461,6 +461,7 @@ set t_vb=
 set tm=500
 "let g:mapleader = "<"
 let g:mapleader = ","
+map <C-W>+ <C-W>_<C-W><Bar>
 set ttyfast             " We have a fast terminal connection.
 " set esckeys             " Cursor keys in insert mode.
 "if !has('win32') && !has('win64')

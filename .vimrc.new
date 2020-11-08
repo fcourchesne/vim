@@ -34,11 +34,13 @@ call plug#begin('~/.vim/plugged')
 
 
 " Auto completion
-    " Plug 'fcourchesne/FC-Snippets'
     " Plug 'MarcWeber/vim-addon-mw-utils'
     " Plug 'tomtom/tlib_vim'
-    " Plug 'ervandew/supertab'
+    Plug 'ervandew/supertab'
     " Plug 'garbas/vim-snipmate'
+    Plug 'SirVer/ultisnips'
+    " Plug 'honza/vim-snippets'
+    Plug 'fcourchesne/FC-Snippets'
 
 "Other
     " Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
@@ -259,16 +261,6 @@ let g:ale_fixers = {
 \   'typescript': ['prettier'],
 \   'rust': ['rustfmt'],
 \}
-" let g:lightline.component_expand = {
-"       \  'linter_checking': 'lightline#ale#checking',
-"       \  'linter_warnings': 'lightline#ale#warnings',
-"       \  'linter_errors': 'lightline#ale#errors',
-"       \  'linter_ok': 'lightline#ale#ok',
-"       \ }
-" let g:lightline#ale#indicator_checking = "\uf110"
-" let g:lightline#ale#indicator_warnings = "\uf071"
-" let g:lightline#ale#indicator_errors = "\uf05e"
-" let g:lightline#ale#indicator_ok = "\uf00c"
 set omnifunc=ale#completion#OmniFunc
 let g:ale_completion_enabled = 1
 " let g:ale_set_balloons=1
@@ -283,3 +275,15 @@ nmap<silent> gd :ALEGoToDefinition<CR>
 " autocmd FileType rust nmap<silent> gr :ALEFindReferences<CR>
 " autocmd FileType rust nmap<silent> gf :ALESymbolSearch<CR>
 "}}}
+
+" Ultisnip
+let g:UltiSnipsSnippetsDir="~/.vim/plugged/FC-Snippets/ultisnippets"
+let g:UltiSnipsSnippetDirectories=["ultisnippets"]
+
+" YouCompleteMe, block issues with Ultisnip tab completion
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"

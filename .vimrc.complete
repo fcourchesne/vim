@@ -1,7 +1,6 @@
 scriptencoding utf-8
 set encoding=utf-8
 
-
 " Vim-Plug packages {{{
 call plug#begin('~/.vim/plugged')
 
@@ -20,28 +19,15 @@ call plug#begin('~/.vim/plugged')
 " Go
     " Plug 'fatih/vim-go'
 
-" Rust
-    " Plug 'cespare/vim-toml'
-    " Plug 'ncm2/ncm2'
-
 " Appearance
     Plug 'fcourchesne/vizuki2'
-    " Plug 'sonph/onehalf', {'rtp': 'vim/'}
     Plug 'w0ng/vim-hybrid'
     Plug 'ayu-theme/ayu-vim'
-    " Plug 'NLKNguyen/papercolor-theme'
-    " Plug 'dracula/vim'
     Plug 'fcourchesne/FC-vim-colors'
     Plug 'gruvbox-community/gruvbox'
-    " Plug 'joshdick/onedark.vim'
     Plug 'chriskempson/vim-tomorrow-theme'
-    " Plug 'treycucco/vim-monotonic'
-    " Plug 'chriskempson/base16-vim'
-    " Plug 'guns/xterm-color-table.vim'
     Plug 'altercation/vim-colors-solarized'
-    " Plug 'owickstrom/vim-colors-paramount'
     Plug 'axvr/photon.vim'
-    " Plug 'dikiaap/minimalist'
 
 " Syntax highlight
     Plug 'rust-lang/rust.vim'
@@ -50,7 +36,6 @@ call plug#begin('~/.vim/plugged')
 " Files management
     Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
     Plug 'scrooloose/nerdtree'
-    " Plug 'jremmen/vim-ripgrep'
 
 
 " Auto completion
@@ -59,26 +44,12 @@ call plug#begin('~/.vim/plugged')
     Plug 'tomtom/tlib_vim'
     Plug 'ervandew/supertab'
     Plug 'garbas/vim-snipmate'
-    "Plug 'sirver/ultisnips'
 
 " Delimiters
     Plug 'Raimondi/delimitMate' 		"Close tags
 
 " Html
     "Plug 'flomotlik/vim-livereload'
-    " Plug 'wavded/vim-stylus' 			" .styl support for CSS compiling
-    " Plug 'groenewege/vim-less'
-    " Plug 'pangloss/vim-javascript' 	" Fix issues with javascript from gvim 7.4
-
-" Building
-    "Plug 'tpope/vim-fugitive' " Git operations in vim
-    "Plug 'airblade/vim-gitgutter'
-    " Plug 'majutsushi/tagbar'
-    " Plug 'dan-t/rusty-tags'
-    " Plug 'xolox/vim-easytags'
-    " Plug 'xolox/vim-misc'
-    " Plug 'godlygeek/tabular'
-    " Plug 'plasticboy/vim-markdown'
 
 "Other
     Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
@@ -86,8 +57,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'edkolev/tmuxline.vim'
     Plug 'leafgarland/typescript-vim'
 
-"Tests
-" Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 ""}}}
 
@@ -105,8 +74,6 @@ set t_Co=256
 
 if has('gui_running')
     set lines=50 columns=130
-
-
     if has('gui_win32')
         set guifont=UbuntuMonoRegular:h12:cANSI
     else
@@ -114,11 +81,11 @@ if has('gui_running')
     endif
 endif
 
+set background=dark
 let g:airline_theme='gruvbox'
 let g:gruvbox_contrast_light='soft'
 let g:gruvbox_contrast_dark='soft'
 " set background=light
-set background=dark
 colorscheme gruvbox
 " colorscheme delek
 " let ayucolor="mirage"
@@ -194,7 +161,7 @@ set laststatus=2
 set foldcolumn=0
 set foldlevelstart=99
 set foldmarker={{{,}}}
-set foldmethod=expr
+" set foldmethod=syntax
 set foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
 " Look for fold method in file
 set modelines=1
@@ -208,6 +175,7 @@ set modelines=1
 "autocmd BufWinEnter ?* silent loadview
 
 autocmd Syntax c,cpp,tcl,xml set foldmethod=marker
+" autocmd Syntax html set foldmethod=syntax
 autocmd Syntax makefile set !expandtab               " Need to use tabs in makefiles
 
 fu! CustomFoldText()
@@ -230,7 +198,7 @@ fu! CustomFoldText()
     let foldSize = 1 + v:foldend - v:foldstart
     let foldSizeStr = " " . foldSize . " lines "
     let foldLevelStr = repeat("+", v:foldlevel)
-    let lineCount = line("$")
+    let lineCount = line("$")l
     let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
     let expansionString = repeat("჻", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
 
@@ -296,6 +264,42 @@ let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '▲'
 nmap <C-S-e> :ALEPreviousWrap<CR>
 nmap <C-e> :ALENextWrap<CR>
+let b:ale_linters = {
+\   'rust': ['rls'],
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'css': ['prettier'],
+\}
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\   'html': ['prettier'],
+\   'typescript': ['prettier'],
+\   'rust': ['rustfmt'],
+\}
+" let g:lightline.component_expand = {
+"       \  'linter_checking': 'lightline#ale#checking',
+"       \  'linter_warnings': 'lightline#ale#warnings',
+"       \  'linter_errors': 'lightline#ale#errors',
+"       \  'linter_ok': 'lightline#ale#ok',
+"       \ }
+let g:lightline#ale#indicator_checking = "\uf110"
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
+let g:ale_completion_enabled = 1
+let g:ale_set_balloons=1
+" let g:ale_completion_autoimport = 1
+set omnifunc=ale#completion#OmniFunc
+let g:ale_fix_on_save = 1
+let g:ale_rust_cargo_use_check = 1
+let g:ale_rust_cargo_check_tests = 0
+let g:ale_rust_cargo_use_clippy = 1
+let g:ale_rust_rls_executable = 'rust-analyzer'
+autocmd FileType rust nmap<silent> gd :ALEGoToDefinition<CR>
+autocmd FileType rust nmap<silent> gh :ALEHover<CR>
+autocmd FileType rust nmap<silent> gr :ALEFindReferences<CR>
+autocmd FileType rust nmap<silent> gf :ALESymbolSearch<CR>
 "}}}
 
 "" Syntastic {{{
@@ -324,30 +328,20 @@ nmap <C-e> :ALENextWrap<CR>
 " nnoremap <Leader>f :Autoformat<CR>
 " }}}
 
-" Lightline {{{
-set noshowmode
-let g:lightline = {
-      \ 'colorscheme': 'one',
-      \ }
+" " Lightline {{{
+" set noshowmode
+" let g:lightline = {
+"       \ 'colorscheme': 'one',
+"       \ }
 
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
-let g:lightline.component_type = {
-      \     'linter_checking': 'left',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'left',
-      \ }
-let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors = "\uf05e"
-let g:lightline#ale#indicator_ok = "\uf00c"
-" }}}
+" let g:lightline.component_type = {
+"       \     'linter_checking': 'left',
+"       \     'linter_warnings': 'warning',
+"       \     'linter_errors': 'error',
+"       \     'linter_ok': 'left',
+"       \ }
+" let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
+" " }}}
 
 " Airline {{{
 let g:airline_section_warning = airline#section#create([ "syntastic" ])
@@ -399,11 +393,10 @@ let g:airline_symbols.whitespace = 'Ξ'
 " set complete=.,i " Complete only the current buffer and includes
 set complete=.,i,b,w,u " Complete only the current buffer and includes
 set completeopt=menu,menuone,longest " Complete options (disable preview scratch window)
-let g:SuperTabDefaultCompletionType = "context"
-" let g:ale_completion_enabled = 1
-set omnifunc=ale#completion#OmniFunc
-" set omnifunc=syntaxcomplete#Complete
+" let g:SuperTabDefaultCompletionType = "context"
+" let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
+" set omnifunc=syntaxcomplete#Complete
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
@@ -413,6 +406,55 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "}}}
 
 " HTML {{{
+au FileType html set foldmethod=manual
+" autocmd FileType html match ErrorMsg '\%>140v.\+'
+" autocmd FileType typescript match ErrorMsg '\%>140v.\+'
+" let s:exclude_tags_list = [
+"       \ '\/',
+"       \ '!',
+"       \ 'html',
+"       \ 'head\>',
+"       \ 'body',
+"       \ 'area',
+"       \ 'base',
+"       \ 'br',
+"       \ 'col',
+"       \ 'embed',
+"       \ 'hr',
+"       \ 'img',
+"       \ 'input',
+"       \ 'keygen',
+"       \ 'link',
+"       \ 'menuitem',
+"       \ 'meta',
+"       \ 'param',
+"       \ 'source',
+"       \ 'track',
+"       \ 'wbr',
+"       \ ]
+" let s:exclude_tags = join(s:exclude_tags_list, '\|')
+
+" function! HTMLFolds()
+"   let line = getline(v:lnum)
+
+"   " Ignore tags that open and close in the same line
+"   if line =~# '<\(\w\+\).*<\/\1>'
+"     return '='
+"   endif
+
+"   if line =~# '<\%(' . s:exclude_tags . '\)\@!'
+"     return 'a1'
+"   endif
+
+"   if line =~# '<\/\%(' . s:exclude_tags . '\)\@!'
+"     return 's1'
+"   endif
+
+"   return '='
+" endfunction
+
+" setlocal foldmethod=expr
+" setlocal foldexpr=HTMLFolds()
 " Map less to css
 " nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
 " au BufNewFile,BufRead *.jinja set syntax=htmljinja
@@ -673,9 +715,6 @@ let NERDTreeKeepTreeInNewTab=0
 
 " set hidden
 let g:rustfmt_autosave = 1
-let g:ale_rust_cargo_use_check = 1
-let g:ale_rust_cargo_check_tests = 0
-let g:ale_rust_cargo_use_clippy = 1
 
 if has('macunix')
     let $RUST_SRC_PATH= "~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust"
@@ -686,10 +725,6 @@ else
 endif
 
 " autocmd FileType rust setlocal omnifunc=racer#RacerComplete
-autocmd FileType rust nmap<silent> gd :ALEGoToDefinition<CR>
-autocmd FileType rust nmap<silent> gh :ALEHover<CR>
-autocmd FileType rust nmap<silent> gr :ALEFindReferences<CR>
-autocmd FileType rust nmap<silent> gf :ALESymbolSearch<CR>
 " autocmd FileType rust nmap<silent> gs :LspHover<CR>
 " autocmd FileType rust nmap<silent> grn :LspRename<CR>
 autocmd FileType rust nmap <leader>b :call VimuxRunCommand("RUST_BACKTRACE=1 clear; cargo build") <CR>
@@ -746,8 +781,8 @@ au FileType go nmap <leader>b :silent !clear<CR> :silent !make build<CR> :redraw
 
 " au BufNewFile,BufRead go set foldmethod=marker
 " au BufNewFile,BufRead go set foldmarker={,}
-" au FileType go set foldmethod=marker
-au FileType go set foldmethod=syntax
+au FileType go set foldmethod=marker
+" au FileType go set foldmethod=syntax
 " au FileType go set foldmarker={,}
 " au BufWritePost *.go silent! !ctags -R &
 "

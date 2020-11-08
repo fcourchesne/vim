@@ -1,0 +1,285 @@
+scriptencoding utf-8
+set encoding=utf-8
+
+" Vim-Plug packages {{{
+call plug#begin('~/.vim/plugged')
+
+" Main
+    Plug 'w0rp/ale' "async syntax checker
+    Plug 'ycm-core/YouCompleteMe'
+	" Plug 'maximbaz/lightline-ale'
+    " Plug 'vim-airline/vim-airline'
+    " Plug 'vim-airline/vim-airline-themes'
+    " Plug 'airblade/vim-rooter'
+    Plug 'tpope/vim-commentary'
+    " Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
+    " Plug 'aserebryakov/vim-todo-lists'
+    " Plug 'Yggdroot/indentLine'
+
+" Go
+    " Plug 'fatih/vim-go'
+
+" Appearance
+    " Plug 'fcourchesne/vizuki2'
+    " Plug 'fcourchesne/FC-vim-colors'
+    Plug 'gruvbox-community/gruvbox'
+
+" Syntax highlight
+    " Plug 'rust-lang/rust.vim'
+    " Plug 'ekalinin/Dockerfile.vim'
+
+" Files management
+    Plug 'kien/ctrlp.vim'             "Using Ctrl-F as a shortcut, searches buffer, files, content
+    Plug 'scrooloose/nerdtree'
+
+
+" Auto completion
+    " Plug 'fcourchesne/FC-Snippets'
+    " Plug 'MarcWeber/vim-addon-mw-utils'
+    " Plug 'tomtom/tlib_vim'
+    " Plug 'ervandew/supertab'
+    " Plug 'garbas/vim-snipmate'
+
+"Other
+    " Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
+    " Plug 'benmills/vimux'
+    " Plug 'edkolev/tmuxline.vim'
+    " Plug 'leafgarland/typescript-vim'
+
+call plug#end()
+""}}}
+
+" {{{ FOLDS
+" Keep folds when saving
+" augroup remember_folds
+"   autocmd!
+"   autocmd BufWinLeave *.* silent! mkview
+"   autocmd BufWinEnter *.* silent! loadview
+" augroup END
+" }}}
+
+set t_Co=256
+if has('gui_running')
+    set lines=50 columns=130
+    if has('gui_win32')
+        set guifont=UbuntuMonoRegular:h12:cANSI
+    else
+        set guifont=Ubuntu\ Mono\ derivative\ Powerline\ Regular\ 13
+    endif
+endif
+
+set background=dark
+let g:airline_theme='gruvbox'
+let g:gruvbox_contrast_light='soft'
+let g:gruvbox_contrast_dark='soft'
+" set background=light
+colorscheme gruvbox
+
+" OS and encoding specific {{{
+set shell=/bin/bash
+set encoding=utf8
+scriptencoding utf-8
+set ffs=unix,dos,mac                " Use Unix as the standard file type
+set mouse=a
+"}}}
+
+" GUI {{{
+" set cursorline                  " highlight current line
+if has("gui_running")
+    set showmode                    " display the current mode
+    set guioptions+=e
+    set guioptions-=L
+    set guioptions-=T  "no scrollbar by default
+    set guioptions-=r  "no toolbar by default
+    set guioptions-=m  "no menu displayed by default
+    map <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+    map <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
+    map <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
+    set guitablabel=\[%N\]\ %t\ %M
+endif
+"}}}
+
+" Relative numbers when in normal mode, and window focussed {{{
+autocmd FocusLost * set norelativenumber
+autocmd FocusGained * set relativenumber
+autocmd InsertEnter * set norelativenumber
+autocmd InsertLeave * set relativenumber
+set nu
+set norelativenumber
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<CR>
+"}}}
+
+
+" General {{{
+set so=5                       " Set 7 lines to the cursor - when moving vertically using j/k
+set wildmenu                    " Turn on the WiLd menu
+set wildignore=*.o,*~,*.pyc,*.exe,*.hex,*.elf   " Ignore compiled files
+set ruler                       "Always show current position
+set cmdheight=1                 " Height of the command bar
+set hid                         " A buffer becomes hidden when it is abandoned
+set ignorecase                  " Ignore case when searching
+set smartcase                   " When searching try to be smart about cases
+set hlsearch                    " Highlight search results
+set incsearch                   " Makes search act like search in modern browsers
+set lazyredraw                  " Don't redraw while executing macros (good performance config)
+set magic                       " For regular expressions turn magic on
+set showmatch                   " Show matching brackets when text indicator is over them
+set mat=10                      " How many tenths of a second to blink when matching brackets
+set noerrorbells                " No annoying sound on errors
+set novisualbell
+let g:mapleader = "\<Space>"
+filetype plugin indent on   " Automatically detect file types.
+syntax on                   " syntax highlighting
+set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
+set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
+set virtualedit=onemore         " allow for cursor beyond last character
+set nospell                       " no spell checking
+set linespace=0                 " No extra spaces between rows
+set winminheight=0              " windows can be 0 line high
+set gdefault                    " the /g flag on :s substitutions by default
+"}}}
+
+" Typical Ctrl-C/V/X behavior and Select all {{{
+vnoremap <C-X> "+x
+vnoremap <C-C> "+y
+cmap <S-Insert>     <C-R>+
+exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
+exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
+imap <S-Insert>     <C-V>
+vmap <S-Insert>     <C-V>
+noremap <C-Q>       <C-V>
+map <silent> <C-A> gg0vG$
+imap <C-A> <ESC><C-A>
+"}}}
+
+" Files, backups and undo {{{
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
+set undolevels=200      " Number of undo levels.
+set undodir=~/.vim/undo
+set undofile
+set history=1000                " Store a ton of history (default is 20)
+"}}}
+
+" Indenting and wrapping {{{
+set tabstop=4
+set shiftwidth=4                " 1 tab == 4 spaces
+set expandtab
+set lbr                         " Linebreak on 500 characters
+set tw=500
+set wrap "Wrap lines
+
+" Movement, tabs and buffers {{{
+map j gj
+map k gk
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Close the current buffer and tabs
+map <leader>bd :Bclose<cr>
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+"}}}
+
+" Easymotion {{{
+let g:EasyMotion_startofline = 1 " keep cursor colum when JK motion
+"}}}
+
+" General {{{
+" Return to last edit position when opening files
+autocmd BufReadPost *
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal! g`\"" |
+            \ endif
+set viminfo^=%                   " Remember info about open buffers on close"
+"}}}
+
+" For when you forget to sudo.. Really Write the file.
+cmap w!! w !sudo tee % >/dev/null
+" Work around caps lock
+nnoremap ; :
+nmap :W :w
+nmap :Q :q
+
+" Ctrl-P
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|\.git'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+map <C-b> :bprevious<CR>
+map <C-S-b> :bnext<CR>
+
+" Tmux
+let g:tmux_navigator_save_on_switch = 0
+nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+" NerdTree 
+map <C-o> :NERDTreeToggle<CR>
+map <Leader>o :NERDTreeToggle<CR>
+let g:nerdtree_tabs_open_on_gui_startup = 1
+let g:nerdtree_tabs_open_on_console_startup = 1
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.eep', '\.DSN', 'Cargo.lock', '\.lss', '\.lst', '\.map', '\.o', '\.sym', '\.DBK', '\.elf', '\.hex', '\.meta', 'tags', 'Makefile', '\.rs.bk', 'target']
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=1
+let NERDTreeShowHidden=0
+let NERDTreeKeepTreeInNewTab=0
+"}}}
+
+" Ale
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '▲'
+nmap <C-S-e> :ALEPreviousWrap<CR>
+nmap <C-e> :ALENextWrap<CR>
+let b:ale_linters = {
+\   'rust': ['rls'],
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'css': ['prettier'],
+\}
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\   'html': ['prettier'],
+\   'typescript': ['prettier'],
+\   'rust': ['rustfmt'],
+\}
+" let g:lightline.component_expand = {
+"       \  'linter_checking': 'lightline#ale#checking',
+"       \  'linter_warnings': 'lightline#ale#warnings',
+"       \  'linter_errors': 'lightline#ale#errors',
+"       \  'linter_ok': 'lightline#ale#ok',
+"       \ }
+" let g:lightline#ale#indicator_checking = "\uf110"
+" let g:lightline#ale#indicator_warnings = "\uf071"
+" let g:lightline#ale#indicator_errors = "\uf05e"
+" let g:lightline#ale#indicator_ok = "\uf00c"
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_enabled = 1
+" let g:ale_set_balloons=1
+let g:ale_completion_autoimport = 1
+let g:ale_fix_on_save = 1
+let g:ale_rust_cargo_use_check = 1
+" let g:ale_rust_cargo_check_tests = 0
+let g:ale_rust_cargo_use_clippy = 1
+let g:ale_rust_rls_executable = 'rust-analyzer'
+nmap<silent> gd :ALEGoToDefinition<CR>
+" autocmd FileType rust nmap<silent> gh :ALEHover<CR>
+" autocmd FileType rust nmap<silent> gr :ALEFindReferences<CR>
+" autocmd FileType rust nmap<silent> gf :ALESymbolSearch<CR>
+"}}}

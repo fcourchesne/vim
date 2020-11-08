@@ -1,1 +1,0 @@
-/home/fc/.vim/.vimrc.complete

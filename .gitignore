@@ -15,3 +15,6 @@ autoload/plug.vim
 plugged/
 undo/*
 vim_startup_counter.txt
+tags
+tags.lock
+tags.temp

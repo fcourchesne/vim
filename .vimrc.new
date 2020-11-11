@@ -7,22 +7,31 @@ call plug#begin('~/.vim/plugged')
 " Main
     Plug 'w0rp/ale' "async syntax checker
     Plug 'ycm-core/YouCompleteMe'
-	" Plug 'maximbaz/lightline-ale'
-    " Plug 'vim-airline/vim-airline'
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'vim-airline/vim-airline'
     " Plug 'vim-airline/vim-airline-themes'
     " Plug 'airblade/vim-rooter'
     Plug 'tpope/vim-commentary'
-    " Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
+    Plug 'Lokaltog/vim-easymotion' 	"Easy find strings in document
     " Plug 'aserebryakov/vim-todo-lists'
     " Plug 'Yggdroot/indentLine'
+    Plug 'tpope/vim-surround'
+    Plug 'Raimondi/delimitMate' 		"Close tags
+    Plug 'tpope/vim-fugitive'
 
 " Go
     " Plug 'fatih/vim-go'
+    "
+" Web
+    Plug 'ap/vim-css-color'
 
 " Appearance
     " Plug 'fcourchesne/vizuki2'
     " Plug 'fcourchesne/FC-vim-colors'
     Plug 'gruvbox-community/gruvbox'
+    Plug 'fcourchesne/airline-transparent'
+    Plug 'axvr/photon.vim'
+    Plug 'ayu-theme/ayu-vim' " or other package manager
 
 " Syntax highlight
     " Plug 'rust-lang/rust.vim'
@@ -43,9 +52,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'fcourchesne/FC-Snippets'
 
 "Other
-    " Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
-    " Plug 'benmills/vimux'
-    " Plug 'edkolev/tmuxline.vim'
+    Plug 'christoomey/vim-tmux-navigator' 		"Seamless tmux /vim navigator with hjkl keys
+    Plug 'benmills/vimux'
+    Plug 'edkolev/tmuxline.vim'
     " Plug 'leafgarland/typescript-vim'
 
 call plug#end()
@@ -61,6 +70,7 @@ call plug#end()
 " }}}
 
 set t_Co=256
+set termguicolors     " enable true colors support
 if has('gui_running')
     set lines=50 columns=130
     if has('gui_win32')
@@ -71,11 +81,19 @@ if has('gui_running')
 endif
 
 set background=dark
-let g:airline_theme='gruvbox'
 let g:gruvbox_contrast_light='soft'
 let g:gruvbox_contrast_dark='soft'
-" set background=light
 colorscheme gruvbox
+
+" set background=dark
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
+
+" colorscheme photon
+
+" highlight Cursor guifg=white guibg=#808080
 
 " OS and encoding specific {{{
 set shell=/bin/bash
@@ -138,6 +156,7 @@ set mat=10                      " How many tenths of a second to blink when matc
 set noerrorbells                " No annoying sound on errors
 set novisualbell
 let g:mapleader = "\<Space>"
+nnoremap <SPACE> <Nop>
 filetype plugin indent on   " Automatically detect file types.
 syntax on                   " syntax highlighting
 set shortmess+=filmnrxoOtT      " abbrev. of messages (avoids 'hit enter')
@@ -147,19 +166,6 @@ set nospell                       " no spell checking
 set linespace=0                 " No extra spaces between rows
 set winminheight=0              " windows can be 0 line high
 set gdefault                    " the /g flag on :s substitutions by default
-"}}}
-
-" Typical Ctrl-C/V/X behavior and Select all {{{
-vnoremap <C-X> "+x
-vnoremap <C-C> "+y
-cmap <S-Insert>     <C-R>+
-exe 'inoremap <script> <C-V>' paste#paste_cmd['i']
-exe 'vnoremap <script> <C-V>' paste#paste_cmd['v']
-imap <S-Insert>     <C-V>
-vmap <S-Insert>     <C-V>
-noremap <C-Q>       <C-V>
-map <silent> <C-A> gg0vG$
-imap <C-A> <ESC><C-A>
 "}}}
 
 " Files, backups and undo {{{
@@ -188,6 +194,9 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" Quit buffer but do not close pane
+map <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
+
 " Close the current buffer and tabs
 map <leader>bd :Bclose<cr>
 map <leader>tn :tabnew<cr>
@@ -198,6 +207,14 @@ map <leader>tm :tabmove
 
 " Easymotion {{{
 let g:EasyMotion_startofline = 1 " keep cursor colum when JK motion
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+" map <Leader>l <Plug>(easymotion-lineforward)
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
+" map <Leader>h <Plug>(easymotion-linebackward)
 "}}}
 
 " General {{{
@@ -229,6 +246,7 @@ nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
 nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
 nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
 nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+let g:tmuxline_powerline_separators = 0
 
 " NerdTree 
 map <C-o> :NERDTreeToggle<CR>
@@ -249,30 +267,35 @@ let g:ale_sign_warning = '▲'
 nmap <C-S-e> :ALEPreviousWrap<CR>
 nmap <C-e> :ALENextWrap<CR>
 let b:ale_linters = {
-\   'rust': ['rls'],
+\   'rust': ['analyzer'],
 \   'javascript': ['prettier'],
 \   'typescript': ['prettier'],
 \   'css': ['prettier'],
+\   'html': ['prettier'],
+\   'scss': ['prettier'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'css': ['prettier'],
+\   'scss': ['prettier'],
 \   'html': ['prettier'],
 \   'typescript': ['prettier'],
 \   'rust': ['rustfmt'],
 \}
 set omnifunc=ale#completion#OmniFunc
 let g:ale_completion_enabled = 1
-" let g:ale_set_balloons=1
+let g:ale_set_balloons=1
 let g:ale_completion_autoimport = 1
 let g:ale_fix_on_save = 1
 let g:ale_rust_cargo_use_check = 1
 " let g:ale_rust_cargo_check_tests = 0
 let g:ale_rust_cargo_use_clippy = 1
 let g:ale_rust_rls_executable = 'rust-analyzer'
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 nmap<silent> gd :ALEGoToDefinition<CR>
-" autocmd FileType rust nmap<silent> gh :ALEHover<CR>
-" autocmd FileType rust nmap<silent> gr :ALEFindReferences<CR>
+nmap<silent> gh :ALEHover<CR>
+nmap<silent> gr :ALEFindReferences<CR>
 " autocmd FileType rust nmap<silent> gf :ALESymbolSearch<CR>
 "}}}
 
@@ -287,3 +310,50 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+" GitGutter 
+map <F6> :GitGutterToggle<CR>
+let g:gitgutter_enabled = 1       "Activated by toggling, disabled by default
+let g:gitgutter_highlight_lines = 0"
+let g:gitgutter_max_signs = 1000  " default value = 500, any higher may slow down vim
+
+
+" air-line {{{
+" let g:airline_theme='gruvbox'
+let g:airline_theme='transparent'
+let g:airline_mode_map = {
+      \ '__'     : '-',
+      \ 'c'      : 'C',
+      \ 'i'      : 'I',
+      \ 'ic'     : 'I',
+      \ 'ix'     : 'I',
+      \ 'n'      : 'N',
+      \ 'multi'  : 'M',
+      \ 'ni'     : 'N',
+      \ 'no'     : 'N',
+      \ 'R'      : 'R',
+      \ 'Rv'     : 'R',
+      \ 's'      : 'S',
+      \ 'S'      : 'S',
+      \ 't'      : 'T',
+      \ 'v'      : 'V',
+      \ 'V'      : 'V',
+      \ ''     : 'V',
+      \ }
+" let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.branch = ''
+let g:airline#extensions#ale#enabled = 1
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.whitespace = 'Ξ'
+
+" }}}
+

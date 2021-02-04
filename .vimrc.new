@@ -17,7 +17,9 @@ call plug#begin('~/.vim/plugged')
     " Plug 'Yggdroot/indentLine'
     Plug 'tpope/vim-surround'
     Plug 'Raimondi/delimitMate' 		"Close tags
+    "Plug 'alvan/vim-closetag'
     Plug 'tpope/vim-fugitive'
+    Plug 'majutsushi/tagbar'
 
 " Go
     " Plug 'fatih/vim-go'
@@ -26,7 +28,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'ap/vim-css-color'
 
 " Appearance
-    " Plug 'fcourchesne/vizuki2'
+    Plug 'fcourchesne/vizuki2'
     " Plug 'fcourchesne/FC-vim-colors'
     Plug 'gruvbox-community/gruvbox'
     Plug 'fcourchesne/airline-transparent'
@@ -34,7 +36,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'ayu-theme/ayu-vim' " or other package manager
 
 " Syntax highlight
-    " Plug 'rust-lang/rust.vim'
+    Plug 'rust-lang/rust.vim'
     " Plug 'ekalinin/Dockerfile.vim'
 
 " Files management
@@ -61,12 +63,57 @@ call plug#end()
 ""}}}
 
 " {{{ FOLDS
+" Folding {{{
+"set foldenable
+set foldcolumn=0
+set foldlevelstart=99
+set foldmarker={{{,}}}
+set foldmethod=expr
+" set foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum))
+set foldexpr=(getline(v:lnum)=~'^$')?-1:((indent(v:lnum)<indent(v:lnum+1))?('>'.indent(v:lnum+1)):indent(v:lnum+1))
+" Look for fold method in file
+set foldminlines=1
+set foldnestmax=4
+" set foldopen=block,hor,jump,mark,percent,quickfix,search,tag
+set foldopen=hor,jump,mark,percent,quickfix,search,tag
+fu! CustomFoldText()
+    "get first non-blank line
+    let fs = v:foldstart
+
+    while getline(fs) =~ '^\s*$'
+        let fs = nextnonblank(fs + 1)
+    endwhile
+
+    if fs > v:foldend
+        let line = getline(v:foldstart)
+    else
+        let line = substitute(getline(fs), '\t', repeat(' ', &tabstop), 'g')
+    endif
+
+    let w = winwidth(0) - &foldcolumn - (&number ? 8 : 0)
+    let lineWithoutMarker = substitute(line, "{{{", "", "g")
+    let lineWithoutMarker = substitute(lineWithoutMarker, "^\"", "", "g")
+    let foldSize = 1 + v:foldend - v:foldstart
+    let foldSizeStr = " " . foldSize . " lines "
+    let foldLevelStr = repeat("+", v:foldlevel)
+    let lineCount = line("$")
+    let foldPercentage = printf("[%.1f", (foldSize*1.0)/lineCount*100) . "%] "
+    let expansionString = repeat("჻", w - strwidth(foldSizeStr.line.foldLevelStr.foldPercentage))
+
+    return lineWithoutMarker . expansionString . foldSizeStr . foldPercentage . foldLevelStr
+endf
+set foldtext=CustomFoldText()
+" Auto save folds and reload on file open
+" autocmd BufWinLeave ?* mkview
+" autocmd BufWinEnter ?* silent loadview
+
 " Keep folds when saving
-" augroup remember_folds
-"   autocmd!
-"   autocmd BufWinLeave *.* silent! mkview
-"   autocmd BufWinEnter *.* silent! loadview
-" augroup END
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave *.* silent! mkview
+  autocmd BufWinEnter *.* silent! loadview
+augroup END
+autocmd FileType rust set foldmethod=syntax
 " }}}
 
 set t_Co=256
@@ -135,6 +182,9 @@ function! NumberToggle()
 endfunc
 
 nnoremap <C-n> :call NumberToggle()<CR>
+
+autocmd FileType rust match ErrorMsg '\%>140v.\+'
+
 "}}}
 
 
@@ -260,6 +310,9 @@ let NERDTreeQuitOnOpen=1
 let NERDTreeShowHidden=0
 let NERDTreeKeepTreeInNewTab=0
 "}}}
+
+" TagBar
+nmap <F8> :TagbarToggle<CR>
 
 " Ale
 let g:ale_sign_error = '✘'
